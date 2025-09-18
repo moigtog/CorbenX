@@ -75,25 +75,8 @@
             --brand-light: #F8FAFC;
         }
         
-        /* Background Animations */
-        .animated-bg {
-            background: linear-gradient(-45deg, #243B48, #316EA6, #7B8C94, #316EA7);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
         
-        .animated-bg-dark {
-            background: linear-gradient(-45deg, #233B48, #243B48, #316EA6, #7B8C94);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
+    
         /* Floating Particles Animation */
         .particles {
             position: absolute;
@@ -487,6 +470,173 @@
         .dark .card-hover:hover {
             box-shadow: 0 20px 40px rgba(49, 110, 166, 0.2);
         }
+
+
+        /* Modern Construction Scene Animations */
+        @keyframes constructionFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-8px) rotate(1deg); }
+            66% { transform: translateY(-4px) rotate(-1deg); }
+        }
+        
+        @keyframes craneRotate {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-10deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        @keyframes workerMove {
+            0%, 100% { transform: translateX(0px) scaleX(1); }
+            25% { transform: translateX(20px) scaleX(1); }
+            50% { transform: translateX(40px) scaleX(-1); }
+            75% { transform: translateX(20px) scaleX(-1); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes buildingGrow {
+            0% { height: 20%; opacity: 0.3; }
+            50% { height: 60%; opacity: 0.6; }
+            100% { height: 80%; opacity: 0.8; }
+        }
+        
+        @keyframes wiggle {
+            0%, 7% { transform: rotateZ(0); }
+            15% { transform: rotateZ(-15deg); }
+            20% { transform: rotateZ(10deg); }
+            25% { transform: rotateZ(-10deg); }
+            30% { transform: rotateZ(6deg); }
+            35% { transform: rotateZ(-4deg); }
+            40%, 100% { transform: rotateZ(0); }
+        }
+        
+        @keyframes fadeInUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            0% { transform: translateX(100px); opacity: 0; }
+            100% { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            25% { transform: translateY(-15px); }
+            50% { transform: translateY(-8px); }
+            75% { transform: translateY(-4px); }
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(180deg); opacity: 0; }
+        }
+        
+        /* Animation Classes */
+        .animate-construction-float {
+            animation: constructionFloat 6s ease-in-out infinite;
+        }
+        
+        .animate-crane-rotate {
+            animation: craneRotate 8s ease-in-out infinite;
+        }
+        
+        .animate-worker-move {
+            animation: workerMove 10s ease-in-out infinite;
+        }
+        
+        .animate-sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        .animate-building-grow {
+            animation: buildingGrow 4s ease-in-out infinite;
+        }
+        
+        .animate-wiggle {
+            animation: wiggle 2s ease-in-out infinite;
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .animate-bounce-slow {
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        .animated-bg {
+            background: linear-gradient(-45deg, #243B48, #316EA6, #7B8C94, #316EA7);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        /* Staggered animations */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: floatParticle 20s infinite linear;
+        }
+        
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; width: 10px; height: 10px; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; width: 15px; height: 15px; }
+        .particle:nth-child(3) { left: 35%; animation-delay: 4s; width: 8px; height: 8px; }
+        .particle:nth-child(4) { left: 50%; animation-delay: 6s; width: 12px; height: 12px; }
+        .particle:nth-child(5) { left: 65%; animation-delay: 8s; width: 18px; height: 18px; }
+        .particle:nth-child(6) { left: 75%; animation-delay: 10s; width: 6px; height: 6px; }
+        .particle:nth-child(7) { left: 85%; animation-delay: 12s; width: 14px; height: 14px; }
+        .particle:nth-child(8) { left: 90%; animation-delay: 14s; width: 9px; height: 9px; }
+        .particle:nth-child(9) { left: 95%; animation-delay: 16s; width: 11px; height: 11px; }
         
     </style>
 </head>
@@ -666,37 +816,37 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center text-white relative overflow-hidden animated-bg dark:animated-bg-dark">
-        <!-- Animated Particles -->
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-        
-        <!-- Interactive Background -->
-        <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
-            <div class="absolute top-20 left-10 w-32 h-32 rounded-full animate-float" style="background-color: rgba(36, 59, 72, 0.1);"></div>
-            <div class="absolute bottom-32 right-16 w-40 h-40 rounded-full animate-pulse-slow" style="background-color: rgba(49, 110, 166, 0.1); animation-delay: 2s;"></div>
-            <div class="absolute top-1/2 left-1/3 w-24 h-24 rounded-full animate-float" style="background-color: rgba(123, 140, 148, 0.08); animation-delay: 4s;"></div>
-            <div class="absolute top-1/4 right-1/4 w-28 h-28 rounded-full animate-bounce-slow" style="background-color: rgba(49, 110, 166, 0.06); animation-delay: 1s;"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-36 h-36 rounded-full animate-pulse-slow" style="background-color: rgba(36, 59, 72, 0.05); animation-delay: 3s;"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+<section id="home" class="min-h-screen flex flex-col items-center justify-center text-white relative overflow-visible bg-[#316EA7] pt-24 sm:pt-28 md:pt-0">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Interactive Background Bubbles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full animate-float" style="background-color: rgba(36, 59, 72, 0.1);"></div>
+        <div class="absolute bottom-32 right-16 w-40 h-40 rounded-full animate-pulse-slow" style="background-color: rgba(49, 110, 166, 0.1); animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-1/3 w-24 h-24 rounded-full animate-float" style="background-color: rgba(123, 140, 148, 0.08); animation-delay: 4s;"></div>
+        <div class="absolute top-1/4 right-1/4 w-28 h-28 rounded-full animate-bounce-slow" style="background-color: rgba(49, 110, 166, 0.06); animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-36 h-36 rounded-full animate-pulse-slow" style="background-color: rgba(36, 59, 72, 0.05); animation-delay: 3s;"></div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col md:flex-row items-center justify-center relative z-10 gap-12 overflow-visible">
+        <!-- Hero Text & Buttons -->
+        <div class="md:w-1/2 max-w-xl text-center md:text-left">
             <h1 class="hero-title text-4xl sm:text-5xl md:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in-up" data-en="Building Tomorrow's Infrastructure" data-fr="Construire l'Infrastructure de Demain">
                 Building Tomorrow's Infrastructure
             </h1>
             <p class="hero-subtitle text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto animate-fade-in-up stagger-1 opacity-90 px-4" data-en="Leading construction and engineering solutions with cutting-edge technology and unmatched expertise" data-fr="Solutions de construction et d'ingénierie de pointe avec une technologie de pointe et une expertise inégalée">
                 Leading construction and engineering solutions with cutting-edge technology and unmatched expertise
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center animate-fade-in-up stagger-2 px-4">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center md:justify-start animate-fade-in-up stagger-2 px-4">
                 <button class="btn-mobile px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover-glow glass hover:bg-white/20" onclick="scrollToSection('contact')" data-en="Start Your Project" data-fr="Commencer Votre Projet">
                     Start Your Project
                 </button>
@@ -705,7 +855,137 @@
                 </button>
             </div>
         </div>
-    </section>
+
+        <!-- Animated Construction Scene -->
+        <div class="construction-scene-container relative w-80 sm:w-96 h-96 md:h-[28rem] lg:h-[32rem] rounded-3xl overflow-visible text-white shadow-2xl">
+            <div class="particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+
+            <div class="relative w-full h-full animate-construction-float">
+                <!-- Grid Pattern -->
+                <div class="absolute inset-0 opacity-10">
+                    <svg class="w-full h-full" viewBox="0 0 400 400">
+                        <defs>
+                            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#grid)" />
+                    </svg>
+                </div>
+
+                <!-- Building Structure -->
+                <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-48 md:w-64 h-60 md:h-80">
+                    <div class="absolute bottom-0 w-full h-12 md:h-16 bg-gradient-to-t from-gray-600 to-gray-500 rounded-b-lg opacity-60"></div>
+                    <div class="absolute bottom-12 md:bottom-16 w-full h-8 md:h-12 bg-gradient-to-r from-blue-400 to-blue-500 opacity-70 animate-building-grow" style="animation-delay: 0s;"></div>
+                    <div class="absolute bottom-20 md:bottom-28 w-full h-8 md:h-12 bg-gradient-to-r from-blue-500 to-blue-600 opacity-70 animate-building-grow" style="animation-delay: 0.5s;"></div>
+                    <div class="absolute bottom-28 md:bottom-40 w-full h-8 md:h-12 bg-gradient-to-r from-blue-600 to-blue-700 opacity-70 animate-building-grow" style="animation-delay: 1s;"></div>
+                    <div class="absolute bottom-36 md:bottom-52 w-full h-8 md:h-12 bg-gradient-to-r from-blue-700 to-blue-800 opacity-70 animate-building-grow" style="animation-delay: 1.5s;"></div>
+
+                    <!-- Windows -->
+                    <div class="absolute bottom-16 md:bottom-20 left-2 md:left-4 grid grid-cols-4 md:grid-cols-6 gap-1 md:gap-2 w-44 md:w-56">
+                        <div class="w-4 md:w-6 h-1 md:h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 0s;"></div>
+                        <div class="w-4 md:w-6 h-1 md:h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 0.2s;"></div>
+                        <div class="w-4 md:w-6 h-1 md:h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 0.4s;"></div>
+                        <div class="w-4 md:w-6 h-1 md:h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 0.6s;"></div>
+                        <div class="hidden md:block w-6 h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 0.8s;"></div>
+                        <div class="hidden md:block w-6 h-2 bg-yellow-300 opacity-80 animate-pulse" style="animation-delay: 1s;"></div>
+                    </div>
+
+                    <!-- Crane -->
+                    <div class="absolute -top-16 md:-top-20 -right-12 md:-right-16 w-24 md:w-32 h-24 md:h-32 animate-crane-rotate">
+                        <div class="absolute left-1/2 top-6 md:top-8 w-0.5 md:w-1 h-16 md:h-24 bg-yellow-400 opacity-80 transform -translate-x-1/2"></div>
+                        <div class="absolute top-6 md:top-8 left-3 md:left-4 w-18 md:w-24 h-0.5 md:h-1 bg-yellow-400 opacity-80"></div>
+                        <div class="absolute top-8 md:top-12 right-1 md:right-2 w-1 md:w-2 h-6 md:h-8 bg-gray-600 opacity-80"></div>
+                        <div class="absolute top-14 md:top-20 right-0 md:right-1 w-3 md:w-4 h-1 md:h-2 bg-orange-500 opacity-80 animate-bounce-slow"></div>
+                    </div>
+                </div>
+
+                <!-- Workers -->
+                <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8 w-6 md:w-8 h-8 md:h-12 animate-worker-move">
+                    <div class="w-full h-full relative">
+                        <div class="absolute bottom-0 w-6 md:w-8 h-6 md:h-8 bg-blue-400 opacity-80 rounded-full"></div>
+                        <div class="absolute bottom-1 md:bottom-2 left-0.5 md:left-1 w-5 md:w-6 h-4 md:h-6 bg-orange-400 opacity-80 rounded"></div>
+                        <div class="absolute top-0 left-1 md:left-2 w-3 md:w-4 h-3 md:h-4 bg-yellow-400 opacity-80 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-6 md:bottom-8 right-12 md:right-16 w-6 md:w-8 h-8 md:h-12 animate-construction-float">
+                    <div class="w-full h-full relative">
+                        <div class="absolute bottom-0 w-6 md:w-8 h-6 md:h-8 bg-green-400 opacity-80 rounded-full"></div>
+                        <div class="absolute bottom-1 md:bottom-2 left-0.5 md:left-1 w-5 md:w-6 h-4 md:h-6 bg-blue-500 opacity-80 rounded"></div>
+                        <div class="absolute top-0 left-1 md:left-2 w-3 md:w-4 h-3 md:h-4 bg-orange-400 opacity-80 rounded-full"></div>
+                        <div class="absolute -right-1 md:-right-2 top-3 md:top-4 w-4 md:w-6 h-0.5 md:h-1 bg-gray-600 opacity-80 animate-wiggle"></div>
+                    </div>
+                </div>
+
+                <!-- Excavator -->
+                <div class="absolute bottom-3 md:bottom-4 left-1/4 w-12 md:w-16 h-6 md:h-8 animate-construction-float" style="animation-delay: 1s;">
+                    <div class="relative w-full h-full">
+                        <div class="absolute bottom-0 w-12 md:w-16 h-3 md:h-4 bg-yellow-500 opacity-80 rounded"></div>
+                        <div class="absolute bottom-1 md:bottom-2 right-1 md:right-2 w-6 md:w-8 h-4 md:h-6 bg-gray-700 opacity-80 rounded"></div>
+                        <div class="absolute bottom-0 left-0 w-12 md:w-16 h-1 md:h-2 bg-gray-800 opacity-80 rounded"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Sparks -->
+                <div class="absolute top-1/4 left-1/3 w-1.5 md:w-2 h-1.5 md:h-2 bg-yellow-300 opacity-60 rounded-full animate-sparkle" style="animation-delay: 0s;"></div>
+                <div class="absolute top-1/3 right-1/4 w-1 h-1 bg-orange-400 opacity-60 rounded-full animate-sparkle" style="animation-delay: 0.5s;"></div>
+                <div class="absolute top-1/2 left-1/4 w-1 md:w-1.5 h-1 md:h-1.5 bg-blue-300 opacity-60 rounded-full animate-sparkle" style="animation-delay: 1s;"></div>
+                <div class="absolute top-2/3 right-1/3 w-1.5 md:w-2 h-1.5 md:h-2 bg-green-300 opacity-60 rounded-full animate-sparkle" style="animation-delay: 1.5s;"></div>
+                <div class="absolute top-3/4 left-1/2 w-1 h-1 bg-purple-300 opacity-60 rounded-full animate-sparkle" style="animation-delay: 2s;"></div>
+
+                <!-- Progress Indicators -->
+                <div class="absolute top-3 md:top-4 left-3 md:left-4 space-y-1 md:space-y-2">
+                    <div class="flex items-center space-x-1 md:space-x-2 glass px-2 md:px-3 py-0.5 md:py-1 rounded-full">
+                        <div class="w-1.5 md:w-2 h-1.5 md:h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-xs text-white font-medium">In Progress</span>
+                    </div>
+                    <div class="flex items-center space-x-1 md:space-x-2 glass px-2 md:px-3 py-0.5 md:py-1 rounded-full">
+                        <div class="w-1.5 md:w-2 h-1.5 md:h-2 bg-blue-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                        <span class="text-xs text-white font-medium">85% Complete</span>
+                    </div>
+                </div>
+
+                <!-- Floating Info Cards -->
+                <div class="absolute top-6 md:top-8 right-3 md:right-4 glass p-2 md:p-3 rounded-xl animate-fade-in-up stagger-5">
+                    <div class="flex items-center space-x-1 md:space-x-2">
+                        <i class="fas fa-hard-hat text-yellow-400 text-sm md:text-base"></i>
+                        <div class="text-xs text-white">
+                            <div class="font-semibold">Safety First</div>
+                            <div class="opacity-80">0 Accidents</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-16 md:bottom-20 right-6 md:right-8 glass p-2 md:p-3 rounded-xl animate-fade-in-up stagger-6">
+                    <div class="flex items-center space-x-1 md:space-x-2">
+                        <i class="fas fa-clock text-blue-400 text-sm md:text-base"></i>
+                        <div class="text-xs text-white">
+                            <div class="font-semibold">On Schedule</div>
+                            <div class="opacity-80">2 Days Early</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decorative Bubbles -->
+            <div class="absolute -top-2 md:-top-4 -left-2 md:-left-4 w-6 md:w-8 h-6 md:h-8 border-2 border-white/30 rounded-full animate-pulse"></div>
+            <div class="absolute -bottom-2 md:-bottom-4 -right-2 md:-right-4 w-4 md:w-6 h-4 md:h-6 border-2 border-white/30 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="absolute top-1/2 -left-3 md:-left-6 w-3 md:w-4 h-3 md:h-4 border border-white/30 rotate-45 animate-pulse" style="animation-delay: 0.5s;"></div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Quick Stats -->
     <section class="py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6, #7B8C94);">
@@ -866,7 +1146,7 @@
     <section id="about" class="py-20 bg-white dark:bg-gray-900 transition-all duration-500">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text section-transition" data-en="About BuildTech Pro" data-fr="À Propos de BuildTech Pro">About BuildTech Pro</h2>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text section-transition" data-en="About CorbenX data-fr="À Propos de CorbenX">About CorbenX</h2>
                 <p class="text-xl text-gray-600 dark:text-gray-400 section-transition" data-en="Building excellence through innovation and expertise" data-fr="Construire l'excellence grâce à l'innovation et à l'expertise">
                     Building excellence through innovation and expertise
                 </p>
@@ -875,10 +1155,10 @@
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="section-transition">
                     <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-6" data-en="Our Story" data-fr="Notre Histoire">Our Story</h3>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-6" data-en="With over 25 years of experience in construction and engineering, BuildTech Pro has established itself as a leader in delivering innovative solutions for complex projects." data-fr="Avec plus de 25 ans d'expérience en construction et ingénierie, BuildTech Pro s'est établi comme un leader dans la livraison de solutions innovantes pour des projets complexes.">
-                        With over 25 years of experience in construction and engineering, BuildTech Pro has established itself as a leader in delivering innovative solutions for complex projects.
+                    <p class="text-justify text-lg text-gray-600 dark:text-gray-400 mb-6" data-en="With over 25 years of experience in construction and engineering, BuildTech Pro has established itself as a leader in delivering innovative solutions for complex projects." data-fr="Avec plus de 25 ans d'expérience en construction et ingénierie, BuildTech Pro s'est établi comme un leader dans la livraison de solutions innovantes pour des projets complexes.">
+                        With over 25 years of experience in construction and engineering, CorbenX has established itself as a leader in delivering innovative solutions for complex projects.
                     </p>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8" data-en="Our commitment to excellence, safety, and sustainability drives every project we undertake, ensuring superior results that exceed client expectations." data-fr="Notre engagement envers l'excellence, la sécurité et la durabilité guide chaque projet que nous entreprenons, garantissant des résultats supérieurs qui dépassent les attentes des clients.">
+                    <p class="text-justify text-lg text-gray-600 dark:text-gray-400 mb-8" data-en="Our commitment to excellence, safety, and sustainability drives every project we undertake, ensuring superior results that exceed client expectations." data-fr="Notre engagement envers l'excellence, la sécurité et la durabilité guide chaque projet que nous entreprenons, garantissant des résultats supérieurs qui dépassent les attentes des clients.">
                         Our commitment to excellence, safety, and sustainability drives every project we undertake, ensuring superior results that exceed client expectations.
                     </p>
                 </div>
