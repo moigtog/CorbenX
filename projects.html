@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CorbenX - Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            corbenxBlue: "#316EA6",
+            corbenxGray: "#7B8C94",
+            corbenxDark: "#20343F",
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-white dark:bg-corbenxDark text-gray-900 dark:text-white">
+
+  <!-- Page wrapper with space for imported header -->
+  <div class="pt-24">
+
+    <!-- Hero -->
+    <section class="relative bg-gradient-to-r from-corbenxBlue to-corbenxGray text-white py-20">
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4" data-en="Our Portfolio" data-fr="Notre Portfolio">Our Portfolio</h1>
+        <p class="max-w-2xl mx-auto text-lg text-gray-200" data-en="A showcase of our projects and expertise" data-fr="Une vitrine de nos projets et de notre expertise">
+          A showcase of our projects and expertise
+        </p>
+      </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="py-20 bg-gray-50 dark:bg-corbenxDark">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center" data-en="Recent Works" data-fr="Travaux Récents">Recent Works</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Item 1 -->
+          <div class="relative group rounded-xl overflow-hidden shadow-lg">
+            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
+              <h3 class="text-xl font-semibold mb-2" data-en="Residential Complex" data-fr="Complexe Résidentiel">Residential Complex</h3>
+              <p class="text-sm text-gray-200" data-en="Modern housing with sustainable design" data-fr="Logements modernes avec design durable">Modern housing with sustainable design</p>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="relative group rounded-xl overflow-hidden shadow-lg">
+            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
+              <h3 class="text-xl font-semibold mb-2" data-en="Industrial Plant" data-fr="Usine Industrielle">Industrial Plant</h3>
+              <p class="text-sm text-gray-200" data-en="Efficient and optimized facilities" data-fr="Installations efficaces et optimisées">Efficient and optimized facilities</p>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="relative group rounded-xl overflow-hidden shadow-lg">
+            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
+              <h3 class="text-xl font-semibold mb-2" data-en="Maintenance Projects" data-fr="Projets de Maintenance">Maintenance Projects</h3>
+              <p class="text-sm text-gray-200" data-en="24/7 support for client infrastructure" data-fr="Support 24/7 pour l’infrastructure client">24/7 support for client infrastructure</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Project / Case Study -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+      <div class="container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-3xl font-bold mb-6" data-en="Featured Project" data-fr="Projet Vedette">Featured Project</h2>
+          <p class="text-gray-700 dark:text-gray-300 mb-6" data-en="An iconic project showcasing our innovation and excellence in construction." data-fr="Un projet emblématique illustrant notre innovation et excellence en construction.">
+            An iconic project showcasing our innovation and excellence in construction.
+          </p>
+          <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="Sustainable materials" data-fr="Matériaux durables">Sustainable materials</span></li>
+            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="Advanced engineering" data-fr="Ingénierie avancée">Advanced engineering</span></li>
+            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="On-time delivery" data-fr="Livraison à temps">On-time delivery</span></li>
+          </ul>
+        </div>
+        <div class="rounded-xl overflow-hidden shadow-lg">
+          <img src="https://via.placeholder.com/700x500" alt="Featured Project" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Showcase -->
+    <section class="py-20 bg-gradient-to-r from-corbenxBlue to-corbenxGray text-white relative">
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h2 class="text-3xl font-bold mb-8" data-en="Behind the Scenes" data-fr="Dans les Coulisses">Behind the Scenes</h2>
+        <div class="aspect-w-16 aspect-h-9 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg">
+          <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project Video" frameborder="0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
