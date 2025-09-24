@@ -198,6 +198,7 @@ function updateTexts(){
   document.querySelectorAll('[data-en]').forEach(el=>{
     el.textContent = el.dataset[lang] || el.dataset.en;
   });
+  
   renderBigProjects();
   renderOtherGrid();
 }
