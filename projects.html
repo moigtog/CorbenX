@@ -70,7 +70,7 @@
   <div id="header-placeholder" class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-500 fixed inset-x-0 top-0 z-40"></div>
 
   <!-- MAIN -->
-  <main  id="hero-p" class="container mx-auto px-6 pt-28 pb-28">
+  <main class="container mx-auto px-6 pt-28 pb-28">
 
     <!-- HERO -->
     <section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
@@ -121,312 +121,211 @@
     </div>
   </div>
 
- <!-- ========== SCRIPTS ========== -->
-
-
 <script>
-/************* Import header/footer with interactions *************/
+/* ===========================
+   Unified projects-only script
+   =========================== */
+
+/* -------- Import header/footer -------- */
 async function importSection(url, selector, placeholderId, callback) {
     try {
         const res = await fetch(url);
         const text = await res.text();
-        const temp = document.createElement('div');
-        temp.innerHTML = text;
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        const section = tmp.querySelector(selector);
+        if (!section) return;
 
-        const section = temp.querySelector(selector);
-        if (section) {
-            const placeholder = document.getElementById(placeholderId);
-            placeholder.innerHTML = section.outerHTML;
+        const placeholder = document.getElementById(placeholderId);
+        placeholder.innerHTML = section.outerHTML;
 
-            // Copy <style> tags
-            section.querySelectorAll('style').forEach(s => {
-                const styleTag = document.createElement('style');
-                styleTag.textContent = s.textContent;
-                document.head.appendChild(styleTag);
-            });
+        // copy <style>
+        section.querySelectorAll('style').forEach(s => {
+            const st = document.createElement('style');
+            st.textContent = s.textContent;
+            document.head.appendChild(st);
+        });
 
-            // Append extra CSS for header/footer (slide animations + dropglass)
-            const extraCSS = `
-            /* Mobile Menu Animations */
-            .mobile-menu-open { opacity: 1 !important; transform: translateY(0) !important; }
-            .mobile-dropdown-open .mobile-dropdown-content { display: block; }
-            .mobile-dropdown-open .mobile-dropdown-btn i { transform: rotate(180deg); }
+        // copy <script>
+        section.querySelectorAll('script').forEach(s => {
+            const sc = document.createElement('script');
+            if (s.src) sc.src = s.src;
+            else sc.textContent = s.textContent;
+            document.body.appendChild(sc);
+        });
 
-            /* Glass effect for header/footer */
-            .dropglass {
-                background: rgba(255, 255, 255, 1)!important;
-                backdrop-filter: blur(15px)!important;
-                border: 1px solid rgba(255, 255, 255, 0.3)!important;
-            }
-            .dark .dropglass {
-                background: rgba(0, 0, 0, 1)!important;
-                border: 1px solid rgba(255, 255, 255, 0.1)!important;
-            }
-            `;
-            const styleExtra = document.createElement('style');
-            styleExtra.textContent = extraCSS;
-            document.head.appendChild(styleExtra);
-
-            // Run inline scripts from header/footer
-            section.querySelectorAll('script').forEach(s => {
-                const scriptTag = document.createElement('script');
-                if (s.src) scriptTag.src = s.src;
-                else scriptTag.textContent = s.textContent;
-                document.body.appendChild(scriptTag);
-            });
-
-            // Callback for interactions
-            if (callback) callback();
-        }
+        if (callback) callback();
     } catch (err) {
-        console.error('Failed to import section:', err);
+        console.error("importSection error", err);
     }
 }
 
-/************* Attach header/footer interactions *************/
-function attachHeaderFooterInteractions() {
-    // Theme toggles
-    ['darkToggle', 'darkToggleMobile'].forEach(id => {
-        const btn = document.getElementById(id);
-        if (btn) btn.onclick = () => {
-            document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-        };
-    });
-
-   // Language Management (same as index.html)
-   
-    // Load saved language immediately (before DOM content updates)
-let currentLanguage = localStorage.getItem('language') || 'en';
-document.documentElement.lang = currentLanguage;
-
-
-    function switchLanguage(lang) {
-        currentLanguage = lang;
-
-        // Track language change with Google Analytics
-        if (typeof gtag === 'function') {
-            gtag('event', 'language_change', { 'language': lang });
-        }
-
-        // Update buttons
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.style.backgroundColor = 'transparent';
-            btn.style.color = '';
-            btn.classList.add('text-gray-600', 'dark:text-gray-400');
-        });
-
-        const activeButtons = lang === 'en' ? 
-            ['langEn', 'langEnMobile'] : 
-            ['langFr', 'langFrMobile'];
-
-        activeButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.style.backgroundColor = '#243B48';
-                btn.style.color = 'white';
-                btn.classList.remove('text-gray-600', 'dark:text-gray-400');
-            }
-        });
-
-        // Update all elements with data attributes
-        document.querySelectorAll(`[data-${lang}]`).forEach(element => {
-            const text = element.getAttribute(`data-${lang}`);
-            if (text) {
-                element.textContent = text;
-            }
-        });
-
-        // Update placeholders
-        document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(element => {
-            const placeholder = element.getAttribute(`data-${lang}-placeholder`);
-            if (placeholder) {
-                element.placeholder = placeholder;
-            }
-        });
-
-        // Update select options
-        document.querySelectorAll('select option').forEach(option => {
-            const text = option.getAttribute(`data-${lang}`);
-            if (text) {
-                option.textContent = text;
-            }
-        });
-
-        // Update HTML lang attribute
-        document.documentElement.lang = lang;
-
-        // Save preference
-        localStorage.setItem('language', lang);
-    }
-
-    // Restore language after DOM is ready
-    window.addEventListener("DOMContentLoaded", () => {
-        switchLanguage(currentLanguage);
-    });
-
-    // Attach toggle buttons
-    [
-        {id:'langEn', lang:'en'}, 
-        {id:'langFr', lang:'fr'},
-        {id:'langEnMobile', lang:'en'}, 
-        {id:'langFrMobile', lang:'fr'}
-    ].forEach(b => {
-        const btn = document.getElementById(b.id);
-        if (btn) {
-            btn.classList.add('lang-btn'); // ensure consistent styling
-            btn.onclick = () => switchLanguage(b.lang);
-        }
-    });
-
-    // Mobile menu
-    const mobileBtn = document.getElementById('mobileMenu');
-    const mobileDropdown = document.getElementById('mobileMenuDropdown');
-    if (mobileBtn && mobileDropdown) {
-        mobileBtn.onclick = () => {
-            mobileDropdown.classList.toggle('hidden');
-            mobileDropdown.classList.toggle('opacity-0');
-            mobileDropdown.classList.toggle('opacity-100');
-            mobileDropdown.classList.toggle('translate-y-2');
-            mobileDropdown.classList.toggle('translate-y-0');
-        };
-    }
-
-    // Mobile submenu chevrons
-    document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
-        btn.onclick = () => {
-            const submenu = btn.nextElementSibling;
-            const chevron = btn.querySelector('i');
-            if (submenu) submenu.classList.toggle('hidden');
-            if (chevron) chevron.classList.toggle('rotate-180');
-        };
-    });
-
-    // FontAwesome icons in footer
-    if (!document.getElementById('fa')) {
-        const faScript = document.createElement('script');
-        faScript.id = 'fa';
-        faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
-        faScript.crossOrigin = 'anonymous';
-        faScript.defer = true;
-        document.body.appendChild(faScript);
-    } else {
-        // Re-render icons if already loaded
-        if (window.FontAwesome) window.FontAwesome.dom.i2svg();
-    }
-}
-
-// Import header/footer
-importSection('index.html', '#header', 'header-placeholder', attachHeaderFooterInteractions);
-importSection('index.html', '#footer', 'footer-placeholder', attachHeaderFooterInteractions);
-
-</script>
-
-
-
-<script>
-/************* Sample Data *************/
+/* -------- Sample Data -------- */
 const BIG_PROJECTS = [
-    { id:'metro-tower', title:{en:'Metropolitan Tower Complex',fr:'Complexe Metropolitan Tower'}, desc:{en:'42-storey mixed-use development with sustainable terraces and integrated public spaces.',fr:'Développement à usage mixte de 42 étages avec terrasses durables et espaces publics intégrés.'}, images:['https://picsum.photos/seed/metro1/1600/900','https://picsum.photos/seed/metro2/1600/900','https://picsum.photos/seed/metro3/1600/900','https://picsum.photos/seed/metro4/1600/900'] },
-    { id:'green-plant', title:{en:'Green Energy Plant',fr:'Centrale d’Énergie Verte'}, desc:{en:'Renewable energy facility combining solar, wind and storage to support regional grid resilience.',fr:'Installation d’énergie renouvelable combinant solaire, éolien et stockage pour la résilience du réseau régional.'}, images:['https://picsum.photos/seed/green1/1600/900','https://picsum.photos/seed/green2/1600/900','https://picsum.photos/seed/green3/1600/900'] },
-    { id:'bridge-expansion', title:{en:'River Bridge Expansion',fr:'Extension du Pont'}, desc:{en:'Major infrastructure upgrade widening the bridge and improving load capacity.',fr:'Amélioration d’infrastructure majeure élargissant le pont et renforçant la capacité de charge.'}, images:['https://picsum.photos/seed/bridge1/1600/900','https://picsum.photos/seed/bridge2/1600/900','https://picsum.photos/seed/bridge3/1600/900'] }
+    {
+      id:'metro-tower',
+      title:{en:'Metropolitan Tower Complex',fr:'Complexe Metropolitan Tower'},
+      desc:{en:'42-storey mixed-use development with sustainable terraces and integrated public spaces.',fr:'Développement à usage mixte de 42 étages avec terrasses durables et espaces publics intégrés.'},
+      images:[
+        'https://picsum.photos/seed/metro1/1600/900',
+        'https://picsum.photos/seed/metro2/1600/900',
+        'https://picsum.photos/seed/metro3/1600/900',
+        'https://picsum.photos/seed/metro4/1600/900'
+      ]
+    },
+    {
+      id:'green-plant',
+      title:{en:'Green Energy Plant',fr:'Centrale d’Énergie Verte'},
+      desc:{en:'Renewable energy facility combining solar, wind and storage to support regional grid resilience.',fr:'Installation d’énergie renouvelable combinant solaire, éolien et stockage pour la résilience du réseau régional.'},
+      images:[
+        'https://picsum.photos/seed/green1/1600/900',
+        'https://picsum.photos/seed/green2/1600/900',
+        'https://picsum.photos/seed/green3/1600/900'
+      ]
+    },
+    {
+      id:'bridge-expansion',
+      title:{en:'River Bridge Expansion',fr:'Extension du Pont'},
+      desc:{en:'Major infrastructure upgrade widening the bridge and improving load capacity.',fr:'Amélioration d’infrastructure majeure élargissant le pont et renforçant la capacité de charge.'},
+      images:[
+        'https://picsum.photos/seed/bridge1/1600/900',
+        'https://picsum.photos/seed/bridge2/1600/900',
+        'https://picsum.photos/seed/bridge3/1600/900'
+      ]
+    }
 ];
 const OTHER_PROJECT_IMAGES = Array.from({length:12},(_,i)=>`https://picsum.photos/seed/other${i+1}/1200/800`);
 
-/************* Theme & Language *************/
-let lang = localStorage.getItem('language') || (document.documentElement.lang || 'en');
-if(localStorage.getItem('theme')==='dark') document.documentElement.classList.add('dark');
+/* -------- Theme & Language Setup -------- */
+let lang = localStorage.getItem('language') || 'en';
+let theme = localStorage.getItem('theme') || 'light';
+if(theme==='dark') document.documentElement.classList.add('dark');
+document.documentElement.lang = lang;
 
-
-/************* Language Functions *************/
+/* -------- Language Functions -------- */
 function setLanguageGlobal(l){
   lang = l;
   localStorage.setItem('language', l);
   updateTexts();
+  highlightLanguageButtons();
 }
 function updateTexts(){
   document.querySelectorAll('[data-en]').forEach(el=>{
     el.textContent = el.dataset[lang] || el.dataset.en;
   });
+  document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(el=>{
+    el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
+  });
+  document.querySelectorAll('select option').forEach(opt=>{
+    const t = opt.getAttribute(`data-${lang}`);
+    if (t) opt.textContent = t;
+  });
   renderBigProjects();
   renderOtherGrid();
 }
 
-/************* Theme Functions *************/
+/* -------- Highlight + Slide Language Buttons -------- */
+function highlightLanguageButtons(){
+  const buttons=['langEn','langFr','langEnMobile','langFrMobile'];
+  buttons.forEach(id=>{
+    const btn=document.getElementById(id);
+    if(!btn) return;
+    if((lang==='en' && id.toLowerCase().includes('en')) ||
+       (lang==='fr' && id.toLowerCase().includes('fr'))){
+      btn.classList.add('active-lang');
+    }else{
+      btn.classList.remove('active-lang');
+    }
+  });
+}
+
+/* -------- Theme Functions -------- */
 function toggleTheme(){
   document.documentElement.classList.toggle('dark');
-  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light');
 }
 
-/************* Header Listeners (after import) *************/
+/* -------- Attach Listeners -------- */
 function attachHeaderListeners(){
-  // Desktop Theme
-  const darkToggle = document.getElementById('darkToggle');
-  darkToggle?.addEventListener('click', toggleTheme);
-  // Mobile Theme
-  const darkToggleMobile = document.getElementById('darkToggleMobile');
-  darkToggleMobile?.addEventListener('click', toggleTheme);
+  document.getElementById('darkToggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('darkToggleMobile')?.addEventListener('click', toggleTheme);
 
-  // Language Desktop
   document.getElementById('langEn')?.addEventListener('click', ()=>setLanguageGlobal('en'));
   document.getElementById('langFr')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
-  // Language Mobile
   document.getElementById('langEnMobile')?.addEventListener('click', ()=>setLanguageGlobal('en'));
   document.getElementById('langFrMobile')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
+
+  // apply saved state once header is loaded
+  highlightLanguageButtons();
 }
 
-/************* Projects Rendering *************/
+/* -------- Rendering -------- */
 const bigContainer=document.getElementById('bigProjectsContainer');
 const otherGrid=document.getElementById('otherGrid');
 
 function renderBigProjects(){
   bigContainer.innerHTML='';
   BIG_PROJECTS.forEach(p=>{
-    const card=document.createElement('article'); card.className='grad-border rounded-2xl overflow-hidden shadow-sm glass';
+    const card=document.createElement('article'); 
+    card.className='grad-border rounded-2xl overflow-hidden shadow-sm glass';
 
     const row=document.createElement('div'); row.className='md:flex';
     const left=document.createElement('div'); left.className='md:w-1/3';
-    const img=document.createElement('img'); img.src=p.images[0]; img.alt=p.title[lang]||p.title.en; img.className='w-full h-52 md:h-44 object-cover';
+    const img=document.createElement('img'); 
+    img.src=p.images[0]; 
+    img.alt=p.title[lang]; 
+    img.className='w-full h-52 md:h-44 object-cover';
     left.appendChild(img);
 
     const right=document.createElement('div'); right.className='md:w-2/3 p-5 relative';
-    const title=document.createElement('h3'); title.className='text-xl font-semibold text-corbenxNavy dark:text-corbenxLight'; title.textContent=p.title[lang]||p.title.en;
-    const desc=document.createElement('p'); desc.className='mt-2 text-gray-600 dark:text-gray-300'; desc.textContent=p.desc[lang]||p.desc.en;
+    const title=document.createElement('h3'); 
+    title.className='text-xl font-semibold text-corbenxNavy dark:text-corbenxLight'; 
+    title.textContent=p.title[lang];
+    const desc=document.createElement('p'); 
+    desc.className='mt-2 text-gray-600 dark:text-gray-300'; 
+    desc.textContent=p.desc[lang];
 
-    const chev=document.createElement('button'); chev.className='absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition'; chev.setAttribute('aria-expanded','false'); chev.innerHTML=`<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
-    right.appendChild(title); right.appendChild(desc); right.appendChild(chev);
-    row.appendChild(left); row.appendChild(right); card.appendChild(row);
+    const chev=document.createElement('button'); 
+    chev.className='absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition'; 
+    chev.innerHTML=`<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
+    right.append(title, desc, chev);
+    row.append(left, right);
+    card.appendChild(row);
 
-    const details=document.createElement('div'); details.className='slide-hidden border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 p-5'; details.setAttribute('aria-hidden','true');
-
-    const showcaseWrap=document.createElement('div'); showcaseWrap.className='rounded-lg overflow-hidden relative';
-    const showcaseMain=document.createElement('img'); showcaseMain.src=p.images[0]; showcaseMain.alt=p.title[lang]||p.title.en; showcaseMain.className='w-full h-64 object-cover rounded-md cursor-pointer';
+    const details=document.createElement('div'); 
+    details.className='hidden border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 slide-hidden';
+    const showcaseMain=document.createElement('img');
+    showcaseMain.src=p.images[0];
+    showcaseMain.alt=p.title[lang];
+    showcaseMain.className='w-full h-64 object-cover rounded-md cursor-pointer';
     showcaseMain.addEventListener('click',()=>openModal(showcaseMain.src));
-    showcaseWrap.appendChild(showcaseMain);
+    details.appendChild(showcaseMain);
 
     const thumbs=document.createElement('div'); thumbs.className='mt-4 flex gap-3 overflow-x-auto pb-1';
-    p.images.forEach((src,i)=>{ const t=document.createElement('img'); t.src=src; t.alt=`${p.title.en} thumb ${i+1}`; t.className='w-28 h-20 object-cover rounded-md cursor-pointer border thumb-small'; t.addEventListener('click',()=>{ showcaseMain.src=src; thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); t.classList.add('thumb-active'); }); thumbs.appendChild(t); });
+    p.images.forEach((src,i)=>{
+      const t=document.createElement('img'); 
+      t.src=src; 
+      t.alt=`${p.title[lang]} thumb ${i+1}`; 
+      t.className='w-28 h-20 object-cover rounded-md cursor-pointer border thumb-small';
+      t.addEventListener('click',()=>{ showcaseMain.src=src; thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); t.classList.add('thumb-active'); });
+      thumbs.appendChild(t);
+    });
+    details.appendChild(thumbs);
 
     const meta=document.createElement('div'); meta.className='mt-4 flex items-center justify-between';
-    const metaLeft=document.createElement('div'); metaLeft.className='text-sm text-gray-600 dark:text-gray-300'; metaLeft.innerHTML=`<strong>${p.title[lang]||p.title.en}</strong>`;
-    const metaRight=document.createElement('div'); const viewBtn=document.createElement('button'); viewBtn.className='px-4 py-2 rounded-md bg-corbenxNavy text-white text-sm hover:opacity-90 transition'; viewBtn.textContent=(lang==='fr')?'Voir la galerie':'View gallery'; viewBtn.addEventListener('click',()=>openModal(showcaseMain.src)); metaRight.appendChild(viewBtn);
-    meta.appendChild(metaLeft); meta.appendChild(metaRight);
+    const metaLeft=document.createElement('div'); metaLeft.className='text-sm text-gray-600 dark:text-gray-300'; metaLeft.innerHTML=`<strong>${p.title[lang]}</strong>`;
+    const viewBtn=document.createElement('button'); 
+    viewBtn.className='px-4 py-2 rounded-md bg-corbenxNavy text-white text-sm hover:opacity-90 transition'; 
+    viewBtn.textContent=(lang==='fr')?'Voir la galerie':'View gallery';
+    viewBtn.addEventListener('click',()=>openModal(showcaseMain.src));
+    meta.append(metaLeft, viewBtn);
+    details.appendChild(meta);
 
-    details.appendChild(showcaseWrap); details.appendChild(thumbs); details.appendChild(meta);
-    card.appendChild(details);
-
-    chev.addEventListener('click',ev=>{ 
-      const open=details.classList.toggle('slide-open'); 
-      details.classList.toggle('slide-hidden',!open); 
-      details.setAttribute('aria-hidden',!open); 
-      chev.setAttribute('aria-expanded',open?'true':'false'); 
-      chev.querySelector('.chev').classList.toggle('chev-open',open); 
-
-      const first=thumbs.querySelector('img'); if(first){ thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); first.classList.add('thumb-active'); showcaseMain.src=first.src; }
-      if(open) setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),180); 
-      ev.stopPropagation(); 
+    chev.addEventListener('click',()=>{
+      details.classList.toggle('hidden');
     });
 
+    card.appendChild(details);
     bigContainer.appendChild(card);
   });
 }
@@ -434,23 +333,54 @@ function renderBigProjects(){
 function renderOtherGrid(){
   otherGrid.innerHTML='';
   OTHER_PROJECT_IMAGES.forEach(src=>{
-    const btn=document.createElement('button'); btn.className='relative rounded-xl overflow-hidden focus:outline-none';
-    const img=document.createElement('img'); img.src=src; img.className='w-full h-32 object-cover rounded-xl cursor-pointer'; btn.appendChild(img);
+    const btn=document.createElement('button');
+    btn.className='relative rounded-xl overflow-hidden focus:outline-none';
+    const img=document.createElement('img');
+    img.src=src;
+    img.className='w-full h-32 object-cover rounded-xl cursor-pointer';
+    btn.appendChild(img);
     btn.addEventListener('click',()=>openModal(src));
     otherGrid.appendChild(btn);
   });
 }
 
-/************* Modal *************/
+/* -------- Modal -------- */
 const modal=document.getElementById('mediaModal');
 const modalInner=document.getElementById('modalInner');
 document.getElementById('modalClose').addEventListener('click',()=>modal.classList.add('hidden'));
 modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.add('hidden'); });
 function openModal(src){ modalInner.innerHTML=`<img src="${src}" class="w-full h-auto max-h-[80vh] object-contain rounded-md">`; modal.classList.remove('hidden'); }
 
-/************* Init *************/
-window.addEventListener('DOMContentLoaded',()=>{ updateTexts(); });
+/* -------- Init -------- */
+importSection('index.html','#header','header-placeholder',()=>{
+  attachHeaderListeners();
+  updateTexts();
+});
+importSection('index.html','#footer','footer-placeholder');
+
+window.addEventListener('DOMContentLoaded',()=>{
+  updateTexts();
+});
 </script>
+
+<style>
+/* Slide dropdown + language button active state */
+.active-lang {
+  background-color:#243B48 !important;
+  color:white !important;
+  transition:all 0.3s ease-in-out;
+}
+.slide-hidden {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.slide-hidden:not(.hidden) {
+  max-height:1000px;
+}
+</style>
+
+
 
 </body>
 </html>
