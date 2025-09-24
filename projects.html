@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="docs/favicon.ico">
 
   <style>
     * { font-family: 'Inter', sans-serif; }
@@ -69,10 +70,10 @@
   <div id="header-placeholder" class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-500 fixed inset-x-0 top-0 z-40"></div>
 
   <!-- MAIN -->
-  <main class="container mx-auto px-6 pt-28 pb-28">
+  <main  id="hero-p" class="container mx-auto px-6 pt-28 pb-28">
 
     <!-- HERO -->
-    <section id="hero-p" class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
+    <section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
       <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
       <div class="relative z-10 text-center">
         <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="CorbenX Projects" data-fr="Projets CorbenX">CorbenX Projects</h1>
@@ -108,7 +109,7 @@
   </main>
 
   <!-- FOOTER -->
-  <div id="footer-placeholder" class="py-12 text-white relative overflow-hidden mt-12" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
+  <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
 
   <!-- MEDIA MODAL -->
   <div id="mediaModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-bg">
@@ -120,21 +121,12 @@
     </div>
   </div>
 
-  <!-- DEMO FAB -->
-  <div class="fab hidden md:flex gap-2 items-center">
-    <button id="demoThemeBtn" class="p-3 rounded-full bg-white/90 shadow text-slate-800"><i class="fas fa-adjust"></i></button>
-    <div class="flex items-center bg-white/90 rounded-full px-2 py-1 shadow text-sm">
-      <button id="demoEn" class="px-3 py-1 font-medium">EN</button>
-      <button id="demoFr" class="px-3 py-1 text-gray-600">FR</button>
-    </div>
-  </div>
-
  <!-- ========== SCRIPTS ========== -->
 
 
 <script>
-/************* Import header/footer with Tailwind & scripts *************/
-async function importSection(url, selector, placeholderId) {
+/************* Import header/footer with interactions *************/
+async function importSection(url, selector, placeholderId, callback) {
     try {
         const res = await fetch(url);
         const text = await res.text();
@@ -146,33 +138,191 @@ async function importSection(url, selector, placeholderId) {
             const placeholder = document.getElementById(placeholderId);
             placeholder.innerHTML = section.outerHTML;
 
-            // Add any inline styles from <style> tags inside the section
+            // Copy <style> tags
             section.querySelectorAll('style').forEach(s => {
-                const newS = document.createElement('style');
-                newS.textContent = s.textContent;
-                document.head.appendChild(newS);
+                const styleTag = document.createElement('style');
+                styleTag.textContent = s.textContent;
+                document.head.appendChild(styleTag);
             });
 
-            // Run any <script> tags inside the section (JS for theme/lang)
+            // Append extra CSS for header/footer (slide animations + dropglass)
+            const extraCSS = `
+            /* Mobile Menu Animations */
+            .mobile-menu-open { opacity: 1 !important; transform: translateY(0) !important; }
+            .mobile-dropdown-open .mobile-dropdown-content { display: block; }
+            .mobile-dropdown-open .mobile-dropdown-btn i { transform: rotate(180deg); }
+
+            /* Glass effect for header/footer */
+            .dropglass {
+                background: rgba(255, 255, 255, 1)!important;
+                backdrop-filter: blur(15px)!important;
+                border: 1px solid rgba(255, 255, 255, 0.3)!important;
+            }
+            .dark .dropglass {
+                background: rgba(0, 0, 0, 1)!important;
+                border: 1px solid rgba(255, 255, 255, 0.1)!important;
+            }
+            `;
+            const styleExtra = document.createElement('style');
+            styleExtra.textContent = extraCSS;
+            document.head.appendChild(styleExtra);
+
+            // Run inline scripts from header/footer
             section.querySelectorAll('script').forEach(s => {
-                const newS = document.createElement('script');
-                if (s.src) newS.src = s.src; // external script
-                else newS.textContent = s.textContent; // inline script
-                document.body.appendChild(newS);
+                const scriptTag = document.createElement('script');
+                if (s.src) scriptTag.src = s.src;
+                else scriptTag.textContent = s.textContent;
+                document.body.appendChild(scriptTag);
             });
 
-            // Re-attach header listeners for dark mode and language
-            attachHeaderListeners();
+            // Callback for interactions
+            if (callback) callback();
         }
     } catch (err) {
         console.error('Failed to import section:', err);
     }
 }
 
-// Import header and footer
-importSection('index.html', '#header', 'header-placeholder');
-importSection('index.html', '#footer', 'footer-placeholder');
+/************* Attach header/footer interactions *************/
+function attachHeaderFooterInteractions() {
+    // Theme toggles
+    ['darkToggle', 'darkToggleMobile'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.onclick = () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        };
+    });
+
+   // Language Management (same as index.html)
+   
+    // Load saved language immediately (before DOM content updates)
+let currentLanguage = localStorage.getItem('language') || 'en';
+document.documentElement.lang = currentLanguage;
+
+
+    function switchLanguage(lang) {
+        currentLanguage = lang;
+
+        // Track language change with Google Analytics
+        if (typeof gtag === 'function') {
+            gtag('event', 'language_change', { 'language': lang });
+        }
+
+        // Update buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.style.backgroundColor = 'transparent';
+            btn.style.color = '';
+            btn.classList.add('text-gray-600', 'dark:text-gray-400');
+        });
+
+        const activeButtons = lang === 'en' ? 
+            ['langEn', 'langEnMobile'] : 
+            ['langFr', 'langFrMobile'];
+
+        activeButtons.forEach(id => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                btn.style.backgroundColor = '#243B48';
+                btn.style.color = 'white';
+                btn.classList.remove('text-gray-600', 'dark:text-gray-400');
+            }
+        });
+
+        // Update all elements with data attributes
+        document.querySelectorAll(`[data-${lang}]`).forEach(element => {
+            const text = element.getAttribute(`data-${lang}`);
+            if (text) {
+                element.textContent = text;
+            }
+        });
+
+        // Update placeholders
+        document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(element => {
+            const placeholder = element.getAttribute(`data-${lang}-placeholder`);
+            if (placeholder) {
+                element.placeholder = placeholder;
+            }
+        });
+
+        // Update select options
+        document.querySelectorAll('select option').forEach(option => {
+            const text = option.getAttribute(`data-${lang}`);
+            if (text) {
+                option.textContent = text;
+            }
+        });
+
+        // Update HTML lang attribute
+        document.documentElement.lang = lang;
+
+        // Save preference
+        localStorage.setItem('language', lang);
+    }
+
+    // Restore language after DOM is ready
+    window.addEventListener("DOMContentLoaded", () => {
+        switchLanguage(currentLanguage);
+    });
+
+    // Attach toggle buttons
+    [
+        {id:'langEn', lang:'en'}, 
+        {id:'langFr', lang:'fr'},
+        {id:'langEnMobile', lang:'en'}, 
+        {id:'langFrMobile', lang:'fr'}
+    ].forEach(b => {
+        const btn = document.getElementById(b.id);
+        if (btn) {
+            btn.classList.add('lang-btn'); // ensure consistent styling
+            btn.onclick = () => switchLanguage(b.lang);
+        }
+    });
+
+    // Mobile menu
+    const mobileBtn = document.getElementById('mobileMenu');
+    const mobileDropdown = document.getElementById('mobileMenuDropdown');
+    if (mobileBtn && mobileDropdown) {
+        mobileBtn.onclick = () => {
+            mobileDropdown.classList.toggle('hidden');
+            mobileDropdown.classList.toggle('opacity-0');
+            mobileDropdown.classList.toggle('opacity-100');
+            mobileDropdown.classList.toggle('translate-y-2');
+            mobileDropdown.classList.toggle('translate-y-0');
+        };
+    }
+
+    // Mobile submenu chevrons
+    document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+        btn.onclick = () => {
+            const submenu = btn.nextElementSibling;
+            const chevron = btn.querySelector('i');
+            if (submenu) submenu.classList.toggle('hidden');
+            if (chevron) chevron.classList.toggle('rotate-180');
+        };
+    });
+
+    // FontAwesome icons in footer
+    if (!document.getElementById('fa')) {
+        const faScript = document.createElement('script');
+        faScript.id = 'fa';
+        faScript.src = 'https://kit.fontawesome.com/a076d05399.js';
+        faScript.crossOrigin = 'anonymous';
+        faScript.defer = true;
+        document.body.appendChild(faScript);
+    } else {
+        // Re-render icons if already loaded
+        if (window.FontAwesome) window.FontAwesome.dom.i2svg();
+    }
+}
+
+// Import header/footer
+importSection('index.html', '#header', 'header-placeholder', attachHeaderFooterInteractions);
+importSection('index.html', '#footer', 'footer-placeholder', attachHeaderFooterInteractions);
+
 </script>
+
+
 
 <script>
 /************* Sample Data *************/
@@ -198,7 +348,6 @@ function updateTexts(){
   document.querySelectorAll('[data-en]').forEach(el=>{
     el.textContent = el.dataset[lang] || el.dataset.en;
   });
-  
   renderBigProjects();
   renderOtherGrid();
 }
