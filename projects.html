@@ -1,396 +1,306 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects - CorbenX</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CorbenX — Projects</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
-    /* Core styles adapted to match homepage theme and layout */
-    :root {
-      --primary-color: #2c5282;
-      --primary-light: #3182ce;
-      --text-color: #1a202c;
-      --background-color: #f7fafc;
-      --card-bg: #ffffff;
-      --card-shadow: rgba(0, 0, 0, 0.1);
-      --border-radius: 12px;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    [data-theme="dark"] {
-      --primary-color: #90cdf4;
-      --primary-light: #bee3f8;
-      --text-color: #e2e8f0;
-      --background-color: #1a202c;
-      --card-bg: #2d3748;
-      --card-shadow: rgba(0, 0, 0, 0.7);
-    }
+    * { font-family: 'Inter', sans-serif; }
+  </style>
 
-    body {
-      margin: 0;
-      font-family: var(--font-family);
-      background-color: var(--background-color);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            corbenxBlue: '#316EA6',
+            corbenxGray: '#7B8C94',
+            corbenxDark: '#20343F',
+            corbenxNavy: '#001565',
+            corbenxLight: '#009FE3'
+          },
+          animation: {
+            'float-slow': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite'
+          },
+          keyframes: {
+            float: { '0%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-6px)' }, '100%': { transform: 'translateY(0px)' } }
+          }
+        }
+      }
     }
+  </script>
 
-    nav {
-      width: 100%;
-      background-color: var(--primary-color);
-      display: flex;
-      justify-content: center;
-      box-shadow: 0 2px 4px var(--card-shadow);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0.75rem 1rem;
-      justify-content: space-between;
-    }
-
-    .logo {
-      color: white;
-      font-weight: 700;
-      font-size: 1.5rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-links li {
-      position: relative;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--primary-light);
-    }
-
-    .theme-lang-controls {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-
-    /* Theme toggle button */
-    .theme-toggle {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.25rem;
-      cursor: pointer;
-    }
-
-    /* Language toggle */
-    .lang-toggle {
-      background-color: var(--primary-color);
-      border: 1px solid white;
-      border-radius: 4px;
-      color: white;
-      font-weight: 600;
-      padding: 0.25rem 0.75rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .lang-toggle.active {
-      background-color: var(--primary-light);
-      border-color: var(--primary-light);
-    }
-
-    main {
-      max-width: 1200px;
-      width: 100%;
-      padding: 2rem 1rem 4rem;
-      flex-grow: 1;
-    }
-
-    h1.page-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--primary-color);
-      text-align: center;
-    }
-
-    p.page-subtitle {
-      font-size: 1.15rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: var(--text-color);
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .project-card {
-      background-color: var(--card-bg);
-      box-shadow: 0 4px 8px var(--card-shadow);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px var(--card-shadow);
-    }
-
-    .project-image {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .project-content {
-      padding: 1rem 1.25rem;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .project-title {
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-      font-size: 1.25rem;
-    }
-
-    .project-description {
-      font-size: 0.95rem;
-      color: var(--text-color);
-      flex-grow: 1;
-      margin-bottom: 1rem;
-    }
-
-    .project-category {
-      display: inline-block;
-      background-color: var(--primary-light);
-      color: white;
-      font-weight: 600;
-      font-size: 0.75rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      user-select: none;
-    }
-
-    .project-link {
-      align-self: flex-end;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--primary-light);
-      text-decoration: none;
-      border-bottom: 1.5px solid transparent;
-      transition: border-color 0.3s ease;
-    }
-
-    .project-link:hover {
-      border-color: var(--primary-light);
-    }
-
-    footer {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: white;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      font-weight: 700;
-      font-size: 0.95rem;
-      user-select: none;
-    }
+  <style>
+    /* page-specific styling */
+    :root { --accent: #316EA6; --accent-2: #7B8C94; --dark-bg: #20343F; }
+    .hero-gradient { background: linear-gradient(120deg, rgba(49,110,166,1) 0%, rgba(0,159,227,0.85) 35%, rgba(35,48,63,0.95) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    .slide-hidden { max-height: 0; overflow: hidden; transition: max-height 420ms cubic-bezier(.2,.9,.2,1); }
+    .slide-open { max-height: 1600px; transition: max-height 520ms cubic-bezier(.2,.9,.2,1); }
+    .chev { transition: transform 320ms cubic-bezier(.2,.9,.2,1); }
+    .chev-open { transform: rotate(180deg); }
+    .modal-bg { background: rgba(6,8,15,0.72); backdrop-filter: blur(6px); }
+    .thumb-active { box-shadow: 0 12px 32px rgba(3,18,29,0.22); transform: translateY(-6px); border: 3px solid rgba(49,110,166,0.12); }
+    .glass { background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.5)); backdrop-filter: blur(6px); }
+    .dark .glass { background: linear-gradient(180deg, rgba(9,10,12,0.6), rgba(18,20,24,0.6)); }
+    .fade-up { transform: translateY(14px); opacity: 0; transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s; }
+    .fade-up.in-view { transform: translateY(0); opacity: 1; }
+    .grad-border { border: 1px solid transparent; background-origin: border-box; background-clip: padding-box, border-box; background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
+    .dark .grad-border { background-image: linear-gradient(#0b0f13, #0b0f13), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
+    .thumb-small { width: 92px; height: 64px; object-fit: cover; }
+    .fab { position: fixed; right: 18px; bottom: 18px; z-index: 70; }
   </style>
 </head>
-<body>
-  <nav role="navigation" aria-label="Main navigation">
-    <div class="nav-container">
-      <div class="logo" tabindex="0">CorbenX</div>
-      <ul class="nav-links">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="/projects.html" class="active">Projects</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="equipment.html">Equipment</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="theme-lang-controls">
-        <button class="theme-toggle" aria-label="Toggle dark/light theme" id="themeToggle">🌙</button>
-        <button class="lang-toggle active" data-lang="en" aria-pressed="true">EN</button>
-        <button class="lang-toggle" data-lang="fr" aria-pressed="false">FR</button>
+
+<body class="bg-white dark:bg-corbenxDark text-slate-900 dark:text-gray-100 antialiased">
+
+  <!-- HEADER -->
+  <div id="header-placeholder" class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-500 fixed inset-x-0 top-0 z-40"></div>
+
+  <!-- MAIN -->
+  <main class="container mx-auto px-6 pt-28 pb-28">
+
+    <!-- HERO -->
+    <section id="hero-p" class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
+      <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
+      <div class="relative z-10 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="CorbenX Projects" data-fr="Projets CorbenX">CorbenX Projects</h1>
+        <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90" data-en="Large-scale construction & engineering works — selected case studies and gallery." data-fr="Projets de construction et d'ingénierie d'envergure — études de cas et galerie sélectionnées.">Large-scale construction & engineering works — selected case studies and gallery.</p>
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm"><i class="fas fa-building"></i> <span data-en="Construction" data-fr="Construction">Construction</span></span>
+          <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm"><i class="fas fa-wrench"></i> <span data-en="Engineering" data-fr="Ingénierie">Engineering</span></span>
+        </div>
       </div>
-    </div>
-  </nav>
-  <main>
-    <h1 class="page-title" data-i18n="projectsTitle">Our Projects</h1>
-    <p class="page-subtitle" data-i18n="projectsSubtitle">Explore our portfolio of successful construction and engineering projects</p>
+      <svg class="absolute -right-24 -top-12 opacity-30 w-80 h-80 animate-float-slow" viewBox="0 0 200 200"><defs><linearGradient id="g1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></linearGradient></defs><circle cx="60" cy="60" r="80" fill="url(#g1)"></circle></svg>
+    </section>
 
-    <section class="projects-grid" aria-label="Featured Projects">
-      <article class="project-card" tabindex="0">
-        <img
-          src="images/metropolitan-tower.jpg"
-          alt="Metropolitan Tower Complex construction site"
-          class="project-image"
-          loading="lazy"
-        />
-        <div class="project-content">
-          <span class="project-category" data-i18n="categoryCommercial">Commercial</span>
-          <h2 class="project-title" data-i18n="project1Title">Metropolitan Tower Complex</h2>
-          <p class="project-description" data-i18n="project1Desc">
-            42-story mixed-use development in downtown core
-          </p>
-          <a href="project-details.html?project=metropolitan-tower" class="project-link" aria-label="View details about Metropolitan Tower Complex" data-i18n="viewDetails">View Details →</a>
-        </div>
-      </article>
+    <!-- BIG PROJECTS -->
+    <section class="mt-10">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-semibold" data-en="Big Projects" data-fr="Grands Projets">Big Projects</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300" data-en="Click the chevron to expand project showcase" data-fr="Cliquez sur la flèche pour ouvrir la vitrine">Click the chevron to expand project showcase</p>
+      </div>
+      <div id="bigProjectsContainer" class="space-y-6 overflow-hidden"></div>
+    </section>
 
-      <article class="project-card" tabindex="0">
-        <img
-          src="images/green-energy-plant.jpg"
-          alt="Green Energy Plant control room"
-          class="project-image"
-          loading="lazy"
-        />
-        <div class="project-content">
-          <span class="project-category" data-i18n="categoryIndustrial">Industrial</span>
-          <h2 class="project-title" data-i18n="project2Title">Green Energy Plant</h2>
-          <p class="project-description" data-i18n="project2Desc">
-            Sustainable power generation facility
-          </p>
-          <a href="project-details.html?project=green-energy-plant" class="project-link" aria-label="View details about Green Energy Plant" data-i18n="viewDetails">View Details →</a>
-        </div>
-      </article>
+    <!-- Divider -->
+    <div class="my-12 border-t border-gray-100 dark:border-gray-800"></div>
 
-      <article class="project-card" tabindex="0">
-        <img
-          src="images/highway-infrastructure.jpg"
-          alt="Highway Infrastructure construction site"
-          class="project-image"
-          loading="lazy"
-        />
-        <div class="project-content">
-          <span class="project-category" data-i18n="categoryInfrastructure">Infrastructure</span>
-          <h2 class="project-title" data-i18n="project3Title">Highway Infrastructure</h2>
-          <p class="project-description" data-i18n="project3Desc">
-            50km highway expansion project
-          </p>
-          <a href="project-details.html?project=highway-infrastructure" class="project-link" aria-label="View details about Highway Infrastructure" data-i18n="viewDetails">View Details →</a>
-        </div>
-      </article>
+    <!-- OTHER PROJECTS GRID -->
+    <section>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-semibold" data-en="Other Projects" data-fr="Autres Projets">Other Projects</h2>
+        <p class="text-sm text-gray-600 dark:text-gray-300" data-en="Gallery — click an image to view" data-fr="Galerie — cliquez sur une image pour voir">Gallery — click an image to view</p>
+      </div>
+      <div id="otherGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
     </section>
   </main>
 
-  <footer>
-    &copy; 2024 CorbenX. All rights reserved.
-  </footer>
+  <!-- FOOTER -->
+  <div id="footer-placeholder" class="py-12 text-white relative overflow-hidden mt-12" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
 
-  <script>
-    // Language & theme management assumed from homepage existing logic
+  <!-- MEDIA MODAL -->
+  <div id="mediaModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-bg">
+    <div class="relative w-full max-w-6xl mx-4">
+      <button id="modalClose" aria-label="Close" class="absolute top-3 right-3 z-50 p-2 rounded-full bg-white/90 dark:bg-gray-800/80 shadow">
+        <i class="fas fa-times text-slate-800 dark:text-white"></i>
+      </button>
+      <div id="modalInner" class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl"></div>
+    </div>
+  </div>
 
-    // Theme toggle logic
-    const themeToggle = document.getElementById('themeToggle');
-    function setTheme(theme) {
-      if (theme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeToggle.textContent = '☀️';
-      } else {
-        document.documentElement.setAttribute('data-theme', 'light');
-        themeToggle.textContent = '🌙';
-      }
-      localStorage.setItem('theme', theme);
-    }
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-    // Initialize theme on page load
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
+  <!-- DEMO FAB -->
+  <div class="fab hidden md:flex gap-2 items-center">
+    <button id="demoThemeBtn" class="p-3 rounded-full bg-white/90 shadow text-slate-800"><i class="fas fa-adjust"></i></button>
+    <div class="flex items-center bg-white/90 rounded-full px-2 py-1 shadow text-sm">
+      <button id="demoEn" class="px-3 py-1 font-medium">EN</button>
+      <button id="demoFr" class="px-3 py-1 text-gray-600">FR</button>
+    </div>
+  </div>
 
-    // Language toggle logic
-    const langButtons = document.querySelectorAll('.lang-toggle');
-    function setLanguage(lang) {
-      langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
-        btn.setAttribute('aria-pressed', btn.dataset.lang === lang);
-      });
-      // Example translation object
-      const translations = {
-        en: {
-          projectsTitle: "Our Projects",
-          projectsSubtitle: "Explore our portfolio of successful construction and engineering projects",
-          categoryCommercial: "Commercial",
-          categoryIndustrial: "Industrial",
-          categoryInfrastructure: "Infrastructure",
-          project1Title: "Metropolitan Tower Complex",
-          project1Desc: "42-story mixed-use development in downtown core",
-          project2Title: "Green Energy Plant",
-          project2Desc: "Sustainable power generation facility",
-          project3Title: "Highway Infrastructure",
-          project3Desc: "50km highway expansion project",
-          viewDetails: "View Details →"
-        },
-        fr: {
-          projectsTitle: "Nos Projets",
-          projectsSubtitle: "Découvrez notre portefeuille de projets de construction et d'ingénierie réussis",
-          categoryCommercial: "Commercial",
-          categoryIndustrial: "Industriel",
-          categoryInfrastructure: "Infrastructure",
-          project1Title: "Complexe Metropolitan Tower",
-          project1Desc: "Développement à usage mixte de 42 étages au centre-ville",
-          project2Title: "Centrale d'Énergie Verte",
-          project2Desc: "Installation durable de production d'énergie",
-          project3Title: "Infrastructure Autoroutière",
-          project3Desc: "Projet d'extension d'autoroute de 50 km",
-          viewDetails: "Voir les détails →"
+ <!-- ========== SCRIPTS ========== -->
+
+
+<script>
+/************* Import header/footer with Tailwind & scripts *************/
+async function importSection(url, selector, placeholderId) {
+    try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const temp = document.createElement('div');
+        temp.innerHTML = text;
+
+        const section = temp.querySelector(selector);
+        if (section) {
+            const placeholder = document.getElementById(placeholderId);
+            placeholder.innerHTML = section.outerHTML;
+
+            // Add any inline styles from <style> tags inside the section
+            section.querySelectorAll('style').forEach(s => {
+                const newS = document.createElement('style');
+                newS.textContent = s.textContent;
+                document.head.appendChild(newS);
+            });
+
+            // Run any <script> tags inside the section (JS for theme/lang)
+            section.querySelectorAll('script').forEach(s => {
+                const newS = document.createElement('script');
+                if (s.src) newS.src = s.src; // external script
+                else newS.textContent = s.textContent; // inline script
+                document.body.appendChild(newS);
+            });
+
+            // Re-attach header listeners for dark mode and language
+            attachHeaderListeners();
         }
-      };
-
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-      localStorage.setItem('language', lang);
+    } catch (err) {
+        console.error('Failed to import section:', err);
     }
+}
 
-    langButtons.forEach(btn => {
-      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+// Import header and footer
+importSection('index.html', '#header', 'header-placeholder');
+importSection('index.html', '#footer', 'footer-placeholder');
+</script>
+
+<script>
+/************* Sample Data *************/
+const BIG_PROJECTS = [
+    { id:'metro-tower', title:{en:'Metropolitan Tower Complex',fr:'Complexe Metropolitan Tower'}, desc:{en:'42-storey mixed-use development with sustainable terraces and integrated public spaces.',fr:'Développement à usage mixte de 42 étages avec terrasses durables et espaces publics intégrés.'}, images:['https://picsum.photos/seed/metro1/1600/900','https://picsum.photos/seed/metro2/1600/900','https://picsum.photos/seed/metro3/1600/900','https://picsum.photos/seed/metro4/1600/900'] },
+    { id:'green-plant', title:{en:'Green Energy Plant',fr:'Centrale d’Énergie Verte'}, desc:{en:'Renewable energy facility combining solar, wind and storage to support regional grid resilience.',fr:'Installation d’énergie renouvelable combinant solaire, éolien et stockage pour la résilience du réseau régional.'}, images:['https://picsum.photos/seed/green1/1600/900','https://picsum.photos/seed/green2/1600/900','https://picsum.photos/seed/green3/1600/900'] },
+    { id:'bridge-expansion', title:{en:'River Bridge Expansion',fr:'Extension du Pont'}, desc:{en:'Major infrastructure upgrade widening the bridge and improving load capacity.',fr:'Amélioration d’infrastructure majeure élargissant le pont et renforçant la capacité de charge.'}, images:['https://picsum.photos/seed/bridge1/1600/900','https://picsum.photos/seed/bridge2/1600/900','https://picsum.photos/seed/bridge3/1600/900'] }
+];
+const OTHER_PROJECT_IMAGES = Array.from({length:12},(_,i)=>`https://picsum.photos/seed/other${i+1}/1200/800`);
+
+/************* Theme & Language *************/
+let lang = localStorage.getItem('language') || (document.documentElement.lang || 'en');
+if(localStorage.getItem('theme')==='dark') document.documentElement.classList.add('dark');
+
+
+/************* Language Functions *************/
+function setLanguageGlobal(l){
+  lang = l;
+  localStorage.setItem('language', l);
+  updateTexts();
+}
+function updateTexts(){
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = el.dataset[lang] || el.dataset.en;
+  });
+  renderBigProjects();
+  renderOtherGrid();
+}
+
+/************* Theme Functions *************/
+function toggleTheme(){
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+}
+
+/************* Header Listeners (after import) *************/
+function attachHeaderListeners(){
+  // Desktop Theme
+  const darkToggle = document.getElementById('darkToggle');
+  darkToggle?.addEventListener('click', toggleTheme);
+  // Mobile Theme
+  const darkToggleMobile = document.getElementById('darkToggleMobile');
+  darkToggleMobile?.addEventListener('click', toggleTheme);
+
+  // Language Desktop
+  document.getElementById('langEn')?.addEventListener('click', ()=>setLanguageGlobal('en'));
+  document.getElementById('langFr')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
+  // Language Mobile
+  document.getElementById('langEnMobile')?.addEventListener('click', ()=>setLanguageGlobal('en'));
+  document.getElementById('langFrMobile')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
+}
+
+/************* Projects Rendering *************/
+const bigContainer=document.getElementById('bigProjectsContainer');
+const otherGrid=document.getElementById('otherGrid');
+
+function renderBigProjects(){
+  bigContainer.innerHTML='';
+  BIG_PROJECTS.forEach(p=>{
+    const card=document.createElement('article'); card.className='grad-border rounded-2xl overflow-hidden shadow-sm glass';
+
+    const row=document.createElement('div'); row.className='md:flex';
+    const left=document.createElement('div'); left.className='md:w-1/3';
+    const img=document.createElement('img'); img.src=p.images[0]; img.alt=p.title[lang]||p.title.en; img.className='w-full h-52 md:h-44 object-cover';
+    left.appendChild(img);
+
+    const right=document.createElement('div'); right.className='md:w-2/3 p-5 relative';
+    const title=document.createElement('h3'); title.className='text-xl font-semibold text-corbenxNavy dark:text-corbenxLight'; title.textContent=p.title[lang]||p.title.en;
+    const desc=document.createElement('p'); desc.className='mt-2 text-gray-600 dark:text-gray-300'; desc.textContent=p.desc[lang]||p.desc.en;
+
+    const chev=document.createElement('button'); chev.className='absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition'; chev.setAttribute('aria-expanded','false'); chev.innerHTML=`<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
+    right.appendChild(title); right.appendChild(desc); right.appendChild(chev);
+    row.appendChild(left); row.appendChild(right); card.appendChild(row);
+
+    const details=document.createElement('div'); details.className='slide-hidden border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 p-5'; details.setAttribute('aria-hidden','true');
+
+    const showcaseWrap=document.createElement('div'); showcaseWrap.className='rounded-lg overflow-hidden relative';
+    const showcaseMain=document.createElement('img'); showcaseMain.src=p.images[0]; showcaseMain.alt=p.title[lang]||p.title.en; showcaseMain.className='w-full h-64 object-cover rounded-md cursor-pointer';
+    showcaseMain.addEventListener('click',()=>openModal(showcaseMain.src));
+    showcaseWrap.appendChild(showcaseMain);
+
+    const thumbs=document.createElement('div'); thumbs.className='mt-4 flex gap-3 overflow-x-auto pb-1';
+    p.images.forEach((src,i)=>{ const t=document.createElement('img'); t.src=src; t.alt=`${p.title.en} thumb ${i+1}`; t.className='w-28 h-20 object-cover rounded-md cursor-pointer border thumb-small'; t.addEventListener('click',()=>{ showcaseMain.src=src; thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); t.classList.add('thumb-active'); }); thumbs.appendChild(t); });
+
+    const meta=document.createElement('div'); meta.className='mt-4 flex items-center justify-between';
+    const metaLeft=document.createElement('div'); metaLeft.className='text-sm text-gray-600 dark:text-gray-300'; metaLeft.innerHTML=`<strong>${p.title[lang]||p.title.en}</strong>`;
+    const metaRight=document.createElement('div'); const viewBtn=document.createElement('button'); viewBtn.className='px-4 py-2 rounded-md bg-corbenxNavy text-white text-sm hover:opacity-90 transition'; viewBtn.textContent=(lang==='fr')?'Voir la galerie':'View gallery'; viewBtn.addEventListener('click',()=>openModal(showcaseMain.src)); metaRight.appendChild(viewBtn);
+    meta.appendChild(metaLeft); meta.appendChild(metaRight);
+
+    details.appendChild(showcaseWrap); details.appendChild(thumbs); details.appendChild(meta);
+    card.appendChild(details);
+
+    chev.addEventListener('click',ev=>{ 
+      const open=details.classList.toggle('slide-open'); 
+      details.classList.toggle('slide-hidden',!open); 
+      details.setAttribute('aria-hidden',!open); 
+      chev.setAttribute('aria-expanded',open?'true':'false'); 
+      chev.querySelector('.chev').classList.toggle('chev-open',open); 
+
+      const first=thumbs.querySelector('img'); if(first){ thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); first.classList.add('thumb-active'); showcaseMain.src=first.src; }
+      if(open) setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'start'}),180); 
+      ev.stopPropagation(); 
     });
 
-    // Initialize language on page load
-    const savedLang = localStorage.getItem('language') || 'en';
-    setLanguage(savedLang);
-  </script>
+    bigContainer.appendChild(card);
+  });
+}
+
+function renderOtherGrid(){
+  otherGrid.innerHTML='';
+  OTHER_PROJECT_IMAGES.forEach(src=>{
+    const btn=document.createElement('button'); btn.className='relative rounded-xl overflow-hidden focus:outline-none';
+    const img=document.createElement('img'); img.src=src; img.className='w-full h-32 object-cover rounded-xl cursor-pointer'; btn.appendChild(img);
+    btn.addEventListener('click',()=>openModal(src));
+    otherGrid.appendChild(btn);
+  });
+}
+
+/************* Modal *************/
+const modal=document.getElementById('mediaModal');
+const modalInner=document.getElementById('modalInner');
+document.getElementById('modalClose').addEventListener('click',()=>modal.classList.add('hidden'));
+modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.add('hidden'); });
+function openModal(src){ modalInner.innerHTML=`<img src="${src}" class="w-full h-auto max-h-[80vh] object-contain rounded-md">`; modal.classList.remove('hidden'); }
+
+/************* Init *************/
+window.addEventListener('DOMContentLoaded',()=>{ updateTexts(); });
+</script>
+
 </body>
 </html>
