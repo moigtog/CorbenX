@@ -226,7 +226,7 @@ function updateTexts(){
   renderBigProjects();
   renderOtherGrid();
 
-  // ----- Nouveau : opacité bouton langue -----
+  // -----  opacity button language -----
   ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
     const btn = document.getElementById(id);
     if(!btn) return;
@@ -240,8 +240,6 @@ function updateTexts(){
 });
 }
 
-
-
 /* -------- Highlight + Slide Language Buttons -------- */
 function highlightLanguageButtons(){
   const buttons=['langEn','langFr','langEnMobile','langFrMobile'];
@@ -253,6 +251,21 @@ function highlightLanguageButtons(){
       btn.classList.add('active-lang');
     }else{
       btn.classList.remove('active-lang');
+    }
+  });
+}
+
+function updateLanguageButtons() {
+  const allBtns = ['langEn','langFr','langEnMobile','langFrMobile'];
+  allBtns.forEach(id => {
+    const btn = document.getElementById(id);
+    if(btn){
+      btn.style.transition = 'background-color 0.3s ease'; // <-- transition fluide
+      if ((id.toLowerCase().includes('en') && lang==='en') || (id.toLowerCase().includes('fr') && lang==='fr')) {
+        btn.style.backgroundColor = '#243B48'; // actif
+      } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0.5)'; // inactif
+      }
     }
   });
 }
