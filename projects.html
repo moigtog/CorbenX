@@ -1,106 +1,396 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CorbenX - Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            corbenxBlue: "#316EA6",
-            corbenxGray: "#7B8C94",
-            corbenxDark: "#20343F",
-          }
-        }
-      }
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects - CorbenX</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Core styles adapted to match homepage theme and layout */
+    :root {
+      --primary-color: #2c5282;
+      --primary-light: #3182ce;
+      --text-color: #1a202c;
+      --background-color: #f7fafc;
+      --card-bg: #ffffff;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-  </script>
+    [data-theme="dark"] {
+      --primary-color: #90cdf4;
+      --primary-light: #bee3f8;
+      --text-color: #e2e8f0;
+      --background-color: #1a202c;
+      --card-bg: #2d3748;
+      --card-shadow: rgba(0, 0, 0, 0.7);
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-family);
+      background-color: var(--background-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+      width: 100%;
+      background-color: var(--primary-color);
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 2px 4px var(--card-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-links li {
+      position: relative;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-light);
+    }
+
+    .theme-lang-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Theme toggle button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    /* Language toggle */
+    .lang-toggle {
+      background-color: var(--primary-color);
+      border: 1px solid white;
+      border-radius: 4px;
+      color: white;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .lang-toggle.active {
+      background-color: var(--primary-light);
+      border-color: var(--primary-light);
+    }
+
+    main {
+      max-width: 1200px;
+      width: 100%;
+      padding: 2rem 1rem 4rem;
+      flex-grow: 1;
+    }
+
+    h1.page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    p.page-subtitle {
+      font-size: 1.15rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--text-color);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      box-shadow: 0 4px 8px var(--card-shadow);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px var(--card-shadow);
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .project-content {
+      padding: 1rem 1.25rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+    }
+
+    .project-description {
+      font-size: 0.95rem;
+      color: var(--text-color);
+      flex-grow: 1;
+      margin-bottom: 1rem;
+    }
+
+    .project-category {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: white;
+      font-weight: 600;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+
+    .project-link {
+      align-self: flex-end;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--primary-light);
+      text-decoration: none;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+
+    .project-link:hover {
+      border-color: var(--primary-light);
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      user-select: none;
+    }
+  </style>
 </head>
-<body class="bg-white dark:bg-corbenxDark text-gray-900 dark:text-white">
-
-  <!-- Page wrapper with space for imported header -->
-  <div class="pt-24">
-
-    <!-- Hero -->
-    <section class="relative bg-gradient-to-r from-corbenxBlue to-corbenxGray text-white py-20">
-      <div class="absolute inset-0 bg-black/30"></div>
-      <div class="container mx-auto px-6 relative z-10 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4" data-en="Our Portfolio" data-fr="Notre Portfolio">Our Portfolio</h1>
-        <p class="max-w-2xl mx-auto text-lg text-gray-200" data-en="A showcase of our projects and expertise" data-fr="Une vitrine de nos projets et de notre expertise">
-          A showcase of our projects and expertise
-        </p>
+<body>
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <div class="logo" tabindex="0">CorbenX</div>
+      <ul class="nav-links">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="/projects.html" class="active">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="equipment.html">Equipment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="theme-lang-controls">
+        <button class="theme-toggle" aria-label="Toggle dark/light theme" id="themeToggle">🌙</button>
+        <button class="lang-toggle active" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-toggle" data-lang="fr" aria-pressed="false">FR</button>
       </div>
-    </section>
+    </div>
+  </nav>
+  <main>
+    <h1 class="page-title" data-i18n="projectsTitle">Our Projects</h1>
+    <p class="page-subtitle" data-i18n="projectsSubtitle">Explore our portfolio of successful construction and engineering projects</p>
 
-    <!-- Portfolio Grid -->
-    <section class="py-20 bg-gray-50 dark:bg-corbenxDark">
-      <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-12 text-center" data-en="Recent Works" data-fr="Travaux Récents">Recent Works</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Item 1 -->
-          <div class="relative group rounded-xl overflow-hidden shadow-lg">
-            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
-              <h3 class="text-xl font-semibold mb-2" data-en="Residential Complex" data-fr="Complexe Résidentiel">Residential Complex</h3>
-              <p class="text-sm text-gray-200" data-en="Modern housing with sustainable design" data-fr="Logements modernes avec design durable">Modern housing with sustainable design</p>
-            </div>
-          </div>
-          <!-- Item 2 -->
-          <div class="relative group rounded-xl overflow-hidden shadow-lg">
-            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
-              <h3 class="text-xl font-semibold mb-2" data-en="Industrial Plant" data-fr="Usine Industrielle">Industrial Plant</h3>
-              <p class="text-sm text-gray-200" data-en="Efficient and optimized facilities" data-fr="Installations efficaces et optimisées">Efficient and optimized facilities</p>
-            </div>
-          </div>
-          <!-- Item 3 -->
-          <div class="relative group rounded-xl overflow-hidden shadow-lg">
-            <img src="https://via.placeholder.com/600x400" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
-            <div class="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition duration-500">
-              <h3 class="text-xl font-semibold mb-2" data-en="Maintenance Projects" data-fr="Projets de Maintenance">Maintenance Projects</h3>
-              <p class="text-sm text-gray-200" data-en="24/7 support for client infrastructure" data-fr="Support 24/7 pour l’infrastructure client">24/7 support for client infrastructure</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Project / Case Study -->
-    <section class="py-20 bg-white dark:bg-gray-900">
-      <div class="container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <h2 class="text-3xl font-bold mb-6" data-en="Featured Project" data-fr="Projet Vedette">Featured Project</h2>
-          <p class="text-gray-700 dark:text-gray-300 mb-6" data-en="An iconic project showcasing our innovation and excellence in construction." data-fr="Un projet emblématique illustrant notre innovation et excellence en construction.">
-            An iconic project showcasing our innovation and excellence in construction.
+    <section class="projects-grid" aria-label="Featured Projects">
+      <article class="project-card" tabindex="0">
+        <img
+          src="images/metropolitan-tower.jpg"
+          alt="Metropolitan Tower Complex construction site"
+          class="project-image"
+          loading="lazy"
+        />
+        <div class="project-content">
+          <span class="project-category" data-i18n="categoryCommercial">Commercial</span>
+          <h2 class="project-title" data-i18n="project1Title">Metropolitan Tower Complex</h2>
+          <p class="project-description" data-i18n="project1Desc">
+            42-story mixed-use development in downtown core
           </p>
-          <ul class="space-y-3 text-gray-600 dark:text-gray-400">
-            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="Sustainable materials" data-fr="Matériaux durables">Sustainable materials</span></li>
-            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="Advanced engineering" data-fr="Ingénierie avancée">Advanced engineering</span></li>
-            <li><i class="fas fa-check text-corbenxBlue mr-2"></i> <span data-en="On-time delivery" data-fr="Livraison à temps">On-time delivery</span></li>
-          </ul>
+          <a href="project-details.html?project=metropolitan-tower" class="project-link" aria-label="View details about Metropolitan Tower Complex" data-i18n="viewDetails">View Details →</a>
         </div>
-        <div class="rounded-xl overflow-hidden shadow-lg">
-          <img src="https://via.placeholder.com/700x500" alt="Featured Project" class="w-full h-full object-cover">
-        </div>
-      </div>
-    </section>
+      </article>
 
-    <!-- Video Showcase -->
-    <section class="py-20 bg-gradient-to-r from-corbenxBlue to-corbenxGray text-white relative">
-      <div class="absolute inset-0 bg-black/40"></div>
-      <div class="container mx-auto px-6 relative z-10 text-center">
-        <h2 class="text-3xl font-bold mb-8" data-en="Behind the Scenes" data-fr="Dans les Coulisses">Behind the Scenes</h2>
-        <div class="aspect-w-16 aspect-h-9 max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg">
-          <iframe class="w-full h-full" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Project Video" frameborder="0" allowfullscreen></iframe>
+      <article class="project-card" tabindex="0">
+        <img
+          src="images/green-energy-plant.jpg"
+          alt="Green Energy Plant control room"
+          class="project-image"
+          loading="lazy"
+        />
+        <div class="project-content">
+          <span class="project-category" data-i18n="categoryIndustrial">Industrial</span>
+          <h2 class="project-title" data-i18n="project2Title">Green Energy Plant</h2>
+          <p class="project-description" data-i18n="project2Desc">
+            Sustainable power generation facility
+          </p>
+          <a href="project-details.html?project=green-energy-plant" class="project-link" aria-label="View details about Green Energy Plant" data-i18n="viewDetails">View Details →</a>
         </div>
-      </div>
-    </section>
+      </article>
 
-  </div>
+      <article class="project-card" tabindex="0">
+        <img
+          src="images/highway-infrastructure.jpg"
+          alt="Highway Infrastructure construction site"
+          class="project-image"
+          loading="lazy"
+        />
+        <div class="project-content">
+          <span class="project-category" data-i18n="categoryInfrastructure">Infrastructure</span>
+          <h2 class="project-title" data-i18n="project3Title">Highway Infrastructure</h2>
+          <p class="project-description" data-i18n="project3Desc">
+            50km highway expansion project
+          </p>
+          <a href="project-details.html?project=highway-infrastructure" class="project-link" aria-label="View details about Highway Infrastructure" data-i18n="viewDetails">View Details →</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 CorbenX. All rights reserved.
+  </footer>
+
+  <script>
+    // Language & theme management assumed from homepage existing logic
+
+    // Theme toggle logic
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+      localStorage.setItem('theme', theme);
+    }
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+    // Initialize theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    // Language toggle logic
+    const langButtons = document.querySelectorAll('.lang-toggle');
+    function setLanguage(lang) {
+      langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+        btn.setAttribute('aria-pressed', btn.dataset.lang === lang);
+      });
+      // Example translation object
+      const translations = {
+        en: {
+          projectsTitle: "Our Projects",
+          projectsSubtitle: "Explore our portfolio of successful construction and engineering projects",
+          categoryCommercial: "Commercial",
+          categoryIndustrial: "Industrial",
+          categoryInfrastructure: "Infrastructure",
+          project1Title: "Metropolitan Tower Complex",
+          project1Desc: "42-story mixed-use development in downtown core",
+          project2Title: "Green Energy Plant",
+          project2Desc: "Sustainable power generation facility",
+          project3Title: "Highway Infrastructure",
+          project3Desc: "50km highway expansion project",
+          viewDetails: "View Details →"
+        },
+        fr: {
+          projectsTitle: "Nos Projets",
+          projectsSubtitle: "Découvrez notre portefeuille de projets de construction et d'ingénierie réussis",
+          categoryCommercial: "Commercial",
+          categoryIndustrial: "Industriel",
+          categoryInfrastructure: "Infrastructure",
+          project1Title: "Complexe Metropolitan Tower",
+          project1Desc: "Développement à usage mixte de 42 étages au centre-ville",
+          project2Title: "Centrale d'Énergie Verte",
+          project2Desc: "Installation durable de production d'énergie",
+          project3Title: "Infrastructure Autoroutière",
+          project3Desc: "Projet d'extension d'autoroute de 50 km",
+          viewDetails: "Voir les détails →"
+        }
+      };
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+      localStorage.setItem('language', lang);
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    // Initialize language on page load
+    const savedLang = localStorage.getItem('language') || 'en';
+    setLanguage(savedLang);
+  </script>
 </body>
 </html>

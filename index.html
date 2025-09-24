@@ -2124,15 +2124,19 @@ document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
 
             
             // Close mobile menu when clicking nav links
-            document.querySelectorAll('#mobileMenuDropdown .nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    const mobileMenuDropdown = document.getElementById('mobileMenuDropdown');
-                    mobileMenuDropdown.classList.remove('mobile-menu-open');
-                    setTimeout(() => {
-                        mobileMenuDropdown.classList.add('hidden');
-                    }, 300);
-                });
-            });
+       document.querySelectorAll('#mobileMenuDropdown .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        const mobileMenuDropdown = document.getElementById('mobileMenuDropdown');
+        if(mobileMenuDropdown) {
+            mobileMenuDropdown.classList.remove('mobile-menu-open');
+            setTimeout(() => {
+                mobileMenuDropdown.classList.add('hidden');
+            }, 300);
+        }
+        // Do NOT call e.preventDefault() here
+    });
+});
+
 
             // Contact Form API Submission
             const contactForm = document.getElementById('contactForm');
@@ -2285,16 +2289,17 @@ document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
             });
             
             // Footer links smooth scrolling
-            document.querySelectorAll('footer a[href^="#"]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const href = link.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        const sectionId = href.substring(1);
-                        scrollToSection(sectionId);
-                    }
-                });
-            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            scrollToSection(href.substring(1));
+        }
+        // Otherwise, let normal link navigation happen
+    });
+});
+
         });
     </script>
 
