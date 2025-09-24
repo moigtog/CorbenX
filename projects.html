@@ -210,19 +210,37 @@ function setLanguageGlobal(l){
   highlightLanguageButtons();
 }
 function updateTexts(){
+  // update [data-en]/[data-fr]
   document.querySelectorAll('[data-en]').forEach(el=>{
     el.textContent = el.dataset[lang] || el.dataset.en;
   });
+  // placeholders
   document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(el=>{
     el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
   });
+  // options
   document.querySelectorAll('select option').forEach(opt=>{
     const t = opt.getAttribute(`data-${lang}`);
     if (t) opt.textContent = t;
   });
   renderBigProjects();
   renderOtherGrid();
+
+  // ----- Nouveau : opacité bouton langue -----
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    const isActive = (lang==='en' && id.toLowerCase().includes('en')) ||
+                     (lang==='fr' && id.toLowerCase().includes('fr'));
+    if(isActive){
+        btn.style.backgroundColor = '#243B48'; // couleur active pleine
+    } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0)'; // couleur inactive avec opacité
+    }
+});
 }
+
+
 
 /* -------- Highlight + Slide Language Buttons -------- */
 function highlightLanguageButtons(){
@@ -360,6 +378,7 @@ importSection('index.html','#footer','footer-placeholder');
 
 window.addEventListener('DOMContentLoaded',()=>{
   updateTexts();
+  updateLanguageButtons();
 });
 </script>
 
