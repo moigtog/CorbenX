@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CorbenX — Services</title>
+     <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="docs/favicon.ico">
+
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+  </style>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            corbenxBlue: '#316EA6',
+            corbenxGray: '#7B8C94',
+            corbenxDark: '#20343F',
+            corbenxNavy: '#001565',
+            corbenxLight: '#009FE3'
+          },
+          animation: {
+            'float-slow': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite'
+          },
+          keyframes: {
+            float: { '0%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-6px)' }, '100%': { transform: 'translateY(0px)' } }
+          }
+        }
+      }
+    }
+  </script>
+
+    <style>
+
+        /* page-specific styling */
+    :root { --accent: #316EA6; --accent-2: #7B8C94; --dark-bg: #20343F; }
+    .hero-gradient { background: linear-gradient(120deg, rgba(49,110,166,1) 0%, rgba(0,159,227,0.85) 35%, rgba(35,48,63,0.95) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    
+
+        .fade-slide { opacity: 0; transform: translateY(30px); animation: fadeSlide 0.8s ease-out forwards; }
+        .fade-slide-delay-1 { animation-delay: 0.2s; }
+        .fade-slide-delay-2 { animation-delay: 0.4s; }
+        .fade-slide-delay-3 { animation-delay: 0.6s; }
+        .fade-slide-delay-4 { animation-delay: 0.8s; }
+        .fade-slide-delay-5 { animation-delay: 1.0s; }
+        .fade-slide-delay-6 { animation-delay: 1.2s; }
+        @keyframes fadeSlide { to { opacity: 1; transform: translateY(0); } }
+
+        .service-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .service-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(36,59,72,0.25); }
+        .dark .service-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); }
+
+        .theme-transition { transition: all 0.3s ease; }
+
+          /*TO PASTE IN ALL PAGES FOR IMPORT*/
+
+  /* Glass effect for header/footer */
+.dropglass {
+    background: rgba(255, 255, 255, 1) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.dark .dropglass {
+    background: rgba(0, 0, 0, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+    </style>
+
+
+</head>
+<body class="bg-white dark:bg-corbenxDark text-slate-900 dark:text-gray-100 antialiased">
+
+    <!-- HEADER -->
+  <div id="header-placeholder" class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-500 fixed inset-x-0 top-0 z-40"></div>
+
+  <!-- MAIN -->
+  <main class="container mx-auto px-6 pt-28 pb-28">
+
+    <!-- HERO -->
+<section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
+  <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
+  <div class="relative z-10 text-center">
+    <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="Our Services" data-fr="Nos Services">
+      Our Services
+    </h1>
+    <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90" data-en="We provide cutting-edge solutions for your projects." data-fr="Nous fournissons des solutions de pointe pour vos projets.">
+      We provide cutting-edge solutions for your projects.
+    <div class="mt-6 flex items-center justify-center gap-4">
+      <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm"><i class="fas fa-building"></i> <span data-en="Construction" data-fr="Construction">Construction</span></span>
+      <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm"><i class="fas fa-wrench"></i> <span data-en="Engineering" data-fr="Ingénierie">Engineering</span></span>
+    </div>
+  </div>
+  <svg class="absolute -right-24 -top-12 opacity-30 w-80 h-80 animate-float-slow" viewBox="0 0 200 200">
+    <defs>
+      <linearGradient id="g1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/>
+        <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="80" fill="url(#g1)"></circle>
+  </svg>
+</section>
+
+
+    <!-- Construction Section -->
+    <section id="construction" class=" rounded-2xl py-20 mt-20 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="fade-slide text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4" data-en="Construction" data-fr="Construction">Construction</h2>
+                <p class="fade-slide fade-slide-delay-1 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-en="From residential buildings to large-scale commercial projects, we deliver exceptional construction services with precision and quality." data-fr="Des bâtiments résidentiels aux grands projets commerciaux, nous livrons des services de construction exceptionnels avec précision et qualité.">
+                    Des bâtiments résidentiels aux grands projets commerciaux, nous livrons des services de construction exceptionnels avec précision et qualité.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Residential Construction -->
+                <div class="service-card fade-slide fade-slide-delay-2 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Residential Construction" data-fr="Construction Résidentielle">Construction Résidentielle</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Custom homes and residential complexes built with attention to detail and modern living standards." data-fr="Maisons sur mesure et complexes résidentiels construits avec attention aux détails et aux standards de vie modernes.">
+                            Maisons sur mesure et complexes résidentiels construits avec attention aux détails et aux standards de vie modernes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Commercial Construction -->
+                <div class="service-card fade-slide fade-slide-delay-3 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Commercial Construction" data-fr="Construction Commerciale">Construction Commerciale</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Office buildings, retail spaces, and commercial facilities designed for optimal functionality and aesthetics." data-fr="Immeubles de bureaux, espaces commerciaux et installations conçus pour une fonctionnalité et une esthétique optimales.">
+                            Immeubles de bureaux, espaces commerciaux et installations conçus pour une fonctionnalité et une esthétique optimales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Infrastructure -->
+                <div class="service-card fade-slide fade-slide-delay-4 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Infrastructure" data-fr="Infrastructure">Infrastructure</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Roads, bridges, and public infrastructure projects that connect communities and support economic growth." data-fr="Routes, ponts et projets d'infrastructure publique qui connectent les communautés et soutiennent la croissance économique.">
+                            Routes, ponts et projets d'infrastructure publique qui connectent les communautés et soutiennent la croissance économique.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Section -->
+    <section id="engineering" class="rounded-2xl py-20 mt-5 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="fade-slide text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4" data-en="Engineering" data-fr="Ingénierie">Ingénierie</h2>
+                <p class="fade-slide fade-slide-delay-1 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-en="Advanced engineering solutions combining innovation, efficiency, and sustainability to meet the challenges of tomorrow." data-fr="Solutions d'ingénierie avancées combinant innovation, efficacité et durabilité pour relever les défis de demain.">
+                    Solutions d'ingénierie avancées combinant innovation, efficacité et durabilité pour relever les défis de demain.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Structural Engineering -->
+                <div class="service-card fade-slide fade-slide-delay-2 bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Structural Engineering" data-fr="Ingénierie Structurelle">Ingénierie Structurelle</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Designing safe, efficient, and innovative structural systems for buildings and infrastructure." data-fr="Conception de systèmes structurels sûrs, efficaces et innovants pour les bâtiments et les infrastructures.">
+                            Conception de systèmes structurels sûrs, efficaces et innovants pour les bâtiments et les infrastructures.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mechanical Engineering -->
+                <div class="service-card fade-slide fade-slide-delay-3 bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581093448799-32b9c2299c9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Mechanical Engineering" data-fr="Ingénierie Mécanique">Ingénierie Mécanique</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Optimized mechanical systems for industrial and commercial applications." data-fr="Systèmes mécaniques optimisés pour les applications industrielles et commerciales.">
+                            Systèmes mécaniques optimisés pour les applications industrielles et commerciales.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Electrical Engineering -->
+                <div class="service-card fade-slide fade-slide-delay-4 bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581092164858-cdc5f5cf8c1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Electrical Engineering" data-fr="Ingénierie Électrique">Ingénierie Électrique</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Electrical system design, power distribution, and innovative energy solutions." data-fr="Conception de systèmes électriques, distribution d'énergie et solutions énergétiques innovantes.">
+                            Conception de systèmes électriques, distribution d'énergie et solutions énergétiques innovantes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maintenance Section -->
+    <section id="maintenance" class="rounded-2xl py-20 mt-5  bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="fade-slide text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4" data-en="Maintenance" data-fr="Maintenance">Maintenance</h2>
+                <p class="fade-slide fade-slide-delay-1 text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-en="Reliable and efficient maintenance services to ensure longevity and performance of your infrastructure." data-fr="Services de maintenance fiables et efficaces pour assurer la longévité et la performance de vos infrastructures.">
+                    Services de maintenance fiables et efficaces pour assurer la longévité et la performance de vos infrastructures.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Building Maintenance -->
+                <div class="service-card fade-slide fade-slide-delay-2 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Building Maintenance" data-fr="Maintenance des Bâtiments">Maintenance des Bâtiments</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Routine and preventive building maintenance to ensure safety and durability." data-fr="Maintenance régulière et préventive des bâtiments pour assurer sécurité et durabilité.">
+                            Maintenance régulière et préventive des bâtiments pour assurer sécurité et durabilité.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Equipment Maintenance -->
+                <div class="service-card fade-slide fade-slide-delay-3 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581091012184-9e1d2d91c5d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Equipment Maintenance" data-fr="Maintenance des Équipements">Maintenance des Équipements</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Professional servicing of industrial and commercial equipment to maximize efficiency." data-fr="Entretien professionnel des équipements industriels et commerciaux pour maximiser l'efficacité.">
+                            Entretien professionnel des équipements industriels et commerciaux pour maximiser l'efficacité.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Facility Management -->
+                <div class="service-card fade-slide fade-slide-delay-4 bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581092174170-d2c4e10ff0ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white" data-en="Facility Management" data-fr="Gestion des Installations">Gestion des Installations</h3>
+                        <p class="text-gray-600 dark:text-gray-300" data-en="Comprehensive management services to maintain operational efficiency across facilities." data-fr="Services complets de gestion pour maintenir l'efficacité opérationnelle des installations.">
+                            Services complets de gestion pour maintenir l'efficacité opérationnelle des installations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  </main>
+
+    <!-- FOOTER -->
+  <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
+
+
+    <script>
+        /* ===========================
+   Unified projects-only script
+   =========================== */
+
+/* -------- Import header/footer -------- */
+async function importSection(url, selector, placeholderId, callback) {
+    try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        const section = tmp.querySelector(selector);
+        if (!section) return;
+
+        const placeholder = document.getElementById(placeholderId);
+        placeholder.innerHTML = section.outerHTML;
+
+        // copy <style>
+        section.querySelectorAll('style').forEach(s => {
+            const st = document.createElement('style');
+            st.textContent = s.textContent;
+            document.head.appendChild(st);
+        });
+
+        // copy <script>
+        section.querySelectorAll('script').forEach(s => {
+            const sc = document.createElement('script');
+            if (s.src) sc.src = s.src;
+            else sc.textContent = s.textContent;
+            document.body.appendChild(sc);
+        });
+
+        if (callback) callback();
+    } catch (err) {
+        console.error("importSection error", err);
+    }
+}
+
+/* -------- Theme & Language Setup -------- */
+let lang = localStorage.getItem('language') || 'en';
+let theme = localStorage.getItem('theme') || 'light';
+if(theme==='dark') document.documentElement.classList.add('dark');
+document.documentElement.lang = lang;
+
+/* -------- Language Functions -------- */
+function setLanguageGlobal(l){
+  lang = l;
+  localStorage.setItem('language', l);
+  updateTexts();
+  highlightLanguageButtons();
+}
+function updateTexts(){
+  // update [data-en]/[data-fr]
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = el.dataset[lang] || el.dataset.en;
+  });
+  // placeholders
+  document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(el=>{
+    el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
+  });
+  // options
+  document.querySelectorAll('select option').forEach(opt=>{
+    const t = opt.getAttribute(`data-${lang}`);
+    if (t) opt.textContent = t;
+  });
+  renderBigProjects();
+  renderOtherGrid();
+
+  // -----  opacity button language -----
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    const isActive = (lang==='en' && id.toLowerCase().includes('en')) ||
+                     (lang==='fr' && id.toLowerCase().includes('fr'));
+    if(isActive){
+        btn.style.backgroundColor = '#243B48'; // couleur active pleine
+    } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0)'; // couleur inactive avec opacité
+    }
+});
+}
+
+/* -------- Highlight + Slide Language Buttons -------- */
+function highlightLanguageButtons(){
+  const buttons=['langEn','langFr','langEnMobile','langFrMobile'];
+  buttons.forEach(id=>{
+    const btn=document.getElementById(id);
+    if(!btn) return;
+    if((lang==='en' && id.toLowerCase().includes('en')) ||
+       (lang==='fr' && id.toLowerCase().includes('fr'))){
+      btn.classList.add('active-lang');
+    }else{
+      btn.classList.remove('active-lang');
+    }
+  });
+}
+
+function updateLanguageButtons() {
+  const allBtns = ['langEn','langFr','langEnMobile','langFrMobile'];
+  allBtns.forEach(id => {
+    const btn = document.getElementById(id);
+    if(btn){
+      btn.style.transition = 'background-color 0.3s ease'; // <-- transition fluide
+      if ((id.toLowerCase().includes('en') && lang==='en') || (id.toLowerCase().includes('fr') && lang==='fr')) {
+        btn.style.backgroundColor = '#243B48'; // actif
+      } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0.5)'; // inactif
+      }
+    }
+  });
+}
+
+/* -------- Theme Functions -------- */
+function toggleTheme(){
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light');
+}
+
+/* -------- Attach Listeners -------- */
+function attachHeaderListeners(){
+  // Theme toggle
+  document.getElementById('darkToggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('darkToggleMobile')?.addEventListener('click', toggleTheme);
+
+  // Language buttons
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    btn.addEventListener('click', ()=>{
+      setLanguageGlobal(id.toLowerCase().includes('en') ? 'en' : 'fr');
+    });
+  });
+
+  // Mobile menu toggle
+const menuBtn = document.getElementById('mobileMenu');       // match home ID
+const mobileMenu = document.getElementById('mobileMenuDropdown');    // menu container
+if(menuBtn && mobileMenu){
+  menuBtn.addEventListener('click', ()=>{
+    mobileMenu.classList.toggle('hidden'); // Tailwind hidden toggle
+    mobileMenu.classList.toggle('opacity-0');
+    mobileMenu.classList.toggle('opacity-100');
+    mobileMenu.classList.toggle('translate-y-2');
+    mobileMenu.classList.toggle('translate-y-0');
+  });
+}
+
+// Mobile submenu toggle (Services / Equipment)
+document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
+  const btn = dropdown.querySelector('.mobile-dropdown-btn');
+  const menu = dropdown.querySelector('.glass');
+  const icon = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('opacity-100');
+    menu.classList.toggle('translate-y-2');
+    menu.classList.toggle('translate-y-0');
+
+    // Rotate chevron
+    icon.classList.toggle('rotate-180');
+  });
+});
+
+  // Apply saved language state
+  highlightLanguageButtons();
+}
+
+/* -------- Init -------- */
+importSection('index.html','#header','header-placeholder',()=>{
+  attachHeaderListeners();
+  updateTexts();
+  highlightLanguageButtons();
+});
+importSection('index.html','#footer','footer-placeholder');
+
+
+window.addEventListener('DOMContentLoaded',()=>{
+  updateTexts();
+  updateLanguageButtons();
+});
+</script>
+
+<style>
+/* Slide dropdown + language button active state */
+.active-lang {
+  background-color:#243B48 !important;
+  color:white !important;
+  transition:all 0.3s ease-in-out;
+}
+.slide-hidden {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.slide-hidden:not(.hidden) {
+  max-height:1000px;
+}
+</style>
+
+</body>
+</html>
