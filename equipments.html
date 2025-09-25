@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-en="CorbenX Equipment" data-fr="Équipements CorbenX">Équipements CorbenX</title>
+  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
+  <script src="import-header-footer.js" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .hero-gradient {
+      background: linear-gradient(135deg, #001565 0%, #009FE3 100%);
+    }
+    .fade-slide { animation: fadeSlideUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
+    .fade-slide-delay-1 { animation-delay: 0.3s; }
+    @keyframes fadeSlideUp { to { opacity: 1; transform: translateY(0); } }
+    .animate-float-slow { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+  <!-- Header -->
+  <div id="header-placeholder"></div>
+
+  <!-- HERO -->
+  <section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl mt-6">
+    <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
+    <div class="relative z-10 text-center">
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="Our Equipment" data-fr="Nos Équipements">
+        Nos Équipements
+      </h1>
+      <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90" 
+         data-en="High-performance machines for purchase, rental and professional maintenance." 
+         data-fr="Des machines haute performance disponibles à l’achat, à la location et avec des plans de maintenance.">
+         High-performance machines for purchase, rental and professional maintenance.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
+          <i class="fas fa-shopping-cart"></i> <span data-en="Buy Equipment" data-fr="Acheter Équipement">Buy Equipment</span>
+        </span>
+        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
+          <i class="fas fa-truck"></i> <span data-en="Rental" data-fr="Location">Rental</span>
+        </span>
+        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
+          <i class="fas fa-tools"></i> <span data-en="Maintenance" data-fr="Maintenance">Maintenance</span>
+        </span>
+      </div>
+    </div>
+    <svg class="absolute -right-24 -top-12 opacity-30 w-80 h-80 animate-float-slow" viewBox="0 0 200 200">
+      <defs><linearGradient id="g1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></linearGradient></defs>
+      <circle cx="60" cy="60" r="80" fill="url(#g1)"></circle>
+    </svg>
+  </section>
+
+  <!-- Sections -->
+  <section id="buy" class="py-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <img src="https://images.unsplash.com/photo-1604014237744-8c14d5c7ac12?auto=format&fit=crop&w=1000&q=80" alt="Buy Equipment" class="rounded-2xl shadow-lg">
+      <div>
+        <h2 class="text-3xl font-bold mb-4" data-en="Buy Equipment" data-fr="Acheter Équipement">Buy Equipment</h2>
+        <p class="text-lg opacity-80 mb-6" data-en="Choose from a wide range of heavy-duty construction machinery tailored to your needs." 
+           data-fr="Choisissez parmi une large gamme de machines de chantier puissantes adaptées à vos besoins.">
+           Choose from a wide range of heavy-duty construction machinery tailored to your needs.
+        </p>
+        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="rental" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-3xl font-bold mb-4" data-en="Rental Services" data-fr="Services de Location">Rental Services</h2>
+        <p class="text-lg opacity-80 mb-6" data-en="Flexible rental plans for short or long-term projects." 
+           data-fr="Plans de location flexibles pour projets à court ou long terme.">
+           Flexible rental plans for short or long-term projects.
+        </p>
+        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Get a Quote</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1581093588401-22aa1d88e4dc?auto=format&fit=crop&w=1000&q=80" alt="Rental Equipment" class="rounded-2xl shadow-lg">
+    </div>
+  </section>
+
+  <section id="maintenance" class="py-20">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <img src="https://images.unsplash.com/photo-1597002410374-9f5f96365e6a?auto=format&fit=crop&w=1000&q=80" alt="Maintenance" class="rounded-2xl shadow-lg">
+      <div>
+        <h2 class="text-3xl font-bold mb-4" data-en="Maintenance Plans" data-fr="Plans de Maintenance">Maintenance Plans</h2>
+        <p class="text-lg opacity-80 mb-6" data-en="Keep your equipment in top condition with our affordable maintenance services." 
+           data-fr="Gardez vos équipements en parfait état avec nos services de maintenance abordables.">
+           Keep your equipment in top condition with our affordable maintenance services.
+        </p>
+        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+</body>
+</html>
