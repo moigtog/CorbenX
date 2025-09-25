@@ -61,8 +61,71 @@
     .dark .grad-border { background-image: linear-gradient(#0b0f13, #0b0f13), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
     .thumb-small { width: 92px; height: 64px; object-fit: cover; }
     .fab { position: fixed; right: 18px; bottom: 18px; z-index: 70; }
+
+    /* ---- Other Projects Grid Cards ---- */
+#otherGrid button {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* carré */
+  overflow: hidden;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+#otherGrid button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+  z-index: 1; /* image en dessous de l'overlay */
+  position: relative;
+}
+
+/* Overlay sombre au survol */
+#otherGrid button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0,0,0,0.6); /* overlay sombre */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 0.75rem;
+  z-index: 2; /* overlay au-dessus de l'image */
+}
+
+#otherGrid button::after {
+  content: "\f002"; /* icône loupe FontAwesome */
+  font-family: "Font Awesome 5 Free"; 
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3; /* loupe au-dessus de l'overlay */
+}
+
+#otherGrid button:hover img {
+  transform: scale(1.05); /* léger zoom */
+}
+
+#otherGrid button:hover::before {
+  opacity: 1; /* overlay visible au survol */
+}
+
+#otherGrid button:hover::after {
+  opacity: 1; /* loupe visible au survol */
+}
+/* ---- End Other Projects Grid Cards ---- */
+
   
   /*TO PASTE IN ALL PAGES FOR IMPORT*/
+
   /* Glass effect for header/footer */
 .dropglass {
     background: rgba(255, 255, 255, 1) !important;
@@ -125,14 +188,22 @@
   <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
 
   <!-- MEDIA MODAL -->
-  <div id="mediaModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-bg">
-    <div class="relative w-full max-w-6xl mx-4">
-      <button id="modalClose" aria-label="Close" class="absolute top-3 right-3 z-50 p-2 rounded-full bg-white/90 dark:bg-gray-800/80 shadow">
-        <i class="fas fa-times text-slate-800 dark:text-white"></i>
-      </button>
-      <div id="modalInner" class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl"></div>
+<div id="mediaModal" class="fixed inset-0 z-50 hidden bg-black/60 flex items-center justify-center">
+  <div class="relative w-full max-w-3xl max-h-[90vh] mx-4 flex items-center justify-center">
+    
+    <!-- Close button -->
+    <button id="modalClose" aria-label="Close" 
+            class="absolute top-3 right-3 z-50 p-2 rounded-full bg-white/90 dark:bg-gray-800/80 shadow">
+      <i class="fas fa-times text-slate-800 dark:text-white"></i>
+    </button>
+    
+    <!-- Modal content -->
+    <div id="modalInner" class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-2xl flex items-center justify-center">
+      <!-- L'image sera injectée ici via JS -->
     </div>
   </div>
+</div>
+
 
 <script>
 /* ===========================
@@ -291,17 +362,54 @@ function toggleTheme(){
 
 /* -------- Attach Listeners -------- */
 function attachHeaderListeners(){
+  // Theme toggle
   document.getElementById('darkToggle')?.addEventListener('click', toggleTheme);
   document.getElementById('darkToggleMobile')?.addEventListener('click', toggleTheme);
 
-  document.getElementById('langEn')?.addEventListener('click', ()=>setLanguageGlobal('en'));
-  document.getElementById('langFr')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
-  document.getElementById('langEnMobile')?.addEventListener('click', ()=>setLanguageGlobal('en'));
-  document.getElementById('langFrMobile')?.addEventListener('click', ()=>setLanguageGlobal('fr'));
+  // Language buttons
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    btn.addEventListener('click', ()=>{
+      setLanguageGlobal(id.toLowerCase().includes('en') ? 'en' : 'fr');
+    });
+  });
 
-  // apply saved state once header is loaded
+  // Mobile menu toggle
+const menuBtn = document.getElementById('mobileMenu');       // match home ID
+const mobileMenu = document.getElementById('mobileMenuDropdown');    // menu container
+if(menuBtn && mobileMenu){
+  menuBtn.addEventListener('click', ()=>{
+    mobileMenu.classList.toggle('hidden'); // Tailwind hidden toggle
+    mobileMenu.classList.toggle('opacity-0');
+    mobileMenu.classList.toggle('opacity-100');
+    mobileMenu.classList.toggle('translate-y-2');
+    mobileMenu.classList.toggle('translate-y-0');
+  });
+}
+
+// Mobile submenu toggle (Services / Equipment)
+document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
+  const btn = dropdown.querySelector('.mobile-dropdown-btn');
+  const menu = dropdown.querySelector('.glass');
+  const icon = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('opacity-100');
+    menu.classList.toggle('translate-y-2');
+    menu.classList.toggle('translate-y-0');
+
+    // Rotate chevron
+    icon.classList.toggle('rotate-180');
+  });
+});
+
+  // Apply saved language state
   highlightLanguageButtons();
 }
+
 
 /* -------- Rendering -------- */
 const bigContainer=document.getElementById('bigProjectsContainer');
@@ -381,7 +489,7 @@ function renderOtherGrid(){
     btn.className='relative rounded-xl overflow-hidden focus:outline-none';
     const img=document.createElement('img');
     img.src=src;
-    img.className='w-full h-32 object-cover rounded-xl cursor-pointer';
+    img.className='w-full h-24 object-cover rounded-xl cursor-pointer';
     btn.appendChild(img);
     btn.addEventListener('click',()=>openModal(src));
     otherGrid.appendChild(btn);
@@ -399,8 +507,10 @@ function openModal(src){ modalInner.innerHTML=`<img src="${src}" class="w-full h
 importSection('index.html','#header','header-placeholder',()=>{
   attachHeaderListeners();
   updateTexts();
+  highlightLanguageButtons();
 });
 importSection('index.html','#footer','footer-placeholder');
+
 
 window.addEventListener('DOMContentLoaded',()=>{
   updateTexts();
