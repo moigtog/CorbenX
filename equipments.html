@@ -1,103 +1,697 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-en="CorbenX Equipment" data-fr="Équipements CorbenX">Équipements CorbenX</title>
-  <script src="https://kit.fontawesome.com/yourkit.js" crossorigin="anonymous"></script>
-  <script src="import-header-footer.js" defer></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>CorbenX — Equipments</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="docs/favicon.ico">
+
   <style>
-    .hero-gradient {
-      background: linear-gradient(135deg, #001565 0%, #009FE3 100%);
-    }
-    .fade-slide { animation: fadeSlideUp 1s ease-out forwards; opacity: 0; transform: translateY(20px); }
-    .fade-slide-delay-1 { animation-delay: 0.3s; }
-    @keyframes fadeSlideUp { to { opacity: 1; transform: translateY(0); } }
-    .animate-float-slow { animation: float 6s ease-in-out infinite; }
-    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    * { font-family: 'Inter', sans-serif; }
   </style>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            corbenxBlue: '#316EA6',
+            corbenxGray: '#7B8C94',
+            corbenxDark: '#20343F',
+            corbenxNavy: '#001565',
+            corbenxLight: '#009FE3'
+          },
+          animation: {
+            'float-slow': 'float 6s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite'
+          },
+          keyframes: {
+            float: { '0%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-6px)' }, '100%': { transform: 'translateY(0px)' } }
+          }
+        }
+      }
+    }
+  </script>
+
+    <style>
+
+        /* page-specific styling */
+    :root { --accent: #316EA6; --accent-2: #7B8C94; --dark-bg: #20343F; }
+    .hero-gradient { background: linear-gradient(120deg, rgba(49,110,166,1) 0%, rgba(0,159,227,0.85) 35%, rgba(35,48,63,0.95) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
+    @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    
+
+        .fade-slide { opacity: 0; transform: translateY(30px); animation: fadeSlide 0.8s ease-out forwards; }
+        .fade-slide-delay-1 { animation-delay: 0.2s; }
+        .fade-slide-delay-2 { animation-delay: 0.4s; }
+        .fade-slide-delay-3 { animation-delay: 0.6s; }
+        .fade-slide-delay-4 { animation-delay: 0.8s; }
+        .fade-slide-delay-5 { animation-delay: 1.0s; }
+        .fade-slide-delay-6 { animation-delay: 1.2s; }
+        @keyframes fadeSlide { to { opacity: 1; transform: translateY(0); } }
+
+        .service-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .service-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 25px 50px -12px rgba(36,59,72,0.25); }
+        .dark .service-card:hover { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); }
+
+        .theme-transition { transition: all 0.3s ease; }
+
+          /*TO PASTE IN ALL PAGES FOR IMPORT*/
+
+  /* Glass effect for header/footer */
+.dropglass {
+    background: rgba(255, 255, 255, 1) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+.dark .dropglass {
+    background: rgba(0, 0, 0, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+    </style>
+
 </head>
-<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="bg-white dark:bg-corbenxDark text-slate-900 dark:text-gray-100 antialiased">
 
-  <!-- Header -->
-  <div id="header-placeholder"></div>
+  <!-- HEADER -->
+  <div id="header-placeholder" class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg transition-all duration-500 fixed inset-x-0 top-0 z-40"></div>
 
-  <!-- HERO -->
-  <section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl mt-6">
-    <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
-    <div class="relative z-10 text-center">
-      <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="Our Equipment" data-fr="Nos Équipements">
-        Nos Équipements
-      </h1>
-      <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90" 
-         data-en="High-performance machines for purchase, rental and professional maintenance." 
-         data-fr="Des machines haute performance disponibles à l’achat, à la location et avec des plans de maintenance.">
-         High-performance machines for purchase, rental and professional maintenance.
-      </p>
-      <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
-          <i class="fas fa-shopping-cart"></i> <span data-en="Buy Equipment" data-fr="Acheter Équipement">Buy Equipment</span>
-        </span>
-        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
-          <i class="fas fa-truck"></i> <span data-en="Rental" data-fr="Location">Rental</span>
-        </span>
-        <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur">
-          <i class="fas fa-tools"></i> <span data-en="Maintenance" data-fr="Maintenance">Maintenance</span>
-        </span>
-      </div>
-    </div>
-    <svg class="absolute -right-24 -top-12 opacity-30 w-80 h-80 animate-float-slow" viewBox="0 0 200 200">
-      <defs><linearGradient id="g1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/><stop offset="1" stop-color="#000000" stop-opacity="0"/></linearGradient></defs>
-      <circle cx="60" cy="60" r="80" fill="url(#g1)"></circle>
-    </svg>
-  </section>
+  <!-- MAIN -->
+  <main class="container mx-auto px-6 pt-28 pb-28">
 
-  <!-- Sections -->
-  <section id="buy" class="py-20">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <img src="https://images.unsplash.com/photo-1604014237744-8c14d5c7ac12?auto=format&fit=crop&w=1000&q=80" alt="Buy Equipment" class="rounded-2xl shadow-lg">
-      <div>
-        <h2 class="text-3xl font-bold mb-4" data-en="Buy Equipment" data-fr="Acheter Équipement">Buy Equipment</h2>
-        <p class="text-lg opacity-80 mb-6" data-en="Choose from a wide range of heavy-duty construction machinery tailored to your needs." 
-           data-fr="Choisissez parmi une large gamme de machines de chantier puissantes adaptées à vos besoins.">
-           Choose from a wide range of heavy-duty construction machinery tailored to your needs.
+    <!-- HERO -->
+    <section class="hero-gradient rounded-2xl text-white p-8 md:p-16 relative overflow-hidden shadow-xl">
+      <div class="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none"></div>
+      <div class="relative z-10 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-2" data-en="Our Equipments" data-fr="Nos Équipements">
+          Our Equipments
+        </h1>
+        <p class="max-w-2xl mx-auto text-lg md:text-xl opacity-90" 
+           data-en="Cutting-edge construction equipments — sales, rental and maintenance plans tailored for your projects." 
+           data-fr="Équipements de construction de pointe — ventes, location et plans de maintenance adaptés à vos projets.">
+          Cutting-edge construction equipments — sales, rental and maintenance plans tailored for your projects.
         </p>
-        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Contact Us</a>
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm">
+            <i class="fas fa-tags"></i> <span data-en="Sales" data-fr="Ventes">Sales</span>
+          </span>
+          <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm">
+            <i class="fas fa-truck-moving"></i> <span data-en="Rental" data-fr="Location">Rental</span>
+          </span>
+          <span class="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full text-sm">
+            <i class="fas fa-tools"></i> <span data-en="Maintenance" data-fr="Maintenance">Maintenance</span>
+          </span>
+        </div>
       </div>
-    </div>
+      <svg class="absolute -right-24 -top-12 opacity-30 w-80 h-80 animate-float-slow" viewBox="0 0 200 200">
+        <defs>
+          <linearGradient id="g1">
+            <stop offset="0" stop-color="#ffffff" stop-opacity="0.08"/>
+            <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="60" cy="60" r="80" fill="url(#g1)"></circle>
+      </svg>
+    </section>
+
+    <!-- Sections -->
+  <!-- Section: Achat -->
+  <section class="mt-20">
+    <h2 class="text-2xl md:text-4xl font-bold mb-4" data-en="Purchase Equipments" data-fr="Équipements à l'achat">Purchase Equipments</h2>
+    <p class="mb-8 max-w-2xl text-gray-700 dark:text-gray-300" data-en="Explore our range of equipments available for purchase." data-fr="Découvrez notre gamme d'équipements disponibles à l'achat.">
+      Explore our range of equipments available for purchase.
+    </p>
+            <div class="mb-16">
+                
+                <div class=" py-5 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500">
+                        <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/excavator.jpg', 'CAT Excavator 320D')">
+                            <img src="media/images/excavator.jpg" alt="Excavator" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                                <i class="fas fa-truck text-4xl text-white"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <i class="fas fa-expand text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1" data-en="CAT Excavator 320D" data-fr="Excavatrice CAT 320D">CAT Excavator 320D</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-en="Heavy-duty excavation" data-fr="Excavation lourde">Heavy-duty excavation</p>
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-1 rounded text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Available" data-fr="Disponible">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500">
+                        <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/crane.jpg', 'Tower Crane TC-7032')">
+                            <img src="media/images/crane.jpg" alt="Tower Crane" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                                <i class="fas fa-hammer text-4xl text-white"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <i class="fas fa-expand text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1" data-en="Tower Crane TC-7032" data-fr="Grue à Tour TC-7032">Tower Crane TC-7032</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-en="High-rise construction" data-fr="Construction en hauteur">High-rise construction</p>
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-1 rounded text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Available" data-fr="Disponible">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-3 transition-all duration-500">
+                        <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/concrete.jpg', 'Concrete Mixer CM-500')">
+                            <img src="media/images/concrete.jpg" alt="Concrete Mixer" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #7B8C94, #243B48);">
+                                <i class="fas fa-cog text-4xl text-white"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <i class="fas fa-expand text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1" data-en="Concrete Mixer CM-500" data-fr="Malaxeur à Béton CM-500">Concrete Mixer CM-500</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-en="High-capacity mixing" data-fr="Mélange haute capacité">High-capacity mixing</p>
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-1 rounded text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Available" data-fr="Disponible">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-4 transition-all duration-500">
+                        <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/generator.jpg', 'Generator Set GS-100')">
+                            <img src="media/images/generator.jpg" alt="Generator" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                                <i class="fas fa-bolt text-4xl text-white"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <i class="fas fa-expand text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1" data-en="Generator Set GS-100" data-fr="Groupe Électrogène GS-100">Generator Set GS-100</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-en="Reliable power supply" data-fr="Alimentation électrique fiable">Reliable power supply</p>
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-1 rounded text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Available" data-fr="Disponible">Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
   </section>
 
-  <section id="rental" class="py-20 bg-gray-50 dark:bg-gray-800">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-3xl font-bold mb-4" data-en="Rental Services" data-fr="Services de Location">Rental Services</h2>
-        <p class="text-lg opacity-80 mb-6" data-en="Flexible rental plans for short or long-term projects." 
-           data-fr="Plans de location flexibles pour projets à court ou long terme.">
-           Flexible rental plans for short or long-term projects.
-        </p>
-        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Get a Quote</a>
-      </div>
-      <img src="https://images.unsplash.com/photo-1581093588401-22aa1d88e4dc?auto=format&fit=crop&w=1000&q=80" alt="Rental Equipment" class="rounded-2xl shadow-lg">
-    </div>
+  <!-- Section: Location -->
+  <section class="mt-20">
+    <h2 class="text-2xl md:text-4xl font-bold mb-4" data-en="Rental Equipments" data-fr="Équipements à la location">Rental Equipments</h2>
+    <p class="mb-8 max-w-2xl text-gray-700 dark:text-gray-300" data-en="Rent top-quality equipments for your projects." data-fr="Louez des équipements de haute qualité pour vos projets.">
+      Rent top-quality equipments for your projects.
+    </p>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500 overflow-hidden">
+                    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/heavy-equipment.jpg', 'Heavy Machinery Equipment')">
+                        <img src="media/images/heavy-equipment.jpg" alt="Heavy Machinery" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                            <i class="fas fa-truck text-6xl text-white animate-bounce-slow"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fas fa-expand text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                                <i class="fas fa-truck text-lg text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white" data-en="Heavy Machinery" data-fr="Machinerie Lourde">Heavy Machinery</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm" data-en="Excavators • Bulldozers • Loaders" data-fr="Excavatrices • Bulldozers • Chargeuses">Excavators • Bulldozers • Loaders</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Professional-grade heavy equipment for earthmoving, demolition, and construction projects." data-fr="Équipement lourd de qualité professionnelle pour terrassement, démolition et projets de construction.">Professional-grade heavy equipment for earthmoving, demolition, and construction projects.</p>
+                        <div class="flex gap-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500 overflow-hidden">
+                    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/liftingpower.jpg', 'Lifting Equipment and Cranes')">
+                        <img src="media/images/liftingpower.jpg" alt="Lifting Equipment" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                            <i class="fas fa-hammer text-6xl text-white animate-bounce-slow"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fas fa-expand text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                                <i class="fas fa-hammer text-lg text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white" data-en="Lifting Equipment" data-fr="Équipement de Levage">Lifting Equipment</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm" data-en="Cranes • Hoists • Forklifts" data-fr="Grues • Palans • Chariots Élévateurs">Cranes • Hoists • Forklifts</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Complete range of lifting solutions from mobile cranes to tower cranes for any project scale." data-fr="Gamme complète de solutions de levage des grues mobiles aux grues à tour pour tout projet.">Complete range of lifting solutions from mobile cranes to tower cranes for any project scale.</p>
+                        <div class="flex gap-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-3 transition-all duration-500 overflow-hidden">
+                    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/tools.jpg', 'Power Tools and Equipment')">
+                        <img src="media/images/tools.jpg" alt="Power Tools" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #7B8C94, #243B48);">
+                            <i class="fas fa-bolt text-6xl text-white animate-bounce-slow"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                            <i class="fas fa-expand text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #7B8C94, #243B48);">
+                                <i class="fas fa-bolt text-lg text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white" data-en="Power & Tools" data-fr="Énergie et Outils">Power & Tools</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm" data-en="Generators • Compressors • Hand Tools" data-fr="Générateurs • Compresseurs • Outils à Main">Generators • Compressors • Hand Tools</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Reliable power solutions and professional-grade tools to keep your projects running smoothly." data-fr="Solutions d'énergie fiables et outils de qualité professionnelle pour maintenir vos projets en marche.">Reliable power solutions and professional-grade tools to keep your projects running smoothly.</p>
+                        <div class="flex gap-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
   </section>
 
-  <section id="maintenance" class="py-20">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <img src="https://images.unsplash.com/photo-1597002410374-9f5f96365e6a?auto=format&fit=crop&w=1000&q=80" alt="Maintenance" class="rounded-2xl shadow-lg">
-      <div>
-        <h2 class="text-3xl font-bold mb-4" data-en="Maintenance Plans" data-fr="Plans de Maintenance">Maintenance Plans</h2>
-        <p class="text-lg opacity-80 mb-6" data-en="Keep your equipment in top condition with our affordable maintenance services." 
-           data-fr="Gardez vos équipements en parfait état avec nos services de maintenance abordables.">
-           Keep your equipment in top condition with our affordable maintenance services.
-        </p>
-        <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300">Learn More</a>
-      </div>
-    </div>
-  </section>
+  <!-- Section: Maintenance -->
 
-  <!-- Footer -->
-  <div id="footer-placeholder"></div>
+    <section class="rounded-3xl py-20 bg-gray-100 dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Content -->
+                <div class="fade-slide fade-slide-delay-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6" data-en="Maintenance Plans" data-fr="Plans de Maintenance">
+                        Plans de Maintenance
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8" data-en="Keep your equipment running at peak performance with our comprehensive maintenance programs. Our certified technicians provide preventive care, emergency repairs, and complete overhauls." data-fr="Maintenez vos équipements à leur performance optimale avec nos programmes de maintenance complets. Nos techniciens certifiés fournissent des soins préventifs, des réparations d'urgence et des révisions complètes.">
+                        Maintenez vos équipements à leur performance optimale avec nos programmes de maintenance complets. Nos techniciens certifiés fournissent des soins préventifs, des réparations d'urgence et des révisions complètes.
+                    </p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300" data-en="Scheduled preventive maintenance" data-fr="Maintenance préventive programmée">Maintenance préventive programmée</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300" data-en="Emergency repair services" data-fr="Services de réparation d'urgence">Services de réparation d'urgence</span>
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-gray-700 dark:text-gray-300" data-en="Genuine parts and components" data-fr="Pièces et composants d'origine">Pièces et composants d'origine</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                 <!-- Image -->
+                <div class="fade-slide fade-slide-delay-6">
+                    <div class="equipment-card glassmorphism rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Technician Repairing Equipment" 
+                             class="equipment-image w-full h-96 object-cover">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <!-- Contact Section -->
+    <section id="contact" class="rounded-3xl py-20 bg-gray-100 dark:bg-gray-900 transition-all duration-500">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text section-transition" data-en="Get In Touch" data-fr="Contactez-Nous">Get In Touch</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-400 section-transition" data-en="Ready to start your next project? Let's discuss your needs" data-fr="Prêt à commencer votre prochain projet? Discutons de vos besoins">
+                    Ready to start your next project? Let's discuss your needs
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- Success Message -->
+                <div id="successMessage" class="hidden bg-green-100 dark:bg-green-900 border border-green-400 dark:border-green-600 text-green-700 dark:text-green-300 px-6 py-4 rounded-xl mb-6 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-semibold" data-en="Message Sent Successfully!" data-fr="Message Envoyé avec Succès!">Message Sent Successfully!</h4>
+                            <p class="text-sm" data-en="Thank you for contacting us. We'll get back to you within 24 hours." data-fr="Merci de nous avoir contactés. Nous vous répondrons dans les 24 heures.">Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorMessage" class="hidden bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-300 px-6 py-4 rounded-xl mb-6 animate-fade-in-up">
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-semibold" data-en="Error Sending Message" data-fr="Erreur lors de l'Envoi">Error Sending Message</h4>
+                            <p class="text-sm" id="errorText" data-en="Please try again or contact us directly." data-fr="Veuillez réessayer ou nous contacter directement.">Please try again or contact us directly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="bg-gray-50 dark:bg-gray-800 p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg section-transition transition-all duration-500">
+                    <div class="contact-form-grid grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base" data-en="Full Name" data-fr="Nom Complet">Full Name</label>
+                            <input type="text" name="fullName" required class="w-full p-3 sm:p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" data-en-placeholder="Enter your full name" data-fr-placeholder="Entrez votre nom complet" placeholder="Enter your full name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base" data-en="Email Address" data-fr="Adresse Email">Email Address</label>
+                            <input type="email" name="email" required class="w-full p-3 sm:p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" data-en-placeholder="Enter your email" data-fr-placeholder="Entrez votre email" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="contact-form-grid grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base" data-en="Phone Number" data-fr="Numéro de Téléphone">Phone Number</label>
+                            <input type="tel" name="phone" class="w-full p-3 sm:p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" data-en-placeholder="Enter your phone number" data-fr-placeholder="Entrez votre numéro de téléphone" placeholder="Enter your phone number">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base" data-en="Company" data-fr="Entreprise">Company</label>
+                            <input type="text" name="company" class="w-full p-3 sm:p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-sm sm:text-base" data-en-placeholder="Enter your company name" data-fr-placeholder="Entrez le nom de votre entreprise" placeholder="Enter your company name">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2" data-en="Project Type" data-fr="Type de Projet">Project Type</label>
+                        <select name="projectType" required class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                            <option value="" data-en="Select project type" data-fr="Sélectionnez le type de projet">Select project type</option>
+                            <option value="construction" data-en="Construction" data-fr="Construction">Construction</option>
+                            <option value="industrial-engineering" data-en="Industrial Engineering" data-fr="Ingénierie Industrielle">Industrial Engineering</option>
+                            <option value="equipment-rental" data-en="Equipment Rental" data-fr="Location d'Équipement">Equipment Rental</option>
+                            <option value="equipment-purchase" data-en="Equipment Purchase" data-fr="Achat d'Équipement">Equipment Purchase</option>
+                            <option value="maintenance" data-en="Maintenance" data-fr="Maintenance">Maintenance</option>
+                            <option value="consultation" data-en="Consultation" data-fr="Consultation">Consultation</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2" data-en="Project Budget" data-fr="Budget du Projet">Project Budget</label>
+                        <select name="budget" class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                            <option value="" data-en="Select budget range" data-fr="Sélectionnez la gamme de budget">Select budget range</option>
+                            <option value="under-50k" data-en="Under $50,000" data-fr="Moins de 50 000 $">Under $50,000</option>
+                            <option value="50k-100k" data-en="$50,000 - $100,000" data-fr="50 000 $ - 100 000 $">$50,000 - $100,000</option>
+                            <option value="100k-500k" data-en="$100,000 - $500,000" data-fr="100 000 $ - 500 000 $">$100,000 - $500,000</option>
+                            <option value="500k-1m" data-en="$500,000 - $1,000,000" data-fr="500 000 $ - 1 000 000 $">$500,000 - $1,000,000</option>
+                            <option value="over-1m" data-en="Over $1,000,000" data-fr="Plus de 1 000 000 $">Over $1,000,000</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2" data-en="Message" data-fr="Message">Message</label>
+                        <textarea name="message" rows="5" required class="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300" data-en-placeholder="Tell us about your project requirements, timeline, and any specific needs..." data-fr-placeholder="Parlez-nous des exigences de votre projet, du calendrier et de tous besoins spécifiques..." placeholder="Tell us about your project requirements, timeline, and any specific needs..."></textarea>
+                    </div>
+                    
+                    <!-- Privacy Notice -->
+                    <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+                        <div class="flex items-start">
+                            <i class="fas fa-shield-alt mr-3 mt-1" style="color: #316EA6;"></i>
+                            <div class="text-sm text-gray-700 dark:text-gray-300">
+                                <p class="font-medium mb-1" data-en="Privacy Notice" data-fr="Avis de Confidentialité">Privacy Notice</p>
+                                <p data-en="Your information is secure and will only be used to respond to your inquiry. We never share your data with third parties." data-fr="Vos informations sont sécurisées et ne seront utilisées que pour répondre à votre demande. Nous ne partageons jamais vos données avec des tiers.">Your information is secure and will only be used to respond to your inquiry. We never share your data with third parties.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover-glow text-white disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                        <span id="submitText" data-en="Send Message" data-fr="Envoyer le Message">Send Message</span>
+                        <i id="submitSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                    </button>
+                </form>
+
+                <!-- Contact Information -->
+                <div class="grid md:grid-cols-3 gap-6 mt-12">
+                    <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover-lift transition-all duration-500">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                            <i class="fas fa-phone text-2xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Call Us" data-fr="Appelez-Nous">Call Us</h4>
+                        <p class="text-gray-600 dark:text-gray-400">+1 (555) 123-4567</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500 mt-1" data-en="24/7 Emergency Line" data-fr="Ligne d'Urgence 24/7">24/7 Emergency Line</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover-lift transition-all duration-500">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                            <i class="fas fa-envelope text-2xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Email Us" data-fr="Envoyez-nous un Email">Email Us</h4>
+                        <p class="text-gray-600 dark:text-gray-400">info@corbenx.io</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500 mt-1" data-en="Response within 2 hours" data-fr="Réponse dans les 2 heures">Response within 2 hours</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover-lift transition-all duration-500">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, #7B8C94, #243B48);">
+                            <i class="fas fa-map-marker-alt text-2xl text-white"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Visit Us" data-fr="Visitez-Nous">Visit Us</h4>
+                        <p class="text-gray-600 dark:text-gray-400">123 Construction Ave</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-500 mt-1" data-en="Mon-Fri 8AM-6PM" data-fr="Lun-Ven 8h-18h">Mon-Fri 8AM-6PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- FOOTER -->
+  <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
+
+   <script>
+        /* ===========================
+   Unified projects-only script
+   =========================== */
+
+/* -------- Import header/footer -------- */
+async function importSection(url, selector, placeholderId, callback) {
+    try {
+        const res = await fetch(url);
+        const text = await res.text();
+        const tmp = document.createElement('div');
+        tmp.innerHTML = text;
+        const section = tmp.querySelector(selector);
+        if (!section) return;
+
+        const placeholder = document.getElementById(placeholderId);
+        placeholder.innerHTML = section.outerHTML;
+
+        // copy <style>
+        section.querySelectorAll('style').forEach(s => {
+            const st = document.createElement('style');
+            st.textContent = s.textContent;
+            document.head.appendChild(st);
+        });
+
+        // copy <script>
+        section.querySelectorAll('script').forEach(s => {
+            const sc = document.createElement('script');
+            if (s.src) sc.src = s.src;
+            else sc.textContent = s.textContent;
+            document.body.appendChild(sc);
+        });
+
+        if (callback) callback();
+    } catch (err) {
+        console.error("importSection error", err);
+    }
+}
+
+/* -------- Theme & Language Setup -------- */
+let lang = localStorage.getItem('language') || 'en';
+let theme = localStorage.getItem('theme') || 'light';
+if(theme==='dark') document.documentElement.classList.add('dark');
+document.documentElement.lang = lang;
+
+/* -------- Language Functions -------- */
+function setLanguageGlobal(l){
+  lang = l;
+  localStorage.setItem('language', l);
+  updateTexts();
+  highlightLanguageButtons();
+}
+function updateTexts(){
+  // update [data-en]/[data-fr]
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    el.textContent = el.dataset[lang] || el.dataset.en;
+  });
+  // placeholders
+  document.querySelectorAll(`[data-${lang}-placeholder]`).forEach(el=>{
+    el.placeholder = el.getAttribute(`data-${lang}-placeholder`);
+  });
+  // options
+  document.querySelectorAll('select option').forEach(opt=>{
+    const t = opt.getAttribute(`data-${lang}`);
+    if (t) opt.textContent = t;
+  });
+  renderBigProjects();
+  renderOtherGrid();
+
+  // -----  opacity button language -----
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    const isActive = (lang==='en' && id.toLowerCase().includes('en')) ||
+                     (lang==='fr' && id.toLowerCase().includes('fr'));
+    if(isActive){
+        btn.style.backgroundColor = '#243B48'; // couleur active pleine
+    } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0)'; // couleur inactive avec opacité
+    }
+});
+}
+
+/* -------- Highlight + Slide Language Buttons -------- */
+function highlightLanguageButtons(){
+  const buttons=['langEn','langFr','langEnMobile','langFrMobile'];
+  buttons.forEach(id=>{
+    const btn=document.getElementById(id);
+    if(!btn) return;
+    if((lang==='en' && id.toLowerCase().includes('en')) ||
+       (lang==='fr' && id.toLowerCase().includes('fr'))){
+      btn.classList.add('active-lang');
+    }else{
+      btn.classList.remove('active-lang');
+    }
+  });
+}
+
+function updateLanguageButtons() {
+  const allBtns = ['langEn','langFr','langEnMobile','langFrMobile'];
+  allBtns.forEach(id => {
+    const btn = document.getElementById(id);
+    if(btn){
+      btn.style.transition = 'background-color 0.3s ease'; // <-- transition fluide
+      if ((id.toLowerCase().includes('en') && lang==='en') || (id.toLowerCase().includes('fr') && lang==='fr')) {
+        btn.style.backgroundColor = '#243B48'; // actif
+      } else {
+        btn.style.backgroundColor = 'rgba(36, 59, 72, 0.5)'; // inactif
+      }
+    }
+  });
+}
+
+/* -------- Theme Functions -------- */
+function toggleTheme(){
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('theme', document.documentElement.classList.contains('dark')?'dark':'light');
+}
+
+/* -------- Attach Listeners -------- */
+function attachHeaderListeners(){
+  // Theme toggle
+  document.getElementById('darkToggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('darkToggleMobile')?.addEventListener('click', toggleTheme);
+
+  // Language buttons
+  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
+    const btn = document.getElementById(id);
+    if(!btn) return;
+    btn.addEventListener('click', ()=>{
+      setLanguageGlobal(id.toLowerCase().includes('en') ? 'en' : 'fr');
+    });
+  });
+
+  // Mobile menu toggle
+const menuBtn = document.getElementById('mobileMenu');       // match home ID
+const mobileMenu = document.getElementById('mobileMenuDropdown');    // menu container
+if(menuBtn && mobileMenu){
+  menuBtn.addEventListener('click', ()=>{
+    mobileMenu.classList.toggle('hidden'); // Tailwind hidden toggle
+    mobileMenu.classList.toggle('opacity-0');
+    mobileMenu.classList.toggle('opacity-100');
+    mobileMenu.classList.toggle('translate-y-2');
+    mobileMenu.classList.toggle('translate-y-0');
+  });
+}
+
+// Mobile submenu toggle (Services / Equipment)
+document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
+  const btn = dropdown.querySelector('.mobile-dropdown-btn');
+  const menu = dropdown.querySelector('.glass');
+  const icon = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('opacity-100');
+    menu.classList.toggle('translate-y-2');
+    menu.classList.toggle('translate-y-0');
+
+    // Rotate chevron
+    icon.classList.toggle('rotate-180');
+  });
+});
+
+  // Apply saved language state
+  highlightLanguageButtons();
+}
+
+/* -------- Init -------- */
+importSection('index.html','#header','header-placeholder',()=>{
+  attachHeaderListeners();
+  updateTexts();
+  highlightLanguageButtons();
+});
+importSection('index.html','#footer','footer-placeholder');
+
+
+window.addEventListener('DOMContentLoaded',()=>{
+  updateTexts();
+  updateLanguageButtons();
+});
+</script>
+
+<style>
+/* Slide dropdown + language button active state */
+.active-lang {
+  background-color:#243B48 !important;
+  color:white !important;
+  transition:all 0.3s ease-in-out;
+}
+.slide-hidden {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s ease;
+}
+.slide-hidden:not(.hidden) {
+  max-height:1000px;
+}
+</style>
 
 </body>
 </html>
