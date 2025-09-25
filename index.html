@@ -7,6 +7,7 @@
    <script src="https://cdn.tailwindcss.com"></script>
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
    <link rel="icon" type="image/x-icon" href="docs/favicon.ico">
+   <link href="https://fonts.cdnfonts.com/css/911-porscha" rel="stylesheet">
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
@@ -23,9 +24,9 @@
                 extend: {
                     colors: {
                         brand: {
-                            primary: '#243B48',
-                            secondary: '#316EA6',
-                            accent: '#7B8C94',
+                            primary: '#272974',
+                            secondary: '#AED8E6',
+                            accent: '#FF6B6B',
                             dark: '#233B48',
                         }
                     },
@@ -61,18 +62,29 @@
     </script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+     /* Import Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Import 911 Porscha family */
+@import url('https://fonts.cdnfonts.com/css/911-porscha');
+
+/* Default font for all text */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titles only → 911 Porscha Bold */
+h2 {
+    font-family: '911 Porscha Bold', sans-serif;
+}
+
         
         /* Custom Brand Colors */
         :root {
-            --brand-primary: #243B48;
-            --brand-secondary: #316EA6;
-            --brand-accent: #7B8C94;
-            --brand-dark: #233B48;
+            --brand-primary: #272974;
+            --brand-secondary: #AED8E6;
+            --brand-accent: #FF6B6B;
+            --brand-dark: #272974;
             --brand-light: #F8FAFC;
         }
         
@@ -268,7 +280,7 @@
         
         .logo-icon:hover {
             transform: rotate(15deg) scale(1.1);
-            color: #316EA6;
+            color: #AED8E6;
         }
         
         /* Custom Scrollbar */
@@ -281,25 +293,25 @@
         }
         
         ::-webkit-scrollbar-thumb {
-            background: #316EA6;
+            background: #AED8E6;
             border-radius: 4px;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: #243B48;
+            background: #272974;
         }
         
         /* Dark mode scrollbar */
         .dark ::-webkit-scrollbar-track {
-            background: #1e293b;
+            background: #272974;
         }
         
         .dark ::-webkit-scrollbar-thumb {
-            background: #316EA6;
+            background: #AED8E6;
         }
         
         .dark ::-webkit-scrollbar-thumb:hover {
-            background: #7B8C94;
+            background: #FF6B6B;
         }
         
         /* Section Transitions */
@@ -450,7 +462,7 @@
         
         /* Gradient text */
         .gradient-text {
-            background: linear-gradient(135deg, #243B48, #316EA6);
+            background: linear-gradient(135deg, #272974, #AED8E6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -463,7 +475,7 @@
         }
         
         .card-hover:hover {
-            border-color: #316EA6;
+            border-color: #AED8E6;
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(49, 110, 166, 0.1);
         }
@@ -674,12 +686,12 @@
                     <div class="text-2xl font-bold flex items-center animate-fade-in-left">
     <!-- Light mode logo -->
      <a href="index.html">
-    <img src="docs/Corbenx (light).png" alt="CorbenX Logo" class="h-12 block dark:hidden">
+    <img src="docs/Awusa (light).png" alt="CorbenX Logo" class="h-11 block dark:hidden">
     </a>
 
     <!-- Dark mode logo -->
      <a href="index.html">
-    <img src="docs/Corbenx (dark).png" alt="CorbenX Logo" class="h-12 hidden dark:block">
+    <img src="docs/Awusa (dark).png" alt="CorbenX Logo" class="h-11 hidden dark:block">
     </a>
 </div>
 
@@ -1645,7 +1657,7 @@
                    <div class="text-2xl font-bold mb-4 flex items-center">
     <!-- Dark mode logo -->
      <a href="index.html">
-    <img src="docs/Corbenx (dark).png" alt="CorbenX Logo" class="h-12">
+    <img src="docs/Awusa (dark).png" alt="CorbenX Logo" class="h-11">
     </a>
 </div>
 
