@@ -76,7 +76,40 @@
     background: rgba(0, 0, 0, 1) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+#imageModal img {
+    max-width: 70%;      /* reduce width */
+    max-height: 70%;     /* reduce height */
+    width: auto;
+    height: auto;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+  }
+
+  #imageModal img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Close button near the image */
+#closeImageModal {
+  position: absolute;   /* position relative to the modal overlay */
+  top: 15%;             /* adjust vertical distance from top of modal */
+  right: 15%;           /* adjust horizontal distance from right of modal */
+  cursor: pointer;
+  z-index: 20;          /* make sure it's above the image */
+}
+
+  @keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
     </style>
+
+    
 
 </head>
 <body class="bg-white dark:bg-corbenxDark text-slate-900 dark:text-gray-100 antialiased">
@@ -306,7 +339,7 @@
 
   <!-- Section: Maintenance -->
 
-    <section class="rounded-3xl py-20 bg-gray-100 dark:bg-gray-900">
+    <section class="rounded-3xl py-20 bg-gray-50 dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
@@ -358,7 +391,7 @@
   </main>
 
   <!-- Contact Section -->
-    <section id="contact" class="rounded-3xl py-20 bg-gray-100 dark:bg-gray-900 transition-all duration-500">
+    <section id="contact" class="rounded-3xl py-20 bg-gray-50 dark:bg-gray-900 transition-all duration-500">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text section-transition" data-en="Get In Touch" data-fr="Contactez-Nous">Get In Touch</h2>
@@ -488,6 +521,19 @@
             </div>
         </div>
     </section>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl max-h-full animate-scale-in">
+            <button id="closeImageModal" class="absolute  text-white text-2xl hover:text-gray-300 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modalImage" src="" alt="" class="max-w-full max-h-full object-contain rounded-2xl">
+        
+                <h3 id="modalImageTitle" class="text-white text-xl font-bold"></h3>
+            </div>
+        </div>
+    </div>
 
   <!-- FOOTER -->
   <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
@@ -692,6 +738,63 @@ window.addEventListener('DOMContentLoaded',()=>{
   max-height:1000px;
 }
 </style>
+
+<script>
+  // Elements
+  const imageModal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const closeModalBtn = document.getElementById('closeImageModal');
+
+  // Open modal function
+  function openImageModal(src, alt = '') {
+    modalImage.src = src;
+    modalImage.alt = alt;
+    imageModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal open
+  }
+
+  // Close modal function
+  function closeImageModal() {
+    imageModal.classList.add('hidden');
+    modalImage.src = '';
+    modalImage.alt = '';
+    document.body.style.overflow = ''; // Restore scroll
+  }
+
+  // Close when clicking close button
+  closeModalBtn.addEventListener('click', closeImageModal);
+
+  // Close when clicking outside the image
+  imageModal.addEventListener('click', (e) => {
+    if (e.target === imageModal) closeImageModal();
+  });
+
+  // Optional: Close with ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+      closeImageModal();
+    }
+  });
+</script>
+
+<!-- Add minimal modal animation in your style -->
+<style>
+  #imageModal img {
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+  }
+  #imageModal img:hover {
+    transform: scale(1.05);
+  }
+  @keyframes scaleIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+</style>
+
 
 </body>
 </html>
