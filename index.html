@@ -462,11 +462,35 @@ h2 {
         
         /* Gradient text */
         .gradient-text {
-            background: linear-gradient(135deg, #272974, #AED8E6);
+            background: #272974;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+         .dark .gradient-text {
+            background: linear-gradient(135deg, #AED8E6, #AED8E6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .featuretext {
+  background: linear-gradient(135deg, #272974, #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .featuretext {
+  background: linear-gradient(135deg, #FFFFFF, #FFFFFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
         
         /* Card hover effects */
         .card-hover {
@@ -671,6 +695,9 @@ h2 {
   z-index: 5;
 }
 
+.dark #fasmenu {
+    color: #ffffff !important;
+}
 
     </style>
 
@@ -802,7 +829,7 @@ h2 {
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
                     <button id="mobileMenu" class="p-2 rounded-lg glass hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300">
-                        <i class="fas fa-bars text-xl" style="color: #243B48;"></i>
+                        <i id="fasmenu" class="fas fa-bars text-xl" style="color: #272974;"></i>
                     </button>
                 </div>
             </div>
@@ -811,12 +838,12 @@ h2 {
             <div id="mobileMenuDropdown" class="md:hidden hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-xl border-t border-gray-200 dark:border-gray-700 z-50 transform transition-all duration-300 opacity-0 translate-y-2">
                 <div class="container mx-auto px-6 py-4">
                     <div class="space-y-2">
-                        <a href="index.html#home" class="nav-link block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Home" data-fr="Accueil">Home</a>
+                        <a href="index.html#home" class="nav-link block px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Home" data-fr="Accueil">Home</a>
                         
                         <!-- Mobile Services Submenu -->
                         <div class="mobile-dropdown">
                             <a href="services.html">
-                            <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Services" data-fr="Services">
+                            <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Services" data-fr="Services">
                                 <span>Services</span>
                                 <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
                             </button>
@@ -828,13 +855,13 @@ h2 {
                             </div>
                         </div>
                         
-                        <a href="projects.html" class="nav-link block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Projects" data-fr="Projets">Projects</a>
-                        <a href="index.html#about" class="nav-link block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="About" data-fr="À Propos">About</a>
+                        <a href="projects.html" class="nav-link block px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Projects" data-fr="Projets">Projects</a>
+                        <a href="index.html#about" class="nav-link block px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="About" data-fr="À Propos">About</a>
                         
                         <!-- Mobile Equipment Submenu -->
                         <div class="mobile-dropdown">
                             <a href="equipments.html">
-                            <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Equipments" data-fr="Équipements">
+                            <button class="mobile-dropdown-btn w-full flex items-center justify-between px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Equipments" data-fr="Équipements">
                                 <span>Equipments</span>
                                 <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
                             </button>
@@ -846,12 +873,12 @@ h2 {
                             </div>
                         </div>
                         
-                        <a href="#contact" class="nav-link block px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Contact" data-fr="Contact">Contact</a>
+                        <a href="#contact" class="nav-link block px-4 py-3 text-[#272974] dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-all duration-300 font-medium" data-en="Contact" data-fr="Contact">Contact</a>
                         
                         <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-700">
                             <button id="darkToggleMobile" class="p-3 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300">
-                                <i class="fas fa-moon dark:hidden" style="color: #243B48;"></i>
-                                <i class="fas fa-sun hidden dark:block" style="color: #316EA6;"></i>
+                                <i class="fas fa-moon dark:hidden" style="color: #272974;"></i>
+                                <i class="fas fa-sun hidden dark:block" style="color: #ffffff;"></i>
                             </button>
                             <div class="flex bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
                                 <button id="langEnMobile" class="lang-btn px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300" style="background-color: #243B48; color: white;">EN</button>
@@ -866,7 +893,7 @@ h2 {
 
     <!-- Hero Section -->
 
-<section id="home" class="min-h-screen flex flex-col items-center justify-center text-white relative overflow-visible bg-[#316EA7] pt-24 sm:pt-28 md:pt-0">
+<section id="home" class="min-h-screen flex flex-col items-center justify-center text-white relative overflow-visible bg-[#272974] pt-24 sm:pt-28 md:pt-0">
         <div class="particle"></div>
         <div class="particle"></div>
         <div class="particle"></div>
@@ -1072,6 +1099,7 @@ h2 {
 </section>
 
     <!-- Services Section -->
+
     <section id="services" class="py-20 bg-white dark:bg-gray-900 transition-all duration-500">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -1083,7 +1111,7 @@ h2 {
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="service-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background-color: #243B48;">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background-color: #3D5AFE;">
                         <i class="fas fa-building text-2xl text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-en="Construction" data-fr="Construction">Construction</h3>
@@ -1091,14 +1119,14 @@ h2 {
                         From residential to commercial projects, we deliver quality construction with precision and excellence.
                     </p>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Residential Buildings" data-fr="Bâtiments Résidentiels">Residential Buildings</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Commercial Complexes" data-fr="Complexes Commerciaux">Commercial Complexes</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Infrastructure Projects" data-fr="Projets d'Infrastructure">Infrastructure Projects</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Residential Buildings" data-fr="Bâtiments Résidentiels">Residential Buildings</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Commercial Complexes" data-fr="Complexes Commerciaux">Commercial Complexes</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Infrastructure Projects" data-fr="Projets d'Infrastructure">Infrastructure Projects</span></li>
                     </ul>
                 </div>
                 
                 <div class="service-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background-color: #316EA6;">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background-color: #3D5AFE;">
                         <i class="fas fa-cogs text-2xl text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-en="Industrial Engineering" data-fr="Ingénierie Industrielle">Industrial Engineering</h3>
@@ -1106,14 +1134,14 @@ h2 {
                         Advanced engineering solutions for complex industrial challenges and manufacturing processes.
                     </p>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Process Optimization" data-fr="Optimisation des Processus">Process Optimization</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="System Integration" data-fr="Intégration de Systèmes">System Integration</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Quality Control" data-fr="Contrôle Qualité">Quality Control</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Process Optimization" data-fr="Optimisation des Processus">Process Optimization</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="System Integration" data-fr="Intégration de Systèmes">System Integration</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Quality Control" data-fr="Contrôle Qualité">Quality Control</span></li>
                     </ul>
                 </div>
                 
                 <div class="service-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-3 transition-all duration-500">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-bounce-slow" style="background-color: #3D5AFE;">
                         <i class="fas fa-tools text-2xl text-white"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4" data-en="Equipment & Machinery" data-fr="Équipement et Machinerie">Equipment & Machinery</h3>
@@ -1121,9 +1149,9 @@ h2 {
                         State-of-the-art equipment rental and machinery services for all construction needs.
                     </p>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Heavy Machinery" data-fr="Machinerie Lourde">Heavy Machinery</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Specialized Tools" data-fr="Outils Spécialisés">Specialized Tools</span></li>
-                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #316EA6;"></i><span data-en="Maintenance Support" data-fr="Support de Maintenance">Maintenance Support</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Heavy Machinery" data-fr="Machinerie Lourde">Heavy Machinery</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Specialized Tools" data-fr="Outils Spécialisés">Specialized Tools</span></li>
+                        <li class="flex items-center"><i class="fas fa-check mr-2" style="color: #3D5AFE;"></i><span data-en="Maintenance Support" data-fr="Support de Maintenance">Maintenance Support</span></li>
                     </ul>
                 </div>
             </div>
@@ -1155,8 +1183,8 @@ h2 {
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-en="Metropolitan Tower Complex" data-fr="Complexe de Tours Métropolitaines">Metropolitan Tower Complex</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="42-story mixed-use development in downtown core" data-fr="Développement à usage mixte de 42 étages au centre-ville">42-story mixed-use development in downtown core</p>
                         <div class="flex flex-row justify-between mt-4 sm:mt-0 font-medium text-blue-700 dark:text-blue-400">
-                        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">Commercial</span>
-                        <span class="font-medium hover:underline cursor-pointer" style="color: #316EA6;" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
+                        <span class="inline-block bg-[#3D5AFE]/10 dark:bg-[#3D5AFE]/90 text-[#3D5AFE] dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">Commercial</span>
+                        <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-[#ffffff]" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
                         </div>
                     </div>
                 </div>
@@ -1178,7 +1206,7 @@ h2 {
         </div>
         <div class="flex flex-row justify-between mt-auto font-medium text-blue-700 dark:text-blue-400">
             <span class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">Industrial</span>
-            <span class="font-medium hover:underline cursor-pointer" style="color: #316EA6;" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
+            <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-white" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
         </div>
     </div>
 </div>
@@ -1199,9 +1227,9 @@ h2 {
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-en="Highway Infrastructure" data-fr="Infrastructure Autoroutière">Highway Infrastructure</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="50km highway expansion project" data-fr="Projet d'expansion autoroutière de 50 km">50km highway expansion project</p>
                         </div>
-                        <div class="flex items-center justify-between">
-                        <span class="inline-block bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-3 py-1 rounded-full text-sm font-medium">Infrastructure</span>
-                        <span class="font-medium hover:underline cursor-pointer" style="color: #316EA6;" data-en="Watch Project Video →" data-fr="Voir Vidéo du Projet →">View Details →</span>
+                        <div class="flex items-center justify-between mt-4">
+                        <span class="inline-block bg-[#FF6B6B]/20 dark:bg-[#FF6B6B]/90 text-[#FF6B6B] dark:text-white px-3 py-1 rounded-full text-sm font-medium">Infrastructure</span>
+                        <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-white" data-en="Watch Project Video →" data-fr="Voir Vidéo du Projet →">View Details →</span>
                         </div>
                     </div>
                 </div>
@@ -1233,7 +1261,7 @@ h2 {
                 </div>
                 
                 <div class="relative section-transition">
-                    <div class="rounded-2xl p-8 text-white glass" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                    <div class="rounded-2xl p-8 text-white glass" style="background: linear-gradient(100deg, #AED8E6, #272974);">
                         <div class="grid grid-cols-2 gap-6">
                             <div class="text-center animate-scale-in stagger-1">
                                 <i class="fas fa-award text-4xl mb-4 animate-bounce-slow"></i>
@@ -1263,7 +1291,7 @@ h2 {
     </section>
 
     <!-- Quick Stats -->
-    <section class="py-20 relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6, #7B8C94);">
+    <section class="py-20 relative overflow-hidden" style="background: linear-gradient(100deg,#272974, #AED8E6);">
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-4 gap-8 text-center text-white">
                 <div class="section-transition animate-scale-in stagger-1">
@@ -1317,7 +1345,7 @@ h2 {
                 <div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500 overflow-hidden">
                     <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/heavy-equipment.jpg', 'Heavy Machinery Equipment')">
                         <img src="media/images/heavy-equipment.jpg" alt="Heavy Machinery" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #FF6B6B);">
                             <i class="fas fa-truck text-6xl text-white animate-bounce-slow"></i>
                         </div>
                         <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
@@ -1326,7 +1354,7 @@ h2 {
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #272974, #FF6B6B);">
                                 <i class="fas fa-truck text-lg text-white"></i>
                             </div>
                             <div>
@@ -1336,7 +1364,7 @@ h2 {
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Professional-grade heavy equipment for earthmoving, demolition, and construction projects." data-fr="Équipement lourd de qualité professionnelle pour terrassement, démolition et projets de construction.">Professional-grade heavy equipment for earthmoving, demolition, and construction projects.</p>
                         <div class="flex gap-3">
-                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #272974;" data-en="Rent" data-fr="Louer">Rent</span>
                             <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
                         </div>
                     </div>
@@ -1354,7 +1382,7 @@ h2 {
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #272974, #FF6B6B);">
                                 <i class="fas fa-hammer text-lg text-white"></i>
                             </div>
                             <div>
@@ -1364,7 +1392,7 @@ h2 {
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Complete range of lifting solutions from mobile cranes to tower cranes for any project scale." data-fr="Gamme complète de solutions de levage des grues mobiles aux grues à tour pour tout projet.">Complete range of lifting solutions from mobile cranes to tower cranes for any project scale.</p>
                         <div class="flex gap-3">
-                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #272974;" data-en="Rent" data-fr="Louer">Rent</span>
                             <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
                         </div>
                     </div>
@@ -1382,7 +1410,7 @@ h2 {
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #7B8C94, #243B48);">
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center mr-3 animate-bounce-slow" style="background: linear-gradient(135deg, #272974, #FF6B6B);">
                                 <i class="fas fa-bolt text-lg text-white"></i>
                             </div>
                             <div>
@@ -1392,7 +1420,7 @@ h2 {
                         </div>
                         <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Reliable power solutions and professional-grade tools to keep your projects running smoothly." data-fr="Solutions d'énergie fiables et outils de qualité professionnelle pour maintenir vos projets en marche.">Reliable power solutions and professional-grade tools to keep your projects running smoothly.</p>
                         <div class="flex gap-3">
-                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #316EA6;" data-en="Rent" data-fr="Louer">Rent</span>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #272974;" data-en="Rent" data-fr="Louer">Rent</span>
                             <span class="px-3 py-1 rounded-full text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Buy" data-fr="Acheter">Buy</span>
                         </div>
                     </div>
@@ -1401,7 +1429,7 @@ h2 {
             
             <!-- Featured Equipment Gallery -->
             <div class="mb-16">
-                <h3 class="text-3xl font-bold text-center mb-8 gradient-text section-transition" data-en="Featured Equipment" data-fr="Équipement en Vedette">Featured Equipment</h3>
+                <h3 class="text-3xl font-bold text-center mb-8 featuretext section-transition" data-en="Featured Equipment" data-fr="Équipement en Vedette">Featured Equipment</h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500">
                         <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/excavator.jpg', 'CAT Excavator 320D')">
@@ -1485,14 +1513,14 @@ h2 {
             <div class="bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg section-transition">
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                     <div class="animate-scale-in stagger-1">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background-color: #243B48;">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background-color: #272974;">
                             <i class="fas fa-shipping-fast text-2xl text-white"></i>
                         </div>
                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Fast Delivery" data-fr="Livraison Rapide">Fast Delivery</h4>
                         <p class="text-gray-600 dark:text-gray-400 text-sm" data-en="Same-day delivery available" data-fr="Livraison le jour même disponible">Same-day delivery available</p>
                     </div>
                     <div class="animate-scale-in stagger-2">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background-color: #316EA6;">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background-color: #3D5AFE;">
                             <i class="fas fa-shield-alt text-2xl text-white"></i>
                         </div>
                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Fully Insured" data-fr="Entièrement Assuré">Fully Insured</h4>
@@ -1506,7 +1534,7 @@ h2 {
                         <p class="text-gray-600 dark:text-gray-400 text-sm" data-en="Round-the-clock maintenance" data-fr="Maintenance 24h/24">Round-the-clock maintenance</p>
                     </div>
                     <div class="animate-scale-in stagger-4">
-                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center animate-pulse-slow" style="background-color: #FF6B6B;">
                             <i class="fas fa-certificate text-2xl text-white"></i>
                         </div>
                         <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-2" data-en="Certified Quality" data-fr="Qualité Certifiée">Certified Quality</h4>
@@ -1717,20 +1745,21 @@ h2 {
 
     <!-- Fixed Controls -->
     <div class="fixed right-6 bottom-6 flex flex-col items-center space-y-4 z-50">
+        
         <!-- Scroll to Top Button -->
-        <button id="scrollTop" class="hidden text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110" style="background-color: #243B48;">
+        <button id="scrollTop" class="hidden text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110" style="background-color: #3D5AFE;">
             <i class="fas fa-arrow-up"></i>
         </button>
         
         <!-- Chatbot Button -->
-        <button id="chatToggle" class="text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 animate-pulse" style="background-color: #316EA6;">
+        <button id="chatToggle" class="text-white p-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 animate-pulse" style="background-color: #FF6B6B;">
             <i class="fas fa-comments text-xl"></i>
         </button>
     </div>
 
     <!-- Chatbot Window -->
     <div id="chatWindow" class="fixed right-6 bottom-32 w-80 h-96 bg-white dark:bg-gray-800 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700 hidden z-50 transition-all duration-300">
-        <div class="text-white p-4 rounded-t-lg flex justify-between items-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
+        <div class="text-white p-4 rounded-t-lg flex justify-between items-center" style="background: linear-gradient(135deg, #272974, #FF6B6B);">
             <h3 class="font-semibold" data-en="Awusa Intl. Assistant" data-fr="Assistant Awusa Intl.">Awusa Intl. Assistant</h3>
             <button id="chatClose" class="text-white hover:text-gray-200">
                 <i class="fas fa-times"></i>
@@ -1744,7 +1773,7 @@ h2 {
         <div class="p-4 border-t border-gray-200 dark:border-gray-700">
             <div class="flex space-x-2">
                 <input type="text" id="chatInput" placeholder="Type your message..." class="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" data-en-placeholder="Type your message..." data-fr-placeholder="Tapez votre message...">
-                <button id="chatSend" class="text-white px-4 py-2 rounded-lg transition-colors" style="background-color: #243B48;">
+                <button id="chatSend" class="text-white px-4 py-2 rounded-lg transition-colors" style="background-color: #272974;">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -1985,7 +2014,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 // Add user message
                 const userMsg = document.createElement('div');
                 userMsg.className = 'p-3 rounded-xl mb-2 ml-8 text-white';
-                userMsg.style.background = 'linear-gradient(135deg, #243B48, #316EA6)';
+                userMsg.style.background = 'linear-gradient(135deg, #272974, #FF6B6B)';
                 userMsg.innerHTML = `<p class="text-sm">${input.value}</p>`;
                 messages.appendChild(userMsg);
                 
