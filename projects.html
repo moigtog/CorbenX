@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CorbenX — Projects</title>
+  <title>Awusa Intl. — Projects</title>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,7 +60,7 @@
     .grad-border { border: 1px solid transparent; background-origin: border-box; background-clip: padding-box, border-box; background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
     .dark .grad-border { background-image: linear-gradient(#0b0f13, #0b0f13), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
     .thumb-small { width: 92px; height: 64px; object-fit: cover; }
-    .fab { position: fixed; right: 18px; bottom: 18px; z-index: 70; }
+    
 
     /* ---- Other Projects Grid Cards ---- */
 #otherGrid button {
@@ -141,6 +141,8 @@
   .dark #fasmenu {
     color: #ffffff !important;
 }
+
+
 
   </style>
   
@@ -249,6 +251,7 @@ async function importSection(url, selector, placeholderId, callback) {
         console.error("importSection error", err);
     }
 }
+
 
 /* -------- Sample Data -------- */
 const BIG_PROJECTS = [
@@ -500,6 +503,7 @@ importSection('index.html','#header','header-placeholder',()=>{
   highlightLanguageButtons();
 });
 importSection('index.html','#footer','footer-placeholder');
+
 
 
 window.addEventListener('DOMContentLoaded',()=>{

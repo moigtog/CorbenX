@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CorbenX — Equipments</title>
+  <title>Awusa Intl. — Equipments</title>
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -717,27 +717,12 @@ importSection('index.html','#footer','footer-placeholder');
 
 
 window.addEventListener('DOMContentLoaded',()=>{
+   attachHeaderListeners();
   updateTexts();
-  updateLanguageButtons();
+  highlightLanguageButtons();
 });
 </script>
 
-<style>
-/* Slide dropdown + language button active state */
-.active-lang {
-  background-color:#243B48 !important;
-  color:white !important;
-  transition:all 0.3s ease-in-out;
-}
-.slide-hidden {
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.4s ease;
-}
-.slide-hidden:not(.hidden) {
-  max-height:1000px;
-}
-</style>
 
 <script>
   // Elements
