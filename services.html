@@ -12,7 +12,26 @@
   <link rel="icon" type="image/x-icon" href="docs/favicon.ico">
 
   <style>
-    * { font-family: 'Inter', sans-serif; }
+    /* Import Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Import 911 Porscha family */
+@import url('https://fonts.cdnfonts.com/css/911-porscha');
+
+/* Default font for all text */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titles only → 911 Porscha Bold */
+h2 {
+    font-family: '911 Porscha Bold', sans-serif;
+    color: #272974 !important;
+}
+
+.dark h2 {
+    color: #AED8E6 !important;
+}
   </style>
 
   <!-- Tailwind CDN -->
@@ -45,7 +64,7 @@
 
         /* page-specific styling */
     :root { --accent: #316EA6; --accent-2: #7B8C94; --dark-bg: #20343F; }
-    .hero-gradient { background: linear-gradient(120deg, rgba(49,110,166,1) 0%, rgba(0,159,227,0.85) 35%, rgba(35,48,63,0.95) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
+    .hero-gradient { background: linear-gradient(120deg, rgba(61, 90, 254, 1) 0%, rgba(143, 165, 184, 0.9) 35%, rgba(39, 41, 116, 1) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
     @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     
 
@@ -263,7 +282,7 @@
   </main>
 
     <!-- FOOTER -->
-  <div id="footer-placeholder" class=" text-white relative overflow-hidden" style="background: linear-gradient(135deg, #243B48, #316EA6);"></div>
+  <div id="footer-placeholder" class=" text-white relative overflow-hidden"></div>
 
 
     <script>
@@ -335,48 +354,7 @@ function updateTexts(){
   renderBigProjects();
   renderOtherGrid();
 
-  // -----  opacity button language -----
-  ['langEn','langFr','langEnMobile','langFrMobile'].forEach(id=>{
-    const btn = document.getElementById(id);
-    if(!btn) return;
-    const isActive = (lang==='en' && id.toLowerCase().includes('en')) ||
-                     (lang==='fr' && id.toLowerCase().includes('fr'));
-    if(isActive){
-        btn.style.backgroundColor = '#243B48'; // couleur active pleine
-    } else {
-        btn.style.backgroundColor = 'rgba(36, 59, 72, 0)'; // couleur inactive avec opacité
-    }
-});
-}
-
-/* -------- Highlight + Slide Language Buttons -------- */
-function highlightLanguageButtons(){
-  const buttons=['langEn','langFr','langEnMobile','langFrMobile'];
-  buttons.forEach(id=>{
-    const btn=document.getElementById(id);
-    if(!btn) return;
-    if((lang==='en' && id.toLowerCase().includes('en')) ||
-       (lang==='fr' && id.toLowerCase().includes('fr'))){
-      btn.classList.add('active-lang');
-    }else{
-      btn.classList.remove('active-lang');
-    }
-  });
-}
-
-function updateLanguageButtons() {
-  const allBtns = ['langEn','langFr','langEnMobile','langFrMobile'];
-  allBtns.forEach(id => {
-    const btn = document.getElementById(id);
-    if(btn){
-      btn.style.transition = 'background-color 0.3s ease'; // <-- transition fluide
-      if ((id.toLowerCase().includes('en') && lang==='en') || (id.toLowerCase().includes('fr') && lang==='fr')) {
-        btn.style.backgroundColor = '#243B48'; // actif
-      } else {
-        btn.style.backgroundColor = 'rgba(36, 59, 72, 0.5)'; // inactif
-      }
-    }
-  });
+  
 }
 
 /* -------- Theme Functions -------- */
@@ -453,7 +431,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 <style>
 /* Slide dropdown + language button active state */
 .active-lang {
-  background-color:#243B48 !important;
+  background-color:#272974 !important;
   color:white !important;
   transition:all 0.3s ease-in-out;
 }

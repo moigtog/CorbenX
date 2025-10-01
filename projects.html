@@ -45,7 +45,7 @@
   <style>
     /* page-specific styling */
     :root { --accent: #316EA6; --accent-2: #7B8C94; --dark-bg: #20343F; }
-    .hero-gradient { background: linear-gradient(120deg, rgba(49,110,166,1) 0%, rgba(0,159,227,0.85) 35%, rgba(35,48,63,0.95) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
+    .hero-gradient { background: linear-gradient(120deg, rgba(61, 90, 254, 1) 0%, rgba(143, 165, 184, 0.9) 35%, rgba(39, 41, 116, 1) 100%); background-size: 300% 300%; animation: gradientShift 12s ease infinite; }
     @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     .slide-hidden { max-height: 0; overflow: hidden; transition: max-height 420ms cubic-bezier(.2,.9,.2,1); }
     .slide-open { max-height: 1600px; transition: max-height 520ms cubic-bezier(.2,.9,.2,1); }
@@ -124,17 +124,22 @@
 /* ---- End Other Projects Grid Cards ---- */
 
   
-  /*TO PASTE IN ALL PAGES FOR IMPORT*/
+   /*TO PASTE IN ALL PAGES FOR IMPORT*/
 
   /* Glass effect for header/footer */
-.dropglass {
-    background: rgba(255, 255, 255, 1) !important;
-    backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
-.dark .dropglass {
-    background: rgba(0, 0, 0, 1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+ .dropglass {
+            background: rgba(236, 247, 249, 1) !important;
+            backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        }
+
+         .dark .dropglass {
+            background: rgba(0, 0, 0, 1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+  .dark #fasmenu {
+    color: #ffffff !important;
 }
 
   </style>
@@ -339,22 +344,6 @@ function highlightLanguageButtons(){
     }
   });
 }
-
-function updateLanguageButtons() {
-  const allBtns = ['langEn','langFr','langEnMobile','langFrMobile'];
-  allBtns.forEach(id => {
-    const btn = document.getElementById(id);
-    if(btn){
-      btn.style.transition = 'background-color 0.3s ease'; // <-- transition fluide
-      if ((id.toLowerCase().includes('en') && lang==='en') || (id.toLowerCase().includes('fr') && lang==='fr')) {
-        btn.style.backgroundColor = '#243B48'; // actif
-      } else {
-        btn.style.backgroundColor = 'rgba(36, 59, 72, 0.5)'; // inactif
-      }
-    }
-  });
-}
-
 /* -------- Theme Functions -------- */
 function toggleTheme(){
   document.documentElement.classList.toggle('dark');
@@ -522,7 +511,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 <style>
 /* Slide dropdown + language button active state */
 .active-lang {
-  background-color:#243B48 !important;
+  background-color:#272974 !important;
   color:white !important;
   transition:all 0.3s ease-in-out;
 }
