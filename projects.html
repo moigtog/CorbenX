@@ -61,46 +61,55 @@
     .dark .grad-border { background-image: linear-gradient(#0b0f13, #0b0f13), linear-gradient(90deg, rgba(49,110,166,0.14), rgba(0,159,227,0.12)); }
     .thumb-small { width: 92px; height: 64px; object-fit: cover; }
     
+.dark .bglass{
+  background: linear-gradient(180deg, rgba(243, 244, 246, 0.1), rgba(243, 244, 246, 0.1));
+}
 
-    /* ---- Other Projects Grid Cards ---- */
-#otherGrid button {
+   #otherGrid button {
   position: relative;
+  display: block;
   width: 100%;
-  aspect-ratio: 1 / 1; /* carré */
+  aspect-ratio: 1/1; /* carré */
   overflow: hidden;
   border-radius: 0.75rem;
   cursor: pointer;
   padding: 0;
 }
 
-.dark .bglass{
-  background: linear-gradient(180deg, rgba(243, 244, 246, 0.1), rgba(243, 244, 246, 0.1));
-}
-
-#otherGrid button img {
+/* Image et vidéo dans le bouton */
+#otherGrid button img,
+#otherGrid button video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
   display: block;
-  z-index: 1; /* image en dessous de l'overlay */
-  position: relative;
+  transition: transform 0.3s ease;
+  position: absolute;  /* <- position absolute derrière overlay */
+  inset: 0;
+  z-index: 0;
 }
 
-/* Overlay sombre au survol */
+/* Zoom au hover */
+#otherGrid button:hover img,
+#otherGrid button:hover video {
+  transform: scale(1.05);
+}
+
+/* Overlay sombre */
 #otherGrid button::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgba(0,0,0,0.6); /* overlay sombre */
+  background-color: rgba(0,0,0,0.4);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 0.75rem;
-  z-index: 2; /* overlay au-dessus de l'image */
+  z-index: 1; /* au-dessus de l'image/vidéo */
 }
 
+/* Icône loupe */
 #otherGrid button::after {
-  content: "\f002"; /* icône loupe FontAwesome */
+  content: "\f002";
   font-family: "Font Awesome 5 Free"; 
   font-weight: 900;
   position: absolute;
@@ -111,21 +120,23 @@
   font-size: 1.5rem;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 3; /* loupe au-dessus de l'overlay */
+  z-index: 2; /* au-dessus de l'overlay */
 }
 
-#otherGrid button:hover img {
-  transform: scale(1.05); /* léger zoom */
-}
-
+/* Hover overlay + loupe */
 #otherGrid button:hover::before {
-  opacity: 1; /* overlay visible au survol */
+  opacity: 1;
 }
 
 #otherGrid button:hover::after {
-  opacity: 1; /* loupe visible au survol */
+  opacity: 1;
 }
-/* ---- End Other Projects Grid Cards ---- */
+
+/* Dark mode background */
+.dark .bglass {
+  background: linear-gradient(180deg, rgba(243, 244, 246, 0.1), rgba(243, 244, 246, 0.1));
+}
+
 
   
    /*TO PASTE IN ALL PAGES FOR IMPORT*/
@@ -291,7 +302,21 @@ const BIG_PROJECTS = [
       ]
     }
 ];
-const OTHER_PROJECT_IMAGES = Array.from({length:12},(_,i)=>`https://picsum.photos/seed/other${i+1}/1200/800`);
+/* -------- OTHER PROJECTS MEDIA -------- */
+const OTHER_PROJECT_MEDIA = [
+  "media/images/paves.jpg",
+  "media/images/piqueur.jpg",
+  "media/images/a plat.jpg",
+  "media/images/pele.jpg",
+  "media/images/carreaux.jpg",
+  "media/images/bois.mp4",   // vidéo
+  "media/images/cloison.jpg",
+  "media/images/cercle.jpg",
+  "media/images/libre.jpg",
+  "media/images/camion.mp4",
+  "media/images/barriere.jpg",
+  "media/images/move.mp4"
+];
 
 /* -------- Theme & Language Setup -------- */
 let lang = localStorage.getItem('language') || 'en';
@@ -479,26 +504,96 @@ function renderBigProjects(){
   });
 }
 
-function renderOtherGrid(){
-  otherGrid.innerHTML='';
-  OTHER_PROJECT_IMAGES.forEach(src=>{
-    const btn=document.createElement('button');
-    btn.className='relative rounded-xl overflow-hidden focus:outline-none';
-    const img=document.createElement('img');
-    img.src=src;
-    img.className='w-full h-24 object-cover rounded-xl cursor-pointer';
-    btn.appendChild(img);
-    btn.addEventListener('click',()=>openModal(src));
-    otherGrid.appendChild(btn);
+/* -------- Grille Other Projects -------- */
+function renderOtherProjectsGrid() {
+  const otherGrid = document.getElementById("otherGrid");
+  if (!otherGrid) return;
+
+  otherGrid.innerHTML = "";
+
+  OTHER_PROJECT_MEDIA.forEach(src => {
+    const isVideo = src.endsWith(".mp4");
+
+    const wrapper = document.createElement("button");
+wrapper.className = "cursor-pointer overflow-hidden rounded-lg shadow hover:shadow-lg transition";
+wrapper.style.position = "relative"; // <- important pour overlay et loupe
+
+if (isVideo) {
+  const video = document.createElement("video");
+  video.src = src;
+  video.muted = true;
+  video.loop = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.style.position = "absolute";
+  video.style.inset = "0";
+  video.style.width = "100%";
+  video.style.height = "100%";
+  video.style.objectFit = "cover";
+  video.style.zIndex = "0"; // <- derrière overlay
+  wrapper.appendChild(video);
+} else {
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = "Project";
+  img.style.position = "absolute";
+  img.style.inset = "0";
+  img.style.width = "100%";
+  img.style.height = "100%";
+  img.style.objectFit = "cover";
+  img.style.zIndex = "0"; // <- derrière overlay
+  wrapper.appendChild(img);
+}
+
+
+    wrapper.addEventListener("click", () => openMediaModal(src));
+    otherGrid.appendChild(wrapper);
   });
 }
 
 /* -------- Modal -------- */
-const modal=document.getElementById('mediaModal');
-const modalInner=document.getElementById('modalInner');
-document.getElementById('modalClose').addEventListener('click',()=>modal.classList.add('hidden'));
-modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.add('hidden'); });
-function openModal(src){ modalInner.innerHTML=`<img src="${src}" class="w-full h-auto max-h-[80vh] object-contain rounded-md">`; modal.classList.remove('hidden'); }
+const mediaModal = document.getElementById("mediaModal");
+const modalInner = document.getElementById("modalInner");
+const modalClose = document.getElementById("modalClose");
+
+function openMediaModal(src) {
+  modalInner.innerHTML = "";
+
+  if (src.endsWith(".mp4")) {
+    const videoEl = document.createElement("video");
+    videoEl.src = src;
+    videoEl.controls = true;
+    videoEl.autoplay = true;
+    videoEl.className = "max-h-[85vh] w-auto";
+    modalInner.appendChild(videoEl);
+  } else {
+    const imgEl = document.createElement("img");
+    imgEl.src = src;
+    imgEl.alt = "Project";
+    imgEl.className = "max-h-[85vh] w-auto object-contain";
+    modalInner.appendChild(imgEl);
+  }
+
+  mediaModal.classList.remove("hidden");
+}
+
+/* Fermer modal */
+modalClose.addEventListener("click", () => {
+  mediaModal.classList.add("hidden");
+  modalInner.innerHTML = "";
+});
+
+mediaModal.addEventListener("click", e => {
+  if (e.target === mediaModal) {
+    mediaModal.classList.add("hidden");
+    modalInner.innerHTML = "";
+  }
+});
+
+/* -------- Init -------- */
+window.addEventListener("DOMContentLoaded", () => {
+  renderOtherProjectsGrid();
+});
 
 /* -------- Init -------- */
 importSection('index.html','#header','header-placeholder',()=>{
