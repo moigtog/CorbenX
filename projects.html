@@ -270,38 +270,37 @@ async function importSection(url, selector, placeholderId, callback) {
 
 /* -------- Sample Data -------- */
 const BIG_PROJECTS = [
-    {
-      id:'metro-tower',
-      title:{en:'Metropolitan Tower Complex',fr:'Complexe Metropolitan Tower'},
-      desc:{en:'42-storey mixed-use development with sustainable terraces and integrated public spaces.',fr:'Développement à usage mixte de 42 étages avec terrasses durables et espaces publics intégrés.'},
-      images:[
-        'https://picsum.photos/seed/metro1/1600/900',
-        'https://picsum.photos/seed/metro2/1600/900',
-        'https://picsum.photos/seed/metro3/1600/900',
-        'https://picsum.photos/seed/metro4/1600/900'
-      ]
-    },
-    {
-      id:'green-plant',
-      title:{en:'Green Energy Plant',fr:'Centrale d’Énergie Verte'},
-      desc:{en:'Renewable energy facility combining solar, wind and storage to support regional grid resilience.',fr:'Installation d’énergie renouvelable combinant solaire, éolien et stockage pour la résilience du réseau régional.'},
-      images:[
-        'https://picsum.photos/seed/green1/1600/900',
-        'https://picsum.photos/seed/green2/1600/900',
-        'https://picsum.photos/seed/green3/1600/900'
-      ]
-    },
-    {
-      id:'bridge-expansion',
-      title:{en:'River Bridge Expansion',fr:'Extension du Pont'},
-      desc:{en:'Major infrastructure upgrade widening the bridge and improving load capacity.',fr:'Amélioration d’infrastructure majeure élargissant le pont et renforçant la capacité de charge.'},
-      images:[
-        'https://picsum.photos/seed/bridge1/1600/900',
-        'https://picsum.photos/seed/bridge2/1600/900',
-        'https://picsum.photos/seed/bridge3/1600/900'
-      ]
-    }
+  {
+    id: 'SNH',
+    title: {en:'SNH Project', fr:'Projet SNH'},
+    desc: {en:'Description of Project One', fr:'Description du Projet Un'},
+    images: [
+      'media/images/cover.jpg',
+      'media/images/ciment.mp4',
+      'media/images/electrician.mp4'  // vidéo possible
+    ]
+  },
+  {
+    id: 'project2',
+    title: {en:'Project Two', fr:'Projet Deux'},
+    desc: {en:'Description of Project Two', fr:'Description du Projet Deux'},
+    images: [
+      'media/images/tonImage3.jpg',
+      'media/videos/taVideo2.mp4'
+    ]
+  },
+  {
+    id: 'project3',
+    title: {en:'Project Three', fr:'Projet Trois'},
+    desc: {en:'Description of Project Three', fr:'Description du Projet Trois'},
+    images: [
+      'media/images/tonImage4.jpg',
+      'media/images/tonImage5.jpg',
+      'media/images/tonImage6.jpg'
+    ]
+  }
 ];
+
 /* -------- OTHER PROJECTS MEDIA -------- */
 const OTHER_PROJECT_MEDIA = [
   "media/images/paves.jpg",
@@ -437,72 +436,194 @@ document.querySelectorAll('.mobile-dropdown').forEach(dropdown => {
 const bigContainer=document.getElementById('bigProjectsContainer');
 const otherGrid=document.getElementById('otherGrid');
 
-function renderBigProjects(){
-  bigContainer.innerHTML='';
-  BIG_PROJECTS.forEach(p=>{
-    const card=document.createElement('article'); 
-    card.className='grad-border rounded-2xl overflow-hidden shadow-sm bglass';
+function renderBigProjects() {
+  const bigContainer = document.getElementById('bigProjectsContainer');
+  if (!bigContainer) return;
+  bigContainer.innerHTML = '';
 
-    const row=document.createElement('div'); row.className='md:flex';
-    const left=document.createElement('div'); left.className='md:w-1/3';
-    const img=document.createElement('img'); 
-    img.src=p.images[0]; 
-    img.alt=p.title[lang]; 
-    img.className='w-full h-52 md:h-44 object-cover';
-    left.appendChild(img);
+  BIG_PROJECTS.forEach(p => {
+    const card = document.createElement('article');
+    card.className = 'grad-border rounded-2xl overflow-hidden shadow-sm bglass';
 
-    const right=document.createElement('div'); right.className='md:w-2/3 p-5 relative';
-    const title=document.createElement('h3'); 
-    title.className='text-xl font-semibold text-corbenxNavy dark:text-corbenxLight'; 
-    title.textContent=p.title[lang];
-    const desc=document.createElement('p'); 
-    desc.className='mt-2 text-gray-600 dark:text-gray-300'; 
-    desc.textContent=p.desc[lang];
+    const row = document.createElement('div');
+    row.className = 'md:flex';
 
-    const chev=document.createElement('button'); 
-    chev.className='absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition'; 
-    chev.innerHTML=`<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
+    // ---- Left: main media ----
+    const left = document.createElement('div');
+    left.className = 'md:w-1/3';
+    const mainSrc = p.images[0];
+    const isVideo = mainSrc.endsWith('.mp4');
+    let mainMedia;
+
+    if (isVideo) {
+      mainMedia = document.createElement('video');
+      mainMedia.src = mainSrc;
+      mainMedia.muted = true;
+      mainMedia.autoplay = true;
+      mainMedia.loop = true;
+      mainMedia.playsInline = true;
+    } else {
+      mainMedia = document.createElement('img');
+      mainMedia.src = mainSrc;
+      mainMedia.alt = p.title[lang];
+    }
+
+    mainMedia.className = 'w-full h-52 md:h-44 object-cover cursor-pointer';
+    mainMedia.addEventListener('click', () => openModal(mainSrc));
+    left.appendChild(mainMedia);
+
+    // ---- Right: title + desc + chevron ----
+    const right = document.createElement('div');
+    right.className = 'md:w-2/3 p-5 relative';
+    const title = document.createElement('h3');
+    title.className = 'text-xl font-semibold text-corbenxNavy dark:text-corbenxLight';
+    title.textContent = p.title[lang];
+    const desc = document.createElement('p');
+    desc.className = 'mt-2 text-gray-600 dark:text-gray-300';
+    desc.textContent = p.desc[lang];
+    const chev = document.createElement('button');
+    chev.className = 'absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition';
+    chev.innerHTML = `<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
+
     right.append(title, desc, chev);
     row.append(left, right);
     card.appendChild(row);
 
-    const details=document.createElement('div'); 
-    details.className='hidden border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 slide-hidden';
-    const showcaseMain=document.createElement('img');
-    showcaseMain.src=p.images[0];
-    showcaseMain.alt=p.title[lang];
-    showcaseMain.className='w-full h-64 object-cover rounded-md cursor-pointer';
-    showcaseMain.addEventListener('click',()=>openModal(showcaseMain.src));
+    // ---- Details / Showcase ----
+    const details = document.createElement('div');
+    details.className = 'hidden border-t border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-900 p-5 slide-hidden';
+
+    // Main showcase
+    const showcaseMainSrc = p.images[0];
+    const showcaseMainIsVideo = showcaseMainSrc.endsWith('.mp4');
+    let showcaseMain;
+
+    if (showcaseMainIsVideo) {
+      showcaseMain = document.createElement('video');
+      showcaseMain.src = showcaseMainSrc;
+      showcaseMain.muted = true;
+      showcaseMain.autoplay = true;
+      showcaseMain.loop = true;
+      showcaseMain.playsInline = true;
+      showcaseMain.controls = true;
+    } else {
+      showcaseMain = document.createElement('img');
+      showcaseMain.src = showcaseMainSrc;
+      showcaseMain.alt = p.title[lang];
+    }
+
+    showcaseMain.className = 'w-full h-64 object-cover rounded-md cursor-pointer';
+    showcaseMain.addEventListener('click', () => openModal(showcaseMainSrc));
     details.appendChild(showcaseMain);
 
-    const thumbs=document.createElement('div'); thumbs.className='mt-4 flex gap-3 overflow-x-auto pb-1';
-    p.images.forEach((src,i)=>{
-      const t=document.createElement('img'); 
-      t.src=src; 
-      t.alt=`${p.title[lang]} thumb ${i+1}`; 
-      t.className='w-28 h-20 object-cover rounded-md cursor-pointer border thumb-small';
-      t.addEventListener('click',()=>{ showcaseMain.src=src; thumbs.querySelectorAll('img').forEach(im=>im.classList.remove('thumb-active')); t.classList.add('thumb-active'); });
-      thumbs.appendChild(t);
-    });
-    details.appendChild(thumbs);
+    const thumbs = document.createElement('div');
+thumbs.className = 'mt-4 flex gap-3 overflow-x-auto pb-1';
 
-    const meta=document.createElement('div'); meta.className='mt-4 flex items-center justify-between';
-    const metaLeft=document.createElement('div'); metaLeft.className='text-sm text-gray-600 dark:text-gray-300'; metaLeft.innerHTML=`<strong>${p.title[lang]}</strong>`;
-    const viewBtn=document.createElement('button'); 
-    viewBtn.className='px-4 py-2 rounded-md bg-corbenxNavy text-white text-sm hover:opacity-90 transition'; 
-    viewBtn.textContent=(lang==='fr')?'Voir la galerie':'View gallery';
-    viewBtn.addEventListener('click',()=>openModal(showcaseMain.src));
+p.images.forEach((src, i) => {
+  const tWrapper = document.createElement('button');
+  tWrapper.className = 'relative w-28 h-20 rounded-md overflow-hidden flex-shrink-0 cursor-pointer';
+
+  const tIsVideo = src.endsWith('.mp4');
+  let tMedia;
+
+  if (tIsVideo) {
+    tMedia = document.createElement('video');
+    tMedia.src = src;
+    tMedia.muted = true;
+    tMedia.autoplay = true;
+    tMedia.loop = true;
+    tMedia.playsInline = true;
+  } else {
+    tMedia = document.createElement('img');
+    tMedia.src = src;
+    tMedia.alt = `thumb ${i+1}`;
+  }
+
+  tMedia.className = 'w-full h-full object-cover';
+  tWrapper.appendChild(tMedia);
+
+  tWrapper.addEventListener('click', () => {
+    // remplacer le media principal
+    const isVideoMain = src.endsWith('.mp4');
+    let newMedia;
+    if (isVideoMain) {
+      newMedia = document.createElement('video');
+      newMedia.src = src;
+      newMedia.muted = true;
+      newMedia.autoplay = true;
+      newMedia.loop = true;
+      newMedia.playsInline = true;
+      newMedia.controls = true;
+    } else {
+      newMedia = document.createElement('img');
+      newMedia.src = src;
+      newMedia.alt = p.title[lang];
+    }
+
+    newMedia.className = 'w-full h-64 md:h-64 object-cover rounded-md cursor-pointer';
+    newMedia.addEventListener('click', () => openModal(src));
+    showcaseMain.replaceWith(newMedia);
+    showcaseMain = newMedia;
+  });
+
+  thumbs.appendChild(tWrapper);
+});
+
+details.appendChild(thumbs);
+
+
+    // Meta / View button
+    const meta = document.createElement('div');
+    meta.className = 'mt-4 flex items-center justify-between';
+    const metaLeft = document.createElement('div');
+    metaLeft.className = 'text-sm text-gray-600 dark:text-gray-300';
+    metaLeft.innerHTML = `<strong>${p.title[lang]}</strong>`;
+    const viewBtn = document.createElement('button');
+    viewBtn.className = 'px-4 py-2 rounded-md bg-corbenxNavy text-white text-sm hover:opacity-90 transition';
+    viewBtn.textContent = (lang === 'fr') ? 'Voir la galerie' : 'View gallery';
+    viewBtn.addEventListener('click', () => openModal(showcaseMain.src));
     meta.append(metaLeft, viewBtn);
     details.appendChild(meta);
 
-    chev.addEventListener('click',()=>{
-      details.classList.toggle('hidden');
-    });
+    // Chevron toggle
+    chev.addEventListener('click', () => details.classList.toggle('hidden'));
 
     card.appendChild(details);
     bigContainer.appendChild(card);
   });
 }
+
+
+/* -------- Modal -------- */
+const modal = document.getElementById('mediaModal');
+document.getElementById('modalClose').addEventListener('click',()=>modal.classList.add('hidden'));
+modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.add('hidden'); });
+
+function openModal(src){
+  const isVideo = src.endsWith('.mp4');
+  modalInner.innerHTML = '';
+  let media;
+  if(isVideo){
+    media = document.createElement('video');
+    media.src = src;
+    media.muted = true;
+    media.autoplay = true;
+    media.loop = true;
+    media.controls = true;
+    media.playsInline = true;
+  } else {
+    media = document.createElement('img');
+    media.src = src;
+  }
+  media.style.width='100%';
+  media.style.height='auto';
+  media.style.maxHeight='80vh';
+  media.style.objectFit='contain';
+  media.style.borderRadius='0.5rem';
+  modalInner.appendChild(media);
+  modal.classList.remove('hidden');
+}
+
 
 /* -------- Grille Other Projects -------- */
 function renderOtherProjectsGrid() {
@@ -593,6 +714,7 @@ mediaModal.addEventListener("click", e => {
 /* -------- Init -------- */
 window.addEventListener("DOMContentLoaded", () => {
   renderOtherProjectsGrid();
+  renderBigProjects();
 });
 
 /* -------- Init -------- */
