@@ -243,6 +243,25 @@ h2 {
                             </div>
                         </div>
                     </div>
+
+                    <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500">
+                        <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/crane.jpg', 'Tower Crane TC-7032')">
+                            <img src="media/images/crane.jpg" alt="Tower Crane" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #316EA6, #7B8C94);">
+                                <i class="fas fa-hammer text-4xl text-white"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                                <i class="fas fa-expand text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-1" data-en="Tower Crane TC-7032" data-fr="Grue à Tour TC-7032">Tower Crane TC-7032</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-en="High-rise construction" data-fr="Construction en hauteur">High-rise construction</p>
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-1 rounded text-xs font-medium text-white" style="background-color: #7B8C94;" data-en="Available" data-fr="Disponible">Available</span>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="bg-white dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-4 transition-all duration-500">
                         <div class="h-40 relative overflow-hidden cursor-pointer" onclick="openImageModal('media/images/generator.jpg', 'Generator Set GS-100')">
@@ -263,7 +282,16 @@ h2 {
                         </div>
                     </div>
                 </div>
+                 
+                            
+                <div class="text-center mt-6">
+  <button id="toggleBigProjects" class="px-6 py-3 rounded-xl bg-[#272974] text-white hover:bg-[#3D5AFE] transition-colors duration-300">
+    <span data-en="View More" data-fr="Voir Plus">View More</span>
+  </button>
+</div>
+
             </div>
+
   </section>
 
   <!-- Section: Location -->
@@ -856,6 +884,45 @@ window.addEventListener('DOMContentLoaded',()=>{
       closeImageModal();
     }
   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector("#buy .grid");
+  const cards = Array.from(container.children);
+  const toggleBtn = document.getElementById("toggleBigProjects");
+
+  // Masquer toutes les cartes après la 4ᵉ et ajouter classe pour transition
+  cards.forEach((card, index) => {
+    if (index >= 4) {
+      card.style.maxHeight = "0";
+      card.style.overflow = "hidden";
+      card.style.transition = "max-height 0.5s ease, opacity 0.5s ease";
+      card.style.opacity = "0";
+    }
+  });
+
+  toggleBtn.addEventListener("click", () => {
+    const hiddenCards = cards.filter((card, index) => index >= 4);
+    const isHidden = hiddenCards.some(card => card.style.maxHeight === "0px" || card.style.maxHeight === "0");
+
+    hiddenCards.forEach(card => {
+      if (isHidden) {
+        card.style.maxHeight = card.scrollHeight + "px";
+        card.style.opacity = "1";
+      } else {
+        card.style.maxHeight = "0";
+        card.style.opacity = "0";
+      }
+    });
+
+    // Changer le texte du bouton selon l'état et la langue
+    const span = toggleBtn.querySelector("span");
+    const lang = document.documentElement.lang || "en";
+    span.textContent = isHidden ? (lang === "fr" ? "Voir Moins" : "View Less") : (lang === "fr" ? "Voir Plus" : "View More");
+  });
+});
+
+
+
 </script>
 
 <!-- Add minimal modal animation in your style -->
