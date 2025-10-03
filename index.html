@@ -2213,9 +2213,10 @@ document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
     });
 });
 
-//active nav-link
 
-  document.addEventListener("DOMContentLoaded", () => {
+//highlight current section in navbar
+
+document.addEventListener("DOMContentLoaded", () => {
   const links = document.querySelectorAll(".nav-link");
   const currentPath = window.location.pathname.split("/").pop(); // current page
 
@@ -2231,24 +2232,6 @@ document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
 });
 
 
-
-window.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".nav-link");
-  const currentPath = window.location.pathname.split("/").pop() || "index.html";
-
-  links.forEach(link => {
-    const href = link.getAttribute("href");
-    if (href.includes(currentPath)) {
-      // Active page → highlight with Tailwind utilities
-      link.classList.add("text-[#3D5AFE]", "font-semibold");
-      link.classList.remove("text-[#272974]", "dark:text-gray-300");
-    } else {
-      // Reset others
-      link.classList.remove("text-[#3D5AFE]", "font-semibold");
-      link.classList.add("text-[#272974]", "dark:text-gray-300");
-    }
-  });
-});
 
             // Contact Form API Submission
             const contactForm = document.getElementById('contactForm');
