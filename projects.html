@@ -28,7 +28,7 @@
             corbenxGray: '#7B8C94',
             corbenxDark: '#111827',
             corbenxNavy: '#001565',
-            corbenxLight: '#009FE3'
+            corbenxLight: '#FF6B6B'
           },
           animation: {
             'float-slow': 'float 6s ease-in-out infinite',
@@ -191,7 +191,7 @@
         <h2 class="text-2xl font-semibold" data-en="Big Projects" data-fr="Grands Projets">Big Projects</h2>
         <p class="text-sm text-gray-600 dark:text-gray-300" data-en="Click the chevron to expand project showcase" data-fr="Cliquez sur la flèche pour ouvrir la vitrine">Click the chevron to expand project showcase</p>
       </div>
-      <div id="bigProjectsContainer" class="space-y-6 overflow-hidden"></div>
+      <div id="bigProjectsContainer" class="space-y-6 overflow-hidden "></div>
     </section>
 
     <!-- Divider -->
@@ -271,22 +271,23 @@ async function importSection(url, selector, placeholderId, callback) {
 /* -------- Sample Data -------- */
 const BIG_PROJECTS = [
   {
-    id: 'SNH',
+    id: 'project1',
     title: {en:'SNH Project', fr:'Projet SNH'},
     desc: {en:'Description of Project One', fr:'Description du Projet Un'},
     images: [
       'media/images/cover.jpg',
-      'media/images/ciment.mp4',
-      'media/images/electrician.mp4'  // vidéo possible
+      'media/videos/ciment.mp4',
+      'media/videos/electrician.mp4'  // vidéo possible
     ]
   },
   {
     id: 'project2',
-    title: {en:'Project Two', fr:'Projet Deux'},
-    desc: {en:'Description of Project Two', fr:'Description du Projet Deux'},
+    title: {en:'Construction Project', fr:'Projet de Construction'},
+    desc: {en:'Construction Project Description', fr:'Description du Projet De Construction'},
     images: [
-      'media/images/tonImage3.jpg',
-      'media/videos/taVideo2.mp4'
+      'media/images/libre.jpg',
+      'media/videos/gravier-deb.mp4',
+      'media/videos/gravier-fin.mp4' 
     ]
   },
   {
@@ -294,9 +295,9 @@ const BIG_PROJECTS = [
     title: {en:'Project Three', fr:'Projet Trois'},
     desc: {en:'Description of Project Three', fr:'Description du Projet Trois'},
     images: [
-      'media/images/tonImage4.jpg',
-      'media/images/tonImage5.jpg',
-      'media/images/tonImage6.jpg'
+      'media/images/excavator.jpg',
+      'media/images/pompe-eau.jpg',
+      'media/videos/chantier.mp4'
     ]
   }
 ];
@@ -308,13 +309,13 @@ const OTHER_PROJECT_MEDIA = [
   "media/images/a plat.jpg",
   "media/images/pele.jpg",
   "media/images/carreaux.jpg",
-  "media/images/bois.mp4",   // vidéo
+  "media/videos/bois.mp4",   // vidéo
   "media/images/cloison.jpg",
   "media/images/cercle.jpg",
   "media/images/libre.jpg",
-  "media/images/camion.mp4",
+  "media/videos/camion.mp4",
   "media/images/barriere.jpg",
-  "media/images/move.mp4"
+  "media/videos/move.mp4"
 ];
 
 /* -------- Theme & Language Setup -------- */
@@ -482,8 +483,18 @@ function renderBigProjects() {
     desc.className = 'mt-2 text-gray-600 dark:text-gray-300';
     desc.textContent = p.desc[lang];
     const chev = document.createElement('button');
-    chev.className = 'absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition';
-    chev.innerHTML = `<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight"></i>`;
+// création du bouton chevron
+chev.className = 'absolute right-4 top-4 w-10 h-10 rounded-full bg-white/95 dark:bg-gray-700/90 shadow flex items-center justify-center hover:scale-105 transition';
+chev.innerHTML = `<i class="fas fa-chevron-down chev text-corbenxNavy dark:text-corbenxLight transition-transform duration-300"></i>`;
+
+// récupérer l'icône
+const chevIcon = chev.querySelector('i');
+
+// toggle au clic
+chev.addEventListener('click', () => {
+  chevIcon.classList.toggle('rotate-180'); 
+ 
+});
 
     right.append(title, desc, chev);
     row.append(left, right);
