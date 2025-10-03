@@ -421,31 +421,77 @@ importSection('index.html','#header','header-placeholder',()=>{
   updateTexts();
   highlightLanguageButtons();
   
+  // Appeler highlightActiveNav APRÈS que tout soit chargé
+  if (window.highlightActiveNav) {
+    window.highlightActiveNav();
+  }
 });
 
-function isLinkActive(linkUrl, currentUrl) {
-  const lpath = normalizePath(linkUrl.pathname);
-  const cpath = normalizePath(currentUrl.pathname);
-
-  // exact pathname match OR index.html root variants
-  const indexCandidates = ["", "/", "/index.html"];
-  const pathnameMatch = (lpath === cpath) || (indexCandidates.includes(lpath) && indexCandidates.includes(cpath));
-
-  if (!pathnameMatch) return false;
-
-  // If link has a hash, it must match the current hash exactly
-  if (linkUrl.hash) {
-    return linkUrl.hash === currentUrl.hash;
+// -------------------- Nav active helper (works with dynamic import) --------------------
+/* -------- Init -------- */
+importSection('index.html','#header','header-placeholder',()=>{
+  attachHeaderListeners();
+  updateTexts();
+  highlightLanguageButtons();
+  
+  // Appeler highlightActiveNav APRÈS que tout soit chargé
+  if (window.highlightActiveNav) {
+    window.highlightActiveNav();
   }
+});
 
-  // no hash on link → active if pathname matches
-  return true;
+// -------------------- Nav active helper (works with dynamic import) --------------------
+function highlightActiveNav() {
+  const links = document.querySelectorAll(".nav-link");
+  if (!links.length) return;
+
+  const currentPath = location.pathname.replace(/\/+$/, ""); // remove trailing slash
+  const currentHash = location.hash;
+
+  links.forEach(link => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    // Split href into path + hash
+    const [linkPathRaw, linkHashRaw] = href.split("#");
+    const linkPath = linkPathRaw ? "/" + linkPathRaw.replace(/^\/+/, "").replace(/\/+$/, "") : "";
+    const linkHash = linkHashRaw ? "#" + linkHashRaw : "";
+
+    // reset styles
+    link.classList.remove("text-[#3D5AFE]", "font-semibold");
+    link.classList.add("text-[#272974]", "dark:text-gray-300");
+
+    // check if link matches current page + hash
+    const pathMatch = (linkPath === currentPath) || (linkPath === "" && (currentPath === "/" || currentPath === "/index.html"));
+    const hashMatch = (!linkHash && !currentHash) || (linkHash && linkHash === currentHash);
+
+    if (pathMatch && hashMatch) {
+      link.classList.add("text-[#3D5AFE]", "font-semibold");
+      link.classList.remove("text-[#272974]", "dark:text-gray-300");
+    }
+  });
 }
+
+// Run once after header is injected
+function initNavHighlight() {
+  if (window.highlightActiveNav) highlightActiveNav();
+}
+
+// Expose globally
+window.highlightActiveNav = highlightActiveNav;
+
+// Observe DOM mutations in case nav is imported dynamically
+const observer = new MutationObserver(() => {
+  if (document.querySelector(".nav-link")) highlightActiveNav();
+});
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Update on hash changes and back/forward navigation
+window.addEventListener("hashchange", highlightActiveNav);
+window.addEventListener("popstate", highlightActiveNav);
 
 
 importSection('index.html','#footer','footer-placeholder');
-
-
 
 window.addEventListener('DOMContentLoaded',()=>{
   updateTexts();
