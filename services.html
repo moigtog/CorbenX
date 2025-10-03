@@ -420,8 +420,31 @@ importSection('index.html','#header','header-placeholder',()=>{
   attachHeaderListeners();
   updateTexts();
   highlightLanguageButtons();
+  
 });
+
+function isLinkActive(linkUrl, currentUrl) {
+  const lpath = normalizePath(linkUrl.pathname);
+  const cpath = normalizePath(currentUrl.pathname);
+
+  // exact pathname match OR index.html root variants
+  const indexCandidates = ["", "/", "/index.html"];
+  const pathnameMatch = (lpath === cpath) || (indexCandidates.includes(lpath) && indexCandidates.includes(cpath));
+
+  if (!pathnameMatch) return false;
+
+  // If link has a hash, it must match the current hash exactly
+  if (linkUrl.hash) {
+    return linkUrl.hash === currentUrl.hash;
+  }
+
+  // no hash on link → active if pathname matches
+  return true;
+}
+
+
 importSection('index.html','#footer','footer-placeholder');
+
 
 
 window.addEventListener('DOMContentLoaded',()=>{
