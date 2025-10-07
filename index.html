@@ -699,6 +699,67 @@ h2 {
     color: #ffffff !important;
 }
 
+/* Projects slider */
+
+.gradient-text {
+            background: linear-gradient(135deg, #272974, #FF6B6B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+       .slider-container {
+    overflow-x: auto;
+    scroll-behavior: smooth; 
+    scrollbar-width: thin;
+    scrollbar-color: #3D5AFE #f1f1f1;
+
+    scroll-snap-type: x mandatory;  
+    scroll-padding: 0 1rem;  
+    transition: scroll-left 0.6s ease-in-out;
+}
+
+.slider-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.slider-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+    background: #3D5AFE;
+    border-radius: 10px;
+}
+
+.slider-container::-webkit-scrollbar-thumb:hover {
+    background: #272974;
+}
+
+/* Chaque élément du slider */
+.project-slide {
+    min-width: 350px;
+    scroll-snap-align: start; /* pour accrocher proprement */
+    transition: transform 0.3s ease; /* smooth hover */
+}
+
+@media (min-width: 768px) {
+    .project-slide {
+        min-width: 400px;
+    }
+}
+
+/* Hover effect */
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+
+
     </style>
 
 </head>
@@ -1150,86 +1211,100 @@ h2 {
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800 transition-all duration-500">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text section-transition" data-en="Featured Projects" data-fr="Projets en Vedette">Featured Projects</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-400 section-transition" data-en="Explore our portfolio of successful construction projects" data-fr="Explorez notre portefeuille de projets de construction réussis">
-                    Explore our portfolio of successful construction projects
-                </p>
-            </div>
+ !-- Projects Section -->
+<section id="projects" class="py-20 bg-gray-50 dark:bg-gray-800 transition-all duration-500">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 gradient-text" data-en="Featured Projects" data-fr="Projets en Vedette">Featured Projects</h2>
+            <p class="text-xl text-gray-600 dark:text-gray-400" data-en="Explore our portfolio of successful construction projects" data-fr="Explorez notre portefeuille de projets de construction réussis">
+                Explore our portfolio of successful construction projects
+            </p>
+        </div>
+        
+        <!-- Slider Navigation Buttons -->
+        <div class="flex justify-end mb-4 gap-2">
+            <button onclick="scrollSlider('left')" class="bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300">
+                <i class="fas fa-chevron-left text-[#272974] dark:text-white"></i>
+            </button>
+            <button onclick="scrollSlider('right')" class="bg-white dark:bg-gray-700 p-3 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300">
+                <i class="fas fa-chevron-right text-[#272974] dark:text-white"></i>
+            </button>
+        </div>
+        
+        <!-- Horizontal Slider -->
+        <div id="projectSlider" class="slider-container flex gap-6 pb-4">
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="project-card bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-1 transition-all duration-500">
-                    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openVideoModal('media/videos/inspection.mp4', 'Metropolitan Tower Construction')">
-                        <video class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" muted>
-                            <source src="media/videos/inspection.mp4" type="video/mp4">
-                        </video>
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-play text-white text-4xl animate-pulse-slow"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-en="Metropolitan Tower Complex" data-fr="Complexe de Tours Métropolitaines">Metropolitan Tower Complex</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="42-story mixed-use development in downtown core" data-fr="Développement à usage mixte de 42 étages au centre-ville">42-story mixed-use development in downtown core</p>
-                        <div class="flex flex-row justify-between mt-4 sm:mt-0 font-medium text-blue-700 dark:text-blue-400">
-                        <span class="inline-block bg-[#3D5AFE]/10 dark:bg-[#3D5AFE]/90 text-[#3D5AFE] dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">Commercial</span>
-                        <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-[#ffffff]" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
-                        </div>
+            <!-- Project 1 -->
+            <div class="project-slide rounded-2xl overflow-hidden shadow-lg hover-scale transition-all duration-500 cursor-pointer" 
+                 onclick="openModal('media/videos/inspection.mp4', 'Metropolitan Tower Complex', '42-story mixed-use development in downtown core featuring state-of-the-art architecture and sustainable design principles.', 'video')">
+                <div class="h-80 relative overflow-hidden">
+                    <video class="w-full h-full object-cover" muted>
+                        <source src="media/videos/inspection.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-play text-white text-5xl"></i>
                     </div>
                 </div>
-                
-                <div class="project-card bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500 flex flex-col h-full">
-    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Green Energy Plant')">
-        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Green Energy Plant" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #243B48, #316EA6);">
-            <i class="fas fa-industry text-6xl text-white animate-bounce-slow"></i>
-        </div>
-        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-            <i class="fas fa-expand text-white text-2xl"></i>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-slide rounded-2xl overflow-hidden shadow-lg hover-scale transition-all duration-500 cursor-pointer" 
+                 onclick="openModal('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Green Energy Plant', 'Sustainable power generation facility utilizing renewable energy sources with minimal environmental impact and maximum efficiency.', 'image')">
+                <div class="h-80 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Green Energy Plant" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-slide rounded-2xl overflow-hidden shadow-lg hover-scale transition-all duration-500 cursor-pointer" 
+                 onclick="openModal('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Highway Infrastructure', '50km highway expansion project enhancing regional connectivity with advanced safety features and modern engineering solutions.', 'image')">
+                <div class="h-80 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Highway Infrastructure" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-slide rounded-2xl overflow-hidden shadow-lg hover-scale transition-all duration-500 cursor-pointer" 
+                 onclick="openModal('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Modern Office Complex', 'State-of-the-art workspace design featuring collaborative environments, smart building technology, and employee wellness facilities.', 'image')">
+                <div class="h-80 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Office Complex" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-slide rounded-2xl overflow-hidden shadow-lg hover-scale transition-all duration-500 cursor-pointer" 
+                 onclick="openModal('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Residential Complex', 'Luxury residential development with modern amenities, green spaces, and community-focused design for comfortable urban living.', 'image')">
+                <div class="h-80 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Residential Complex" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                        <i class="fas fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </div>
-    <div class="p-6 flex flex-col flex-1">
-        <div>
-            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-en="Green Energy Plant" data-fr="Usine d'Énergie Verte">Green Energy Plant</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="Sustainable power generation facility" data-fr="Installation de production d'énergie durable">Sustainable power generation facility</p>
-        </div>
-        <div class="flex flex-row justify-between mt-auto font-medium text-blue-700 dark:text-blue-400">
-            <span class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">Industrial</span>
-            <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-white" data-en="View Details →" data-fr="Voir Détails →">View Details →</span>
-        </div>
+</section>
+
+<!-- Modal for Image/Video Display -->
+<div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center z-50 p-4" onclick="closeModal()">
+    <div class="relative max-w-5xl w-full" onclick="event.stopPropagation()">
+        <button onclick="closeModal()" class="absolute -top-12 right-0 text-white text-3xl hover:text-gray-300 transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+        <div id="modalContent" class="bg-gray-900 rounded-lg overflow-hidden"></div>
     </div>
 </div>
 
-                
-                <div class="project-card bg-white dark:bg-gray-700 rounded-2xl overflow-hidden shadow-lg hover-lift card-hover section-transition stagger-2 transition-all duration-500 flex flex-col h-full">
-                    <div class="h-48 relative overflow-hidden cursor-pointer" onclick="openImageModal('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', 'Highway Infrastructure')">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Highway Infrastructure" class="w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full items-center justify-center" style="background: linear-gradient(135deg, #7B8C94, #316EA6);">
-                            <i class="fas fa-road text-6xl text-white animate-pulse-slow"></i>
-                        </div>
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                            <i class="fas fa-expand text-white text-2xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6 flex flex-col flex-1">
-                        <div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-en="Highway Infrastructure" data-fr="Infrastructure Autoroutière">Highway Infrastructure</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4" data-en="50km highway expansion project" data-fr="Projet d'expansion autoroutière de 50 km">50km highway expansion project</p>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                        <span class="inline-block bg-[#FF6B6B]/20 dark:bg-[#FF6B6B]/90 text-[#FF6B6B] dark:text-white px-3 py-1 rounded-full text-sm font-medium">Infrastructure</span>
-                        <span class="font-medium hover:underline cursor-pointer text-[#272974] dark:text-white" data-en="Watch Project Video →" data-fr="Voir Vidéo du Projet →">View Details →</span>
-                        </div>
-                    </div>
-                </div>
-
-                
-            </div>
-        </div>
-    </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white dark:bg-gray-900 transition-all duration-500">
@@ -2463,7 +2538,128 @@ document.addEventListener("DOMContentLoaded", () => {
     </script>
 
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97fcdd7e84235e45',t:'MTc1Nzk4OTAyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+</script>
 
+<script>
+    function scrollSlider(direction) {
+        const slider = document.getElementById('projectSlider');
+        const scrollAmount = 420;
+        
+        if (direction === 'left') {
+            slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        } else {
+            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    }
+    
+    function openModal(src, title, description, type) {
+        const modal = document.getElementById('mediaModal');
+        const content = document.getElementById('modalContent');
+        
+        if (type === 'video') {
+            content.innerHTML = `
+                <video controls autoplay class="w-full">
+                    <source src="${src}" type="video/mp4">
+                </video>
+                <div class="p-6 bg-gray-800">
+                    <h3 class="text-white text-2xl font-bold mb-3">${title}</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">${description}</p>
+                </div>
+            `;
+        } else {
+            content.innerHTML = `
+                <img src="${src}" alt="${title}" class="w-full">
+                <div class="p-6 bg-gray-800">
+                    <h3 class="text-white text-2xl font-bold mb-3">${title}</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">${description}</p>
+                </div>
+            `;
+        }
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        const modal = document.getElementById('mediaModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.getElementById('modalContent').innerHTML = '';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Keyboard support (ESC to close)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+    
+    // Auto-scroll functionality
+    let autoScrollInterval;
+    const slider = document.getElementById('projectSlider');
+    const scrollSpeed = 2000; // Temps en millisecondes entre chaque scroll
+    
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            const maxScroll = slider.scrollWidth - slider.clientWidth;
+            
+            // Si on est à la fin, revenir au début
+            if (slider.scrollLeft >= maxScroll - 10) {
+                slider.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                // Sinon, continuer à scroller
+                scrollSlider('right');
+            }
+        }, scrollSpeed);
+    }
+    
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+    
+    // Démarrer l'auto-scroll au chargement
+    startAutoScroll();
+    
+    // Arrêter l'auto-scroll au hover
+    slider.addEventListener('mouseenter', stopAutoScroll);
+    slider.addEventListener('mouseleave', startAutoScroll);
+    
+    // Arrêter l'auto-scroll lors d'interaction manuelle
+    slider.addEventListener('touchstart', stopAutoScroll);
+    slider.addEventListener('wheel', stopAutoScroll);
+    
+    // Touch/Swipe support for mobile
+    let startX;
+    
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        stopAutoScroll();
+    });
+    
+    slider.addEventListener('touchmove', (e) => {
+        if (!startX) return;
+        
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                scrollSlider('right');
+            } else {
+                scrollSlider('left');
+            }
+            startX = null;
+        }
+    });
+    
+    // Reprendre l'auto-scroll après 5 secondes d'inactivité
+    let inactivityTimer;
+    slider.addEventListener('touchend', () => {
+        clearTimeout(inactivityTimer);
+        inactivityTimer = setTimeout(startAutoScroll, 5000);
+    });
 </script>
 
 </body>
